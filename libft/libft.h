@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:13:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/07 12:15:58 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/07 19:07:59 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

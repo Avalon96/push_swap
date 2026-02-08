@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:41:18 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/07 17:41:19 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 02:16:38 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ void	ft_lldclear(t_lld **lst)
 	}
 }
 
-void	ft_llditer(t_lld *lst, void (*f)(int *v, int i))
+void	ft_llditer(t_lld *lst, void (*f)(int *v, int i, void *data), void *data)
 {
 	int i;
-	
+
 	i = 0;
 	if (lst == NULL || f == NULL)
 		return ;
 	while (lst != NULL)
 	{
-		f(&lst->value, i++);
+		f(&lst->value, i++, data);
 		lst = lst->next;
 	}
 }

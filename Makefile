@@ -18,7 +18,8 @@ FILES	=	cmd \
 		stack_ops3 \
 		list_ops \
 		utils \
-		push_swap
+		push_swap \
+		print_utils
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)
 NAME	=	push_swap

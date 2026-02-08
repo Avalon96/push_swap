@@ -1,8 +1,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# define MSG_ERROR "Error\n"
-
 # include <unistd.h>
 
 typedef struct s_lld t_lld;
@@ -60,9 +58,9 @@ ssize_t ft_atol(const char *str);
 
 t_lld	*ft_lldnew(int value);
 void	ft_lldadd_front(t_lld **lst, t_lld *new);
-int	ft_lldsize(t_lld *lst);
+int		ft_lldsize(t_lld *lst);
 void	ft_lldclear(t_lld **lst);
-void	ft_llditer(t_lld *lst, void (*f)(int *v, int i));
+void	ft_llditer(t_lld *lst, void (*f)(int *v, int i, void *data), void *data);
 
 int compute_disorder(t_stack *a, float *disorder);
 

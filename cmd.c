@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/07 19:08:21 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/08 18:24:29 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	parse_numbers(int argc, const char *argv[], t_ps *ps)
 			num > 2147483647)
 			return (-1);
 		ft_lldadd_front(&(ps->a.top), ft_lldnew((int)num));
+		ps->a.size++;
 		i--;
 	}
 	return (0);

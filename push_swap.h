@@ -79,4 +79,11 @@ void	swap_both(t_ps *ps);
 void	rotate_both(t_ps *ps);
 void	reverse_rotate_both(t_ps *ps);
 
+// Insertion Sort
+void	insertion_sort(t_ps *ps);
+
+// Sort Helpers
+int	stack_min(t_stack *s);
+int	stack_max(t_stack *s);
+
 #endif // PUSH_SWAP_H

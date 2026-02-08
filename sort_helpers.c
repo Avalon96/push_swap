@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_ops3.c                                       :+:      :+:    :+:   */
+/*   sort_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 13:38:24 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/08 16:13:51 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/08 15:49:14 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/08 15:49:20 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_both(t_ps *ps)
+int	stack_min(t_stack *s)
 {
-	swap_a(ps);
-	swap_b(ps);
+	t_lld	*current;
+	int		min;
+
+	current = s->top;
+	min = current->value;
+	while (current)
+	{
+		if (current->value < min)
+			min = current->value;
+		current = current->next;
+	}
+	return (min);
 }
 
-void	rotate_both(t_ps *ps)
+int	stack_max(t_stack *s)
 {
-	rotate_a(ps);
-	rotate_b(ps);
-}
+	t_lld	*current;
+	int		max;
 
-void	reverse_rotate_both(t_ps *ps)
-{
-	reverse_rotate_a(ps);
-	reverse_rotate_b(ps);
+	current = s->top;
+	max = current->value;
+	while (current)
+	{
+		if (current->value > max)
+			max = current->value;
+		current = current->next;
+	}
+	return (max);
 }

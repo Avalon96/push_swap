@@ -40,9 +40,13 @@ $(SRC)/%.o: $(SRC)/%.c $(SRC)/buffer.h
 $(NAME): $(OBJS) $(LIBS)
 	$(CC) $(LDFLAGS) -o $@ $^
 clean:
-	rm -f ${OBJS} 
+	rm -f ${OBJS}
+	$(MAKE) -C libft clean
+
 fclean: clean
 	rm -f ${NAME}
+	$(MAKE) -C libft fclean
+
 re: fclean
 	$(MAKE) all
 

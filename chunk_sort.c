@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_ops3.c                                       :+:      :+:    :+:   */
+/*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 13:38:24 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/08 16:13:51 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/08 15:01:48 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/08 15:02:17 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_both(t_ps *ps)
+void	chunk_sort()
 {
-	swap_a(ps);
-	swap_b(ps);
-}
 
-void	rotate_both(t_ps *ps)
-{
-	rotate_a(ps);
-	rotate_b(ps);
-}
-
-void	reverse_rotate_both(t_ps *ps)
-{
-	reverse_rotate_a(ps);
-	reverse_rotate_b(ps);
 }

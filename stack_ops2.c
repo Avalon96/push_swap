@@ -6,11 +6,12 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:19 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/08 13:24:04 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/08 17:42:04 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	rotate_a(t_ps *ps)
 {
@@ -27,6 +28,7 @@ void	rotate_a(t_ps *ps)
 	old_top->prev = ps->a.bottom;
 	ps->a.bottom->next = old_top;
 	ps->a.bottom = old_top;
+	printf("ra\n"); // del
 }
 
 void	rotate_b(t_ps *ps)
@@ -44,6 +46,7 @@ void	rotate_b(t_ps *ps)
 	old_top->prev = ps->b.bottom;
 	ps->b.bottom->next = old_top;
 	ps->b.bottom = old_top;
+	printf("rb\n"); // del
 }
 
 void	reverse_rotate_a(t_ps *ps)
@@ -61,6 +64,7 @@ void	reverse_rotate_a(t_ps *ps)
 	old_bottom->next = ps->a.top;
 	ps->a.top->prev = old_bottom;
 	ps->a.top = old_bottom;
+	printf("rra\n"); // del
 }
 
 void	reverse_rotate_b(t_ps *ps)
@@ -78,4 +82,5 @@ void	reverse_rotate_b(t_ps *ps)
 	old_bottom->next = ps->b.top;
 	ps->b.top->prev = old_bottom;
 	ps->b.top = old_bottom;
+	printf("rrb\n"); // del
 }

@@ -18,3 +18,8 @@ valid range, or duplicate values**
 
 ## Todo
 - operation executer
+
+## DSA
+* O(n²)       Insertion Sort
+* O(n√n)      Chunk-Based Insertion Sort
+* O(nlogn)    Radix Sort

@@ -17,7 +17,7 @@ typedef struct s_stack t_stack;
 typedef struct s_stack
 {
 	t_lld	*top;
-	// t_lld	*bottom;
+	t_lld	*bottom;
 	int		size;
 }				t_stack;
 
@@ -60,10 +60,23 @@ ssize_t ft_atol(const char *str);
 
 t_lld	*ft_lldnew(int value);
 void	ft_lldadd_front(t_lld **lst, t_lld *new);
-int	ft_lldsize(t_lld *lst);
+int		ft_lldsize(t_lld *lst);
 void	ft_lldclear(t_lld **lst);
 void	ft_llditer(t_lld *lst, void (*f)(int *v, int i));
 
-int compute_disorder(t_stack *a, float *disorder);
+int 	compute_disorder(t_stack *a, float *disorder);
+
+// OPS
+void	swap_a(t_ps *ps);
+void	swap_b(t_ps *ps);
+void	push_a(t_ps *ps);
+void	push_b(t_ps *ps);
+void	rotate_a(t_ps *ps);
+void	rotate_b(t_ps *ps);
+void	reverse_rotate_a(t_ps *ps);
+void	reverse_rotate_b(t_ps *ps);
+void	swap_both(t_ps *ps);
+void	rotate_both(t_ps *ps);
+void	reverse_rotate_both(t_ps *ps);
 
 #endif // PUSH_SWAP_H

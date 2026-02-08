@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_ops3.c                                       :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 13:38:24 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/08 12:39:21 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/08 11:45:38 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/08 13:25:56 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ops.h"
-
-void	swap_both(t_ps *ps)
+void	insertion_sort()
 {
-	swap_a(ps);
-	swap_b(ps);
+	
 }
 
-void	rotate_both(t_ps *ps)
+void	chunk_sort()
 {
-	rotate_a(ps);
-	rotate_b(ps);
+
 }
 
-void	reverse_rotate_both(t_ps *ps)
+void	radix_sort()
 {
-	reverse_rotate_a(ps);
-	reverse_rotate_b(ps);
+	
 }

@@ -6,11 +6,13 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/07 14:51:42 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 02:28:05 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "utils.h"
+#include "push_swap.h"
 
 ssize_t	ft_atol(const char *str)
 {
@@ -35,3 +37,13 @@ ssize_t	ft_atol(const char *str)
 	return (result * sign);
 }
 
+void end(t_ps *ps)
+{
+	ft_lldclear(&(ps->a.top));
+	ft_lldclear(&(ps->b.top));
+}
+
+void err(void)
+{
+	write(2, MSG_ERROR, sizeof(MSG_ERROR) - 1);
+}

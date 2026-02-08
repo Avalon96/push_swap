@@ -53,7 +53,7 @@ int parse_args(int argc, const char *argv[], t_ps *ps)
 	int	i;
 
 	i = 1;
-	if (i >= argc)
+	if (argc <= 1)
 		return (-1);
 	if (ft_strncmp(argv[i], "--bench", 7) != 0)
 		ps->bench = 0;
@@ -64,6 +64,8 @@ int parse_args(int argc, const char *argv[], t_ps *ps)
 		i++;
 	else
 		ps->strategy = STRATEGY_ADAPTIVE;
+	if (argc - i <= 1)
+		return (-1);
 	if (parse_numbers(argc - i, argv + i, ps) < 0)
 		return (-1);
 	return (0);
@@ -101,7 +103,11 @@ int main(int argc, char const *argv[])
 {
 	t_ps * const ps = &(t_ps){0};
 	if (parse_args(argc, argv, (t_ps *)ps) < 0)
-		return (write(2, MSG_ERROR, sizeof(MSG_ERROR) - 1), -1);
+		return (err(), end(ps), -1);
+	ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	if (ps->err)
+		return (err(), end(ps), -1);
+	print_stats(ps);
 	print_stacks(ps);
 	printf("err %d\n", compute_disorder(&ps->a, &(ps->disorder)));
 	printf("disorder: %f\n", ps->disorder);

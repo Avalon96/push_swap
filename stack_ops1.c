@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:07 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 13:14:15 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 18:26:14 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	push(t_stack *stack, t_dll *node)
 
 void	rotate_down(t_stack *stack)
 {
-	stack->head = stack->head->next;
+	stack->head = stack->head->prev;
 }
 
 void	rotate_up(t_stack *stack)
 {
-	stack->head = stack->head->prev;
+	stack->head = stack->head->next;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 10:43:35 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:15:48 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ int compute_disorder(t_stack *a, float *disorder)
 	float mistakes = 0;
 	int total_pairs = 0;
 	t_dll *i = a->head;
+	t_dll *tail = a->head->prev;
 	t_dll *j;
 
-	while (i && i->next)
+	while (i != tail)
 	{
 		j = i->next;
-		while (j)
+		while (j != tail->next)
 		{
 			total_pairs++;
 			if (i->value > j->value)

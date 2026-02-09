@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 14:07:01 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:31:26 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,20 @@ int main(int argc, char const *argv[])
 	t_ps * const ps = &(t_ps){0};
 	if (parse_args(argc, argv, (t_ps *)ps) < 0)
 		return (err(), end(ps), -1);
-	// ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	// printf("disorder: " CLR_BLD "%f\n" CLR_RST, ps->disorder);
 	if (ps->err)
 		return (err(), end(ps), -1);
-	// print_stats(ps);
+	print_stats(ps);
 	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
+	// pop(&ps->a);
+	// print_stacks(ps);
+	// pop(&ps->a);
+	// print_stacks(ps);
+	// pop(&ps->a);
+	// print_stacks(ps);
+	// pop(&ps->a);
+	// print_stacks(ps);
 
 	// cdll_clear(&(ps->a.head));
 	(void)argc;

@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 11:45:38 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/08 18:36:46 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/09 16:49:10 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 static int	get_max_pos(t_stack *s)
 {
-	t_lld	*curr;
+	t_dll	*curr;
+	// t_dll	*bottom;
 	int		max_val;
 	int		max_pos;
 	int		i;
 
-	curr = s->top;
+	curr = s->head;
+	// bottom = s->head->prev;
 	max_val = curr->value;
 	max_pos = 0;
 	i = 0;
-	while (curr)
+	while (i < s->size)
 	{
 		if (curr->value > max_val)
 		{
@@ -36,21 +38,26 @@ static int	get_max_pos(t_stack *s)
 	return (max_pos);
 }
 
-static int	find_insert_position(t_stack *b, int value)
+static int  find_insert_position(t_stack *b, int value)
 {
-	t_lld	*curr;
+	t_dll	*curr;
 	int		pos;
+	int		i;
 
 	if (value > stack_max(b) || value < stack_min(b))
 		return (get_max_pos(b));
-	curr = b->top;
+
+	curr = b->head;
 	pos = 1;
-	while (curr->next)
+	i = 0;
+	while (i < b->size)
 	{
 		if (curr->value > value && curr->next->value < value)
 			return (pos);
+
 		curr = curr->next;
 		pos++;
+		i++;
 	}
 	return (0);
 }
@@ -83,7 +90,7 @@ void	insertion_sort(t_ps *ps)
 		push_b(ps);
 	while (ps->a.size > 0)
 	{
-		pos = find_insert_position(&ps->b, ps->a.top->value);
+		pos = find_insert_position(&ps->b, ps->a.head->value);
 		rotate_to_position(ps, pos);
 		push_b(ps);
 	}

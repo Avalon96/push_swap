@@ -78,8 +78,8 @@ int 	compute_disorder(t_stack *a, float *disorder);
 // OPS
 void	swap_a(t_ps *ps);
 void	swap_b(t_ps *ps);
-void	push_a(t_stack *a, t_stack *b);
-void	push_b(t_stack *a, t_stack *b);
+void	push_a(t_ps *ps);
+void	push_b(t_ps *ps);
 void	rotate_a(t_ps *ps);
 void	rotate_b(t_ps *ps);
 void	reverse_rotate_a(t_ps *ps);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:05:32 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 02:28:40 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:11:51 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@
 
 void err(void);
 void end(t_ps *ps);
+void print_stacks(t_ps *ps);
 
 #endif

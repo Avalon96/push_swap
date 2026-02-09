@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 14:07:01 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:05:33 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "utils.h"
 
 #include <stdlib.h> //del
-// #include <stdio.h> //del
+#include <stdio.h> //del
 
 void print_stacks(t_ps *ps);
 void	print_stats(t_ps *ps);
@@ -105,15 +105,20 @@ int main(int argc, char const *argv[])
 	if (ps->err)
 		return (err(), end(ps), -1);
 	// print_stats(ps);
-	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
-	pop(&ps->a);
-	print_stacks(ps);
+
+
+		// print_stacks(ps);
+	float n = 0;
+	compute_disorder(&ps->a, &n);
+	// ft_printf("\nBEFORE:\n");
+	// print_stacks(ps);
+	
+	insertion_sort(ps);
+
+	printf("DISORDER = %%%f\n", n);
+	ft_printf("\nAfter:\n");
+	// print_stacks(ps);
+	free(ps->cdll_malloc);
 
 	// cdll_clear(&(ps->a.head));
 	(void)argc;

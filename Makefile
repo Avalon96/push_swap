@@ -19,6 +19,8 @@ FILES	=	cmd \
 		list_ops \
 		utils \
 		push_swap \
+		insertion_sort \
+		sort_helpers \
 		print_utils
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)

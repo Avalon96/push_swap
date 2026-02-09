@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:23:54 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 11:07:48 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:11:32 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void print_stack(t_stack *s, char *str, int mode)
 void print_stacks(t_ps *ps)
 {
 	print_stack(&ps->a, "A = ", 1);
-	// print_stack(&ps->b, "B = ", 1);
+	print_stack(&ps->b, "B = ", 1);
 }
 
 // void	print_stats(t_ps *ps)

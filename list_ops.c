@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:41:18 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 11:41:16 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:14:39 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	cdll_clear(t_dll **lst)
 
 void	cdll_iter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data)
 {
+	if (lst == NULL)
+		return ;
 	t_dll	* const tail = lst->prev;
 	int i;
 

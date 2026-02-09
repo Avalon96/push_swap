@@ -3,19 +3,18 @@
 
 # include <unistd.h>
 
-typedef struct s_lld t_lld;
-typedef struct s_lld
+typedef struct s_dll t_dll;
+typedef struct s_dll
 {
 	int		value;
-	t_lld	*next;
-	t_lld	*prev;
-}				t_lld;
+	t_dll	*next;
+	t_dll	*prev;
+}				t_dll;
 
 typedef struct s_stack t_stack;
 typedef struct s_stack
 {
-	t_lld	*top;
-	t_lld	*bottom;
+	t_dll	*head;
 	int		size;
 }				t_stack;
 
@@ -48,6 +47,8 @@ typedef struct s_ps
 	t_stack	a;
 	t_stack b;
 
+	t_dll	*cdll_malloc;
+	
 	int		bench;
 	t_flags	strategy;
 	int 	err;
@@ -56,19 +57,29 @@ typedef struct s_ps
 
 ssize_t ft_atol(const char *str);
 
-t_lld	*ft_lldnew(int value);
-void	ft_lldadd_front(t_lld **lst, t_lld *new);
-int		ft_lldsize(t_lld *lst);
-void	ft_lldclear(t_lld **lst);
-void	ft_llditer(t_lld *lst, void (*f)(int *v, int i, void *data), void *data);
+t_dll	*ft_dllnew(int value);
+void	ft_dlladd_front(t_dll **lst, t_dll *new);
+int		ft_dllsize(t_dll *lst);
+void	ft_dllclear(t_dll **lst);
+void	ft_dlliter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data);
+
+void	cdll_iter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data);
+void	cdll_link(t_dll *a, t_dll *b, t_dll *c);
+
+void	swap(t_stack *stack);
+t_dll	*pop(t_stack *stack);
+void	push(t_stack *stack, t_dll *node);
+void	rotate_up(t_stack *stack);
+void	rotate_down(t_stack *stack);
+
 
 int 	compute_disorder(t_stack *a, float *disorder);
 
 // OPS
 void	swap_a(t_ps *ps);
 void	swap_b(t_ps *ps);
-void	push_a(t_ps *ps);
-void	push_b(t_ps *ps);
+void	push_a(t_stack *a, t_stack *b);
+void	push_b(t_stack *a, t_stack *b);
 void	rotate_a(t_ps *ps);
 void	rotate_b(t_ps *ps);
 void	reverse_rotate_a(t_ps *ps);

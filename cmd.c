@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 03:12:53 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:58:21 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,43 @@
 #include "utils.h"
 
 #include <stdlib.h> //del
-#include <stdio.h> //del
+// #include <stdio.h> //del
 
 void print_stacks(t_ps *ps);
 void	print_stats(t_ps *ps);
 
-int	parse_numbers(int argc, const char *argv[], t_ps *ps)
-{
-	int	i;
-	ssize_t num;
+int	atol_err(const char *str, int *i) {
+	*i = ft_atol(str);
+	if ((*i == 0 && str[0] != '0') || \
+		*i < -2147483648 || \
+		*i > 2147483647)
+		return (-1);
+	return (0);
+}
 
-	i = argc - 1;
-	while (i >= 0)
+int	parse_numbers(int i, const char *argv[], t_ps *ps)
+{
+	ps->cdll_malloc = malloc(sizeof(t_dll) * i);
+	ps->a.size = i--;
+	if (!ps->cdll_malloc)
+		return (-1);
+	ps->a.head = &ps->cdll_malloc[i];
+	ps->a.head->prev = &ps->cdll_malloc[0];
+	ps->a.head->next = &ps->cdll_malloc[i - 1];
+	if (atol_err(argv[i], &ps->cdll_malloc[i].value) < 0)
+		return (-1);
+	i--;
+	while (i >= 1)
 	{
-		num = ft_atol(argv[i]);
-		if ((num == 0 && argv[i][0] != '0') || \
-			num < -2147483648 || \
-			num > 2147483647)
+		if (atol_err(argv[i], &ps->cdll_malloc[i].value) < 0)
 			return (-1);
-		ft_lldadd_front(&(ps->a.top), ft_lldnew((int)num));
-		ps->a.size++;
+		cdll_link(&ps->cdll_malloc[i + 1], &ps->cdll_malloc[i], &ps->cdll_malloc[i - 1]);
 		i--;
 	}
+	if (atol_err(argv[i], &ps->cdll_malloc[i].value) < 0)
+		return (-1);
+	ps->cdll_malloc[i].prev = &ps->cdll_malloc[i + 1];
+	ps->cdll_malloc[i].next = ps->a.head;
 	return (0);
 }
 
@@ -76,18 +91,28 @@ int parse_args(int argc, const char *argv[], t_ps *ps)
 	return (0);
 }
 
+
 // ./push_swap [[--bench] strategy] numbers...
 int main(int argc, char const *argv[])
 {
 	t_ps * const ps = &(t_ps){0};
 	if (parse_args(argc, argv, (t_ps *)ps) < 0)
 		return (err(), end(ps), -1);
-	ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	// ps->err = compute_disorder(&ps->a, &(ps->disorder));
 	if (ps->err)
 		return (err(), end(ps), -1);
-	print_stats(ps);
+	// print_stats(ps);
 	print_stacks(ps);
-	ft_lldclear(&(ps->a.top));
+	pop(&ps->a);
+	print_stacks(ps);
+	pop(&ps->a);
+	print_stacks(ps);
+	pop(&ps->a);
+	print_stacks(ps);
+	pop(&ps->a);
+	print_stacks(ps);
+
+	// cdll_clear(&(ps->a.head));
 	(void)argc;
 	(void)argv;
 	return 0;

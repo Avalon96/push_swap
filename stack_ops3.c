@@ -6,26 +6,40 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:24 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 03:09:16 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:16:44 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
+
+void	swap_a(t_ps *ps)
+{
+	swap(&ps->a);
+	ft_printf("sa\n");
+}
+
+void	swap_b(t_ps *ps)
+{
+	swap(&ps->b);
+	ft_printf("sb\n");
+}
 
 void	swap_both(t_ps *ps)
 {
 	swap_a(ps);
 	swap_b(ps);
+	ft_printf("ss\n");
 }
 
-void	rotate_both(t_ps *ps)
+void	push_a(t_stack *a, t_stack *b)
 {
-	rotate_a(ps);
-	rotate_b(ps);
+	push(a, pop(b));
+	ft_printf("pa\n");
 }
 
-void	reverse_rotate_both(t_ps *ps)
+void	push_b(t_stack *a, t_stack *b)
 {
-	reverse_rotate_a(ps);
-	reverse_rotate_b(ps);
+	push(b, pop(a));
+	ft_printf("pb\n");
 }

@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:41:18 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 03:06:07 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 11:41:16 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,51 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-t_lld	*ft_lldnew(int value)
+t_dll	*clld_new(int value)
 {
-	t_lld *const	l = malloc(sizeof(t_lld));
+	t_dll *const	l = malloc(sizeof(t_dll));
 
 	if (!l)
 		return (NULL);
 	l->value = value;
-	l->next = NULL;
-	l->prev = NULL;
+	l->next = l;
+	l->prev = l;
 	return (l);
 }
 
-void	ft_lldadd_front(t_lld **lst, t_lld *new)
+/**
+ * ensure least one element in the list before calling
+ * @return new head
+ */
+t_dll	*cdll_add_front(t_dll *head, t_dll *tail, t_dll *new)
 {
-	if (lst == NULL || new == NULL)
-		return ;
-	new->next = *lst;
-	if (*lst != NULL)
-		(*lst)->prev = new;
-	*lst = new;
+	new->prev = tail;
+	new->next = head;
+	tail->next = new;
+	head->prev = new;
+	return head;
 }
 
-int	ft_lldsize(t_lld *lst)
+void	cdll_link(t_dll *a, t_dll *b, t_dll *c)
+{
+	b->prev = a;
+	b->next = c;
+}
+
+/**
+ * bottom ptr is HEAD->prev, cache it for O(1) access.
+ * ensure stack->size > 0 before calling
+ */
+// void	ft_lldadd_front(t_stack *stack, t_dll *new)
+// {
+// 	new->prev = stack->bottom;
+// 	new->next = stack->top;
+// 	stack->top->prev = new;
+// 	stack->bottom->next = new;
+// 	stack->top = new;
+// }
+
+int	cdll_size(t_dll *lst)
 {
 	int	size;
 
@@ -49,9 +71,9 @@ int	ft_lldsize(t_lld *lst)
 	return (size);
 }
 
-void	ft_lldclear(t_lld **lst)
+void	cdll_clear(t_dll **lst)
 {
-	t_lld	*tmp;
+	t_dll	*tmp;
 
 	if (lst == NULL)
 		return ;
@@ -63,14 +85,15 @@ void	ft_lldclear(t_lld **lst)
 	}
 }
 
-void	ft_llditer(t_lld *lst, void (*f)(int *v, int i, void *data), void *data)
+void	cdll_iter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data)
 {
+	t_dll	* const tail = lst->prev;
 	int i;
 
 	i = 0;
-	if (lst == NULL || f == NULL)
-		return ;
-	while (lst != NULL)
+	f(&lst->value, i++, data);
+	lst = lst->next;
+	while (lst != tail->next)
 	{
 		f(&lst->value, i++, data);
 		lst = lst->next;

@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 03:07:52 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 10:42:56 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ ssize_t	ft_atol(const char *str)
 
 void end(t_ps *ps)
 {
-	ft_lldclear(&(ps->a.top));
-	ft_lldclear(&(ps->b.top));
+	// ft_lldclear(&(ps->a.top));
+	// ft_lldclear(&(ps->b.top));
 }
 
 void err(void)

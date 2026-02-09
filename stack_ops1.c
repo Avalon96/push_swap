@@ -6,95 +6,57 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:07 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 03:11:15 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:14:15 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h> // del
 
-void	swap_a(t_ps *ps)
+void	swap(t_stack *stack)
 {
-	t_lld	*first;
-	t_lld	*second;
+	t_dll	* const first = stack->head;
+	t_dll	* const second = first->next;
 
-	if (!ps || ps->a.size < 2)
-		return ;
-	first = ps->a.top;
-	second = first->next;
+	second->next->prev = first;
+	second->prev = first->prev;
 	first->next = second->next;
-	if (second->next)
-		second->next->prev = first;
-	second->prev = NULL;
-	second->next = first;
+	first->prev->next = second;
+
 	first->prev = second;
-	ps->a.top = second;
-	printf("sa\n"); // del
-}
-
-void	swap_b(t_ps *ps)
-{
-	t_lld	*first;
-	t_lld	*second;
-
-	if (!ps || ps->b.size < 2)
-		return ;
-	first = ps->b.top;
-	second = first->next;
-	first->next = second->next;
-	if (second->next)
-		second->next->prev = first;
-	second->prev = NULL;
 	second->next = first;
-	first->prev = second;
-	ps->b.top = second;
-	printf("sb\n"); // del
+
+	stack->head = second;
 }
 
-void	push_a(t_ps *ps)
+t_dll	*pop(t_stack *stack)
 {
-	t_lld	*b;
+	t_dll	* const top = stack->head;
 
-	if (!ps || ps->b.size == 0)
-		return ;
-	b = ps->b.top;
-	ps->b.top = b->next;
-	if (ps->b.top)
-		ps->b.top->prev = NULL;
-	else
-		ps->b.bottom = NULL;
-	b->prev = NULL;
-	b->next = ps->a.top;
-	if (ps->a.top)
-		ps->a.top->prev = b;
-	else
-		ps->a.bottom = b;
-	ps->a.top = b;
-	ps->a.size++;
-	ps->b.size--;
-	printf("pa\n"); // del
+	stack->head->next->prev = stack->head->prev;
+	stack->head->prev->next = stack->head->next;
+	stack->head = stack->head->next;
+	stack->size--;
+	return (top);
 }
 
-void	push_b(t_ps *ps)
+
+void	push(t_stack *stack, t_dll *node)
 {
-	t_lld	*a;
-
-	if (!ps || ps->a.size == 0)
-		return ;
-	a = ps->a.top;
-	ps->a.top = a->next;
-	if (ps->a.top)
-		ps->a.top->prev = NULL;
-	else
-		ps->a.bottom = NULL;
-	a->prev = NULL;
-	a->next = ps->b.top;
-	if (ps->b.top)
-		ps->b.top->prev = a;
-	else
-		ps->b.bottom = a;
-	ps->b.top = a;
-	ps->b.size++;
-	ps->a.size--;
-	printf("pb\n"); // del
+	node->next = stack->head;
+	node->prev = stack->head->prev;
+	stack->head->prev->next = node;
+	stack->head->prev = node;
+	stack->head = node;
+	stack->size++;
 }
+
+void	rotate_down(t_stack *stack)
+{
+	stack->head = stack->head->next;
+}
+
+void	rotate_up(t_stack *stack)
+{
+	stack->head = stack->head->prev;
+}
+

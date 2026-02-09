@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 12:58:21 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:07:01 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,30 @@ int	atol_err(const char *str, int *i) {
 
 int	parse_numbers(int i, const char *argv[], t_ps *ps)
 {
+	int j;
+	
+	j = 0;
 	ps->cdll_malloc = malloc(sizeof(t_dll) * i);
 	ps->a.size = i--;
 	if (!ps->cdll_malloc)
 		return (-1);
-	ps->a.head = &ps->cdll_malloc[i];
-	ps->a.head->prev = &ps->cdll_malloc[0];
-	ps->a.head->next = &ps->cdll_malloc[i - 1];
-	if (atol_err(argv[i], &ps->cdll_malloc[i].value) < 0)
+	ps->a.head = &ps->cdll_malloc[j];
+	ps->a.head->prev = &ps->cdll_malloc[i];
+	ps->a.head->next = &ps->cdll_malloc[j + 1];
+	if (atol_err(argv[j], &ps->cdll_malloc[j].value) < 0)
 		return (-1);
-	i--;
-	while (i >= 1)
+	j++;
+	while (i > j)
 	{
-		if (atol_err(argv[i], &ps->cdll_malloc[i].value) < 0)
+		if (atol_err(argv[j], &ps->cdll_malloc[j].value) < 0)
 			return (-1);
-		cdll_link(&ps->cdll_malloc[i + 1], &ps->cdll_malloc[i], &ps->cdll_malloc[i - 1]);
-		i--;
+		cdll_link(&ps->cdll_malloc[j - 1], &ps->cdll_malloc[j], &ps->cdll_malloc[j + 1]);
+		j++;
 	}
-	if (atol_err(argv[i], &ps->cdll_malloc[i].value) < 0)
+	if (atol_err(argv[j], &ps->cdll_malloc[j].value) < 0)
 		return (-1);
-	ps->cdll_malloc[i].prev = &ps->cdll_malloc[i + 1];
-	ps->cdll_malloc[i].next = ps->a.head;
+	ps->cdll_malloc[j].prev = &ps->cdll_malloc[j - 1];
+	ps->cdll_malloc[j].next = ps->a.head;
 	return (0);
 }
 

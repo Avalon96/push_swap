@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:24 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 13:16:44 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:23:22 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	swap_both(t_ps *ps)
 	ft_printf("ss\n");
 }
 
-void	push_a(t_stack *a, t_stack *b)
+void	push_a(t_ps *ps)
 {
-	push(a, pop(b));
+	push(&ps->a, pop(&ps->b));
 	ft_printf("pa\n");
 }
 
-void	push_b(t_stack *a, t_stack *b)
+void	push_b(t_ps *ps)
 {
-	push(b, pop(a));
+	push(&ps->b, pop(&ps->a));
 	ft_printf("pb\n");
 }

@@ -99,11 +99,8 @@ typedef struct s_move
 	int	total;
 }				t_move;
 
-// Prototypes
 int	stack_min(t_stack *s);
 int	stack_max(t_stack *s);
-int	get_min_pos(t_stack *s);
-void	sort_three_a(t_ps *ps);
 
 // Sort Helpers
 int	stack_min(t_stack *s);

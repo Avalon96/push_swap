@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 11:45:38 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/10 16:20:35 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/10 18:55:49 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	get_max_pos(t_stack *s)
 	return (max_pos);
 }
 
-int	get_min_pos(t_stack *s)
+static int	get_min_pos(t_stack *s)
 {
 	t_dll	*curr;
 	int		min_val;
@@ -98,11 +98,12 @@ static int	find_target_in_a(t_stack *a, int val)
 	return (0);
 }
 
-void	set_cheapest_move(t_ps *ps, t_move *best)
+static void	set_cheapest_move(t_ps *ps, t_move *best)
 {
 	t_dll	*curr_a;
 	t_move	m;
 	int		i;
+	int		target_b;
 
 	curr_a = ps->a.head;
 	best->total = 2147483647;
@@ -110,22 +111,26 @@ void	set_cheapest_move(t_ps *ps, t_move *best)
 	while (++i < ps->a.size)
 	{
 		if (i <= ps->a.size / 2)
-			m.a_count = i;
-		else
-			m.a_count = ps->a.size - i;
-		if (i <= ps->a.size / 2)
+		{
 			m.a_dir = 1;
+			m.a_count = i;
+		}
 		else
+		{
 			m.a_dir = -1;
-		int target_b = find_target_in_b(&ps->b, curr_a->value);
+			m.a_count = ps->a.size - i;
+		}
+		target_b = find_target_in_b(&ps->b, curr_a->value);
 		if (target_b <= ps->b.size / 2)
-			m.b_count = target_b;
-		else
-			m.b_count = ps->b.size - target_b;
-		if (target_b <= ps->b.size / 2)
+		{
 			m.b_dir = 1;
+			m.b_count = target_b;
+		}
 		else
+		{
 			m.b_dir = -1;
+			m.b_count = ps->b.size - target_b;
+		}
 		if (m.a_dir == m.b_dir)
 		{
 			if (m.a_count > m.b_count)
@@ -163,18 +168,21 @@ static void	execute_move(t_ps *ps, t_move m)
 	{
 		if (m.b_dir == 1)
 			rotate_b(ps);
-		else 
+		else
 			reverse_rotate_b(ps);
 	}
 	push_b(ps);
 }
 
-void	sort_three_a(t_ps *ps)
+static void	sort_three_a(t_ps *ps)
 {
-	int	first = ps->a.head->value;
-	int	second = ps->a.head->next->value;
-	int	third = ps->a.head->prev->value;
+	int	first;
+	int	second;
+	int	third;
 
+	first = ps->a.head->value;
+	second = ps->a.head->next->value;
+	third = ps->a.head->prev->value;
 	if (first > second && second < third && first < third)
 		swap_a(ps);
 	else if (first > second && second > third)
@@ -193,9 +201,11 @@ void	sort_three_a(t_ps *ps)
 		reverse_rotate_a(ps);
 }
 
-void	rotate_a_to_top(t_ps *ps, int pos)
+static void	rotate_a_to_top(t_ps *ps, int pos)
 {
-	int	size = ps->a.size;
+	int	size;
+
+	size = ps->a.size;
 	if (pos <= size / 2)
 		while (pos--)
 			rotate_a(ps);
@@ -210,6 +220,7 @@ void	rotate_a_to_top(t_ps *ps, int pos)
 void	insertion_sort(t_ps *ps)
 {
 	t_move	best;
+	int		target;
 
 	if (ps->a.size > 3)
 		push_b(ps);
@@ -223,7 +234,7 @@ void	insertion_sort(t_ps *ps)
 	sort_three_a(ps);
 	while (ps->b.size > 0)
 	{
-		int target = find_target_in_a(&ps->a, ps->b.head->value);
+		target = find_target_in_a(&ps->a, ps->b.head->value);
 		rotate_a_to_top(ps, target);
 		push_a(ps);
 	}

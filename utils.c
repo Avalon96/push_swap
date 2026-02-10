@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 10:42:56 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:02:21 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ ssize_t	ft_atol(const char *str)
 	return (result * sign);
 }
 
-void end(t_ps *ps)
-{
-	// ft_lldclear(&(ps->a.top));
-	// ft_lldclear(&(ps->b.top));
-}
+// void end(t_ps *ps)
+// {
+// 	// ft_lldclear(&(ps->a.top));
+// 	// ft_lldclear(&(ps->b.top));
+// }
 
 void err(void)
 {

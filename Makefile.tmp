@@ -12,7 +12,7 @@ ifneq '$(err)' '0'
 	CFLAGS	+=	$(ERR)
 endif
 
-FILES	=	test \
+FILES	=	cmd \
 		stack_ops1 \
 		stack_ops2 \
 		stack_ops3 \
@@ -33,7 +33,7 @@ all: libft
 
 run: all
 	./$(NAME) $(args)
-           
+
 libft:
 	$(MAKE) -C libft
 
@@ -44,10 +44,12 @@ $(NAME): $(OBJS) $(LIBS)
 	$(CC) $(LDFLAGS) -o $@ $^
 clean:
 	rm -f ${OBJS}
-	$(MAKE) -C libft clean
+# 	$(MAKE) -C libft clean
+
 fclean: clean
 	rm -f ${NAME}
-	$(MAKE) -C libft fclean
+# 	$(MAKE) -C libft fclean
+
 re: fclean
 	$(MAKE) all
 

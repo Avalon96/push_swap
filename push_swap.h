@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/14 17:32:01 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/14 17:32:02 by aunverdi         ###   ########.tr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -65,25 +77,18 @@ typedef struct s_move
 	int	total;
 }				t_move;
 
-ssize_t ft_atol(const char *str);
-
+// Double Linked List Functions
 t_dll	*ft_dllnew(int value);
 void	ft_dlladd_front(t_dll **lst, t_dll *new);
 int		ft_dllsize(t_dll *lst);
 void	ft_dllclear(t_dll **lst);
 void	ft_dlliter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data);
-
 void	cdll_iter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data);
 void	cdll_link(t_dll *a, t_dll *b, t_dll *c);
 
-void	swap(t_stack *stack);
-t_dll	*pop(t_stack *stack);
-void	push(t_stack *stack, t_dll *node);
-void	rotate_up(t_stack *stack);
-void	rotate_down(t_stack *stack);
-
-
+// Disorder
 int 	compute_disorder(t_stack *a, float *disorder);
+ssize_t ft_atol(const char *str);
 
 // OPS
 void	swap_a(t_ps *ps);
@@ -98,17 +103,20 @@ void	swap_both(t_ps *ps);
 void	rotate_both(t_ps *ps);
 void	reverse_rotate_both(t_ps *ps);
 
+// OPS Helpers
+void	swap(t_stack *stack);
+t_dll	*pop(t_stack *stack);
+void	push(t_stack *stack, t_dll *node);
+void	rotate_up(t_stack *stack);
+void	rotate_down(t_stack *stack);
+
 // Insertion Sort
 void	insertion_sort(t_ps *ps);
 
+// Bucket Sort
+// void	bucket_sort(t_ps *ps);
+
 // Radix Sort
 void	radix_sort(t_ps *ps);
-
-int	stack_min(t_stack *s);
-int	stack_max(t_stack *s);
-
-// Sort Helpers
-int	stack_min(t_stack *s);
-int	stack_max(t_stack *s);
 
 #endif // PUSH_SWAP_H

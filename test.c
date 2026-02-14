@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 12:42:12 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/14 17:13:02 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,12 @@ int main(int argc, char const *argv[])
 	// ft_printf("\nBEFORE:\n");
 	// print_stacks(ps);
 	
-	// insertion_sort(ps);
-	radix_sort(ps);
+	insertion_sort(ps);
+	// radix_sort(ps);
 
 	printf("DISORDER = %%%f\n", n);
 	// ft_printf("\nAfter:\n");
-	// print_stacks(ps);
+	print_stacks(ps);
 	free(ps->cdll_malloc);
 
 	// cdll_clear(&(ps->a.head));

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_helpers.c                                     :+:      :+:    :+:   */
+/*   insertion_sort_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 15:49:14 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/09 14:58:20 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/14 16:35:21 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/14 17:02:51 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,52 @@ int	stack_max(t_stack *s)
 		i++;
 	}
 	return (max);
+}
+
+int	get_min_pos(t_stack *s)
+{
+	t_dll	*curr;
+	int		min_val;
+	int		min_pos;
+	int		i;
+
+	curr = s->head;
+	min_val = curr->value;
+	min_pos = 0;
+	i = 0;
+	while (i < s->size)
+	{
+		if (curr->value < min_val)
+		{
+			min_val = curr->value;
+			min_pos = i;
+		}
+		curr = curr->next;
+		i++;
+	}
+	return (min_pos);
+}
+
+int	get_max_pos(t_stack *s)
+{
+	t_dll	*curr;
+	int		max_val;
+	int		max_pos;
+	int		i;
+
+	curr = s->head;
+	max_val = curr->value;
+	max_pos = 0;
+	i = 0;
+	while (i < s->size)
+	{
+		if (curr->value > max_val)
+		{
+			max_val = curr->value;
+			max_pos = i;
+		}
+		curr = curr->next;
+		i++;
+	}
+	return (max_pos);
 }

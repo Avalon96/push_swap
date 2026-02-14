@@ -6,15 +6,16 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:41:18 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 11:41:16 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/14 00:56:22 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+// #include "push_swap.h"
+#include "dll.h"
 #include <stddef.h>
 #include <stdlib.h>
 
-t_dll	*clld_new(int value)
+t_dll	*clld_new(t_custom value)
 {
 	t_dll *const	l = malloc(sizeof(t_dll));
 
@@ -41,51 +42,12 @@ t_dll	*cdll_add_front(t_dll *head, t_dll *tail, t_dll *new)
 
 void	cdll_link(t_dll *a, t_dll *b, t_dll *c)
 {
+	b->value.this = b;
 	b->prev = a;
 	b->next = c;
 }
 
-/**
- * bottom ptr is HEAD->prev, cache it for O(1) access.
- * ensure stack->size > 0 before calling
- */
-// void	ft_lldadd_front(t_stack *stack, t_dll *new)
-// {
-// 	new->prev = stack->bottom;
-// 	new->next = stack->top;
-// 	stack->top->prev = new;
-// 	stack->bottom->next = new;
-// 	stack->top = new;
-// }
-
-int	cdll_size(t_dll *lst)
-{
-	int	size;
-
-	size = 0;
-	while (lst != NULL)
-	{
-		size++;
-		lst = lst->next;
-	}
-	return (size);
-}
-
-void	cdll_clear(t_dll **lst)
-{
-	t_dll	*tmp;
-
-	if (lst == NULL)
-		return ;
-	while (*lst != NULL)
-	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
-	}
-}
-
-void	cdll_iter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data)
+void	cdll_iter(t_dll *lst, void (*f)(t_custom *v, int i, void *data), void *data)
 {
 	t_dll	* const tail = lst->prev;
 	int i;
@@ -98,4 +60,58 @@ void	cdll_iter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data)
 		f(&lst->value, i++, data);
 		lst = lst->next;
 	}
+}
+
+t_dll	*cdll_find(t_dll *lst, int (*f)(t_custom *v, int i, void *data), void *data)
+{
+	t_dll	* const tail = lst->prev;
+	int i;
+
+	i = 0;
+	if (f(&lst->value, i++, data))
+		return (lst);
+	lst = lst->next;
+	while (lst != tail->next)
+	{
+		if (f(&lst->value, i++, data))
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
+int		cdll_some(t_dll *lst, int (*f)(t_custom *v, int i, void *data), void *data)
+{
+	t_dll	* const tail = lst->prev;
+	int i;
+
+	i = 0;
+	if (f(&lst->value, i++, data))
+		return (1);
+	lst = lst->next;
+	while (lst != tail->next)
+	{
+		if (f(&lst->value, i++, data))
+			return (1);
+		lst = lst->next;
+	}
+	return (0);
+}
+
+int		cdll_every(t_dll *lst, int (*f)(t_custom *v, int i, void *data), void *data)
+{
+	t_dll	* const tail = lst->prev;
+	int i;
+
+	i = 0;
+	if (!f(&lst->value, i++, data))
+		return (0);
+	lst = lst->next;
+	while (lst != tail->next)
+	{
+		if (!f(&lst->value, i++, data))
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
 }

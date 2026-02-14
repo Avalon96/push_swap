@@ -4,7 +4,7 @@ INC		=	$(ROOT)/
 
 CC		=	cc
 CFLAGS	=	-I $(INC) -pedantic -Wall -Wextra -I ./libft -I ./libft/ft_printf/include -g
-LDFLAGS	=	-fsanitize=address
+LDFLAGS	=	#-fsanitize=address
 
 ERR		=	-Werror
 
@@ -19,7 +19,9 @@ FILES	=	cmd \
 		list_ops \
 		utils \
 		push_swap \
-		print_utils
+		print_utils \
+		strategies \
+		generics
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)
 NAME	=	push_swap
@@ -30,7 +32,7 @@ all: libft
 	$(MAKE) $(NAME)
 
 run: all
-	./$(NAME) $(args)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(args)
 
 libft:
 	$(MAKE) -C libft

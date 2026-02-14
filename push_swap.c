@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 14:15:48 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:20:19 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int compute_disorder(t_stack *a, float *disorder)
 		while (j != tail->next)
 		{
 			total_pairs++;
-			if (i->value > j->value)
+			if (i->value.num > j->value.num)
 				mistakes++;
-			if (i->value == j->value)
+			if (i->value.num == j->value.num)
 				return (-1);
 			j = j->next;
 		}

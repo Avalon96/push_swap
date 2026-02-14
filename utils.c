@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 10:42:56 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/14 10:53:38 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,41 @@ ssize_t	ft_atol(const char *str)
 	return (result * sign);
 }
 
-void end(t_ps *ps)
+int	ft_sqrt(int nb)
 {
-	// ft_lldclear(&(ps->a.top));
-	// ft_lldclear(&(ps->b.top));
+	int	test;
+
+	test = 2;
+	while (test <= (nb / test))
+	{
+		if ((test * test) == nb)
+			return (test);
+		test++;
+	}
+	return (--test);
+}
+
+size_t ft_abs(ssize_t nb)
+{
+	if (nb < 0)
+		return ((size_t)(-nb));
+	return ((size_t)nb);
+}
+
+void	minmax(t_custom *v, int i, void *data)
+{
+	int (*minmax)[2] = data;
+
+	if (v->num < (*minmax)[0])
+		(*minmax)[0] = v->num;
+	if (v->num > (*minmax)[1])
+		(*minmax)[1] = v->num;
+}
+
+void	indexer(t_custom *v, int i, void *data)
+{
+	(void)data;
+	v->index = i;
 }
 
 void err(void)

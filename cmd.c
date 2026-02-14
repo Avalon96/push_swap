@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 14:31:26 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/15 01:23:24 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,28 @@ int	parse_numbers(int i, const char *argv[], t_ps *ps)
 	int j;
 	
 	j = 0;
-	ps->cdll_malloc = malloc(sizeof(t_dll) * i);
+	ps->cdll_malloc = ft_calloc(i, sizeof(t_dll));
 	ps->a.size = i--;
 	if (!ps->cdll_malloc)
 		return (-1);
 	ps->a.head = &ps->cdll_malloc[j];
 	ps->a.head->prev = &ps->cdll_malloc[i];
+	ps->cdll_malloc[j].value.this = ps->cdll_malloc + j;
 	ps->a.head->next = &ps->cdll_malloc[j + 1];
-	if (atol_err(argv[j], &ps->cdll_malloc[j].value) < 0)
-		return (-1);
+	if (atol_err(argv[j], &ps->cdll_malloc[j].value.num) < 0)
+		return (free(ps->cdll_malloc), -1);
 	j++;
 	while (i > j)
 	{
-		if (atol_err(argv[j], &ps->cdll_malloc[j].value) < 0)
-			return (-1);
+		if (atol_err(argv[j], &ps->cdll_malloc[j].value.num) < 0)
+			return (free(ps->cdll_malloc), -1);
 		cdll_link(&ps->cdll_malloc[j - 1], &ps->cdll_malloc[j], &ps->cdll_malloc[j + 1]);
 		j++;
 	}
-	if (atol_err(argv[j], &ps->cdll_malloc[j].value) < 0)
-		return (-1);
+	if (atol_err(argv[j], &ps->cdll_malloc[j].value.num) < 0)
+		return (free(ps->cdll_malloc), -1);
 	ps->cdll_malloc[j].prev = &ps->cdll_malloc[j - 1];
+	ps->cdll_malloc[j].value.this = ps->cdll_malloc + j;
 	ps->cdll_malloc[j].next = ps->a.head;
 	return (0);
 }
@@ -94,6 +96,10 @@ int parse_args(int argc, const char *argv[], t_ps *ps)
 	return (0);
 }
 
+void end(t_ps *ps)
+{
+	free(ps->cdll_malloc);
+}
 
 // ./push_swap [[--bench] strategy] numbers...
 int main(int argc, char const *argv[])
@@ -107,6 +113,23 @@ int main(int argc, char const *argv[])
 		return (err(), end(ps), -1);
 	print_stats(ps);
 	print_stacks(ps);
+	
+	
+	printf("strategy: %d\n", ps->strategy);
+	if (ps->strategy == STRATEGY_SIMPLE)
+		ps->err = simple_sort(ps);
+	else if (ps->strategy == STRATEGY_MEDIUM)
+		ps->err = medium_sort(ps);
+	else if (ps->strategy == STRATEGY_COMPLEX)
+		ps->err = complex_sort(ps);
+	else
+		ps->err = adaptive_sort(ps);
+	if (ps->err)
+		return (err(), end(ps), -1);
+	print_stats(ps);
+	// print_stacks(ps);
+
+	end(ps);
 	// pop(&ps->a);
 	// print_stacks(ps);
 	// pop(&ps->a);
@@ -117,7 +140,5 @@ int main(int argc, char const *argv[])
 	// print_stacks(ps);
 
 	// cdll_clear(&(ps->a.head));
-	(void)argc;
-	(void)argv;
 	return 0;
 }

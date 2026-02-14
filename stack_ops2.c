@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:19 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 13:16:51 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/14 19:02:27 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,36 @@
 void	rotate_a(t_ps *ps)
 {
 	rotate_up(&ps->a);
+	ps->ops_count++;
 	ft_printf("ra\n");
 }
 
 void	rotate_b(t_ps *ps)
 {
 	rotate_up(&ps->b);
+	ps->ops_count++;
 	ft_printf("rb\n");
 }
 
 void	rotate_both(t_ps *ps)
 {
-	rotate_a(ps);
-	rotate_b(ps);
+	rotate_up(&ps->a);
+	rotate_up(&ps->b);
+	ps->ops_count++;
 	ft_printf("rr\n");
 }
 
 void	reverse_rotate_a(t_ps *ps)
 {
 	rotate_down(&ps->a);
+	ps->ops_count++;
 	ft_printf("rra\n");
 }
 
 void	reverse_rotate_b(t_ps *ps)
 {
 	rotate_down(&ps->b);
+	ps->ops_count++;
 	ft_printf("rrb\n");
 }
 
@@ -48,5 +53,6 @@ void	reverse_rotate_both(t_ps *ps)
 {
 	rotate_down(&ps->a);
 	rotate_down(&ps->b);
+	ps->ops_count++;
 	ft_printf("rrr\n");
 }

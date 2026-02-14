@@ -21,7 +21,8 @@ FILES	=	test \
 		push_swap \
 		insertion_sort \
 		sort_helpers \
-		print_utils
+		print_utils \
+		radix_sort
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)
 NAME	=	push_swap

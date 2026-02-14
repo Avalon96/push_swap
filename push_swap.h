@@ -9,6 +9,7 @@ typedef struct s_dll
 	int		value;
 	t_dll	*next;
 	t_dll	*prev;
+	int		index;
 }				t_dll;
 
 typedef struct s_stack t_stack;
@@ -55,6 +56,15 @@ typedef struct s_ps
 	float	disorder;
 }				t_ps;
 
+typedef struct s_move
+{
+	int	a_count;
+	int	b_count;
+	int	a_dir;
+	int	b_dir;
+	int	total;
+}				t_move;
+
 ssize_t ft_atol(const char *str);
 
 t_dll	*ft_dllnew(int value);
@@ -90,14 +100,9 @@ void	reverse_rotate_both(t_ps *ps);
 
 // Insertion Sort
 void	insertion_sort(t_ps *ps);
-typedef struct s_move
-{
-	int	a_count;
-	int	b_count;
-	int	a_dir;   // 1 for rotate, -1 for reverse
-	int	b_dir;   // 1 for rotate, -1 for reverse
-	int	total;
-}				t_move;
+
+// Radix Sort
+void	radix_sort(t_ps *ps);
 
 int	stack_min(t_stack *s);
 int	stack_max(t_stack *s);

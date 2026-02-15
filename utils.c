@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 10:53:38 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/15 02:37:17 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ int	ft_sqrt(int nb)
 		test++;
 	}
 	return (--test);
+}
+
+int safe_sqrt(int nb)
+{
+	if (nb < 3)
+		return (1);
+	return (ft_sqrt(nb));
 }
 
 size_t ft_abs(ssize_t nb)

@@ -1,1 +1,4 @@
 push_swap
+out.log
+**/*.o
+**/*.a

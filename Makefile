@@ -21,6 +21,7 @@ FILES	=	cmd \
 		push_swap \
 		print_utils \
 		strategies \
+		bucket_sort \
 		generics
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)

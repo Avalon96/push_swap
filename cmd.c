@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/15 01:23:24 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/15 02:59:42 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int parse_args(int argc, const char *argv[], t_ps *ps)
 void end(t_ps *ps)
 {
 	free(ps->cdll_malloc);
+	free(ps->bucket_sort.buckets);
 }
 
 // ./push_swap [[--bench] strategy] numbers...
@@ -113,8 +114,6 @@ int main(int argc, char const *argv[])
 		return (err(), end(ps), -1);
 	print_stats(ps);
 	print_stacks(ps);
-	
-	
 	printf("strategy: %d\n", ps->strategy);
 	if (ps->strategy == STRATEGY_SIMPLE)
 		ps->err = simple_sort(ps);
@@ -126,8 +125,9 @@ int main(int argc, char const *argv[])
 		ps->err = adaptive_sort(ps);
 	if (ps->err)
 		return (err(), end(ps), -1);
+	ps->err = compute_disorder(&ps->b, &(ps->disorder));
 	print_stats(ps);
-	// print_stacks(ps);
+	print_stacks(ps);
 
 	end(ps);
 	// pop(&ps->a);

@@ -2,6 +2,7 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
+# include "bucket_sort.h"
 # include "dll.h"
 # include "stack.h"
 
@@ -36,7 +37,9 @@ typedef struct s_ps
 	t_stack	a;
 	t_stack b;
 
-	t_dll	*cdll_malloc;
+	t_dll			*cdll_malloc;
+	t_bucket_sort	bucket_sort;
+
 	int		bench;
 	t_flags	strategy;
 	int 	err;

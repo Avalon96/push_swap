@@ -64,14 +64,14 @@ void	check_rgap(t_custom *v, int i, void *data)
 		return ;
 	odiff = ft_abs(fg->duo[0]->value.index - fg->duo[1]->value.index);
 	ndiff = fg->stack->size - ft_abs(fg->prev->value.index - cur->value.index);
-	printf("a: %zu, b: %zu\n", fg->prev->value.index, cur->value.index);
+	// printf("a: %zu, b: %zu\n", fg->prev->value.index, cur->value.index);
 	update_gap(fg, ndiff, odiff, cur);
 }
 
 void	get_biggest_gap(t_find_gap *fg)
 {
 	t_dll * const first = cdll_find(fg->stack->head, fg->filter, fg->data);
-	printf("first: %zu, head: %zu\n", first->value.index, fg->stack->head->value.index);
+	// printf("first: %zu, head: %zu\n", first->value.index, fg->stack->head->value.index);
 	fg->prev = first;
 	fg->duo[0] = first;
 	fg->duo[1] = first;
@@ -126,7 +126,7 @@ size_t	get_nearest(size_t a, size_t b, t_stack *stack)
 	const size_t	ra_a = ft_abs(r_a);
 	const size_t	ra_b = ft_abs(r_b);
 
-	printf("get_nearest: a = %zu, b = %zu, a_a = %zu, b_a = %zu\n", a, b, ra_a, ra_b);
+	// printf("get_nearest: a = %zu, b = %zu, a_a = %zu, b_a = %zu\n", a, b, ra_a, ra_b);
 	if (ra_a < ra_b)
 		return (r_a);
 	else

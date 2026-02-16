@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 14:55:55 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/14 17:57:53 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@
 // 				mistakes += 1
 // 	return mistakes / total_pairs
 
-#include <stdio.h>
-int compute_disorder(t_stack *a, float *disorder)
+int	compute_disorder(t_stack *a, float *disorder)
 {
-	float mistakes = 0;
-	int total_pairs = 0;
-	t_dll *bottom = a->head->prev;
-	t_dll *i = a->head;
-	t_dll *j = a->head->next;
+	float	mistakes;
+	int		total_pairs;
+	t_dll	*bottom;
+	t_dll	*i;
+	t_dll	*j;
 
+	mistakes = 0;
+	total_pairs = 0;
+	bottom = a->head->prev;
+	i = a->head;
 	while (i != bottom)
 	{
 		j = i->next;

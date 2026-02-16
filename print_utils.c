@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:23:54 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 15:11:32 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/14 17:41:54 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,23 @@
 
 #include <stdio.h> //del
 
-static void p_v(int *a, int i, void *data){
+static void	p_v(int *a, int i, void *data)
+{
 	(void)i;
 	(void)data;
 	ft_printf("%d,	", *a);
 	// ft_printf("[%d]:%d, ", i++, *a);
 }
 
-static void p_i(int *a, int i, void *data){
+static void	p_i(int *a, int i, void *data)
+{
 	(void)a;
 	(void)data;
 	ft_printf("[%d]	", i);
 }
 
-static void p_vi(int *a, int i, void *data){
+static void	p_vi(int *a, int i, void *data)
+{
 	(void)data;
 	if (i == *(int *)data)
 		ft_printf(CLR_WHT CLR_DIM "[%d]:" CLR_RST CLR_BLD CLR_GRN "%d" CLR_RST ", ", i, *a);
@@ -37,7 +40,7 @@ static void p_vi(int *a, int i, void *data){
 		ft_printf(CLR_WHT CLR_DIM "[%d]:" CLR_RST CLR_BLD CLR_GRN "%d" CLR_RST ", ", i, *a);
 }
 
-static void print_stack(t_stack *s, char *str, int mode)
+static void	print_stack(t_stack *s, char *str, int mode)
 {
 	if (mode == 0)
 	{
@@ -55,7 +58,7 @@ static void print_stack(t_stack *s, char *str, int mode)
 	}
 }
 
-void print_stacks(t_ps *ps)
+void	print_stacks(t_ps *ps)
 {
 	print_stack(&ps->a, "A = ", 1);
 	print_stack(&ps->b, "B = ", 1);

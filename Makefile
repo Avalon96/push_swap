@@ -16,6 +16,7 @@ FILES	=	test \
 		stack_ops1 \
 		stack_ops2 \
 		stack_ops3 \
+		stack_ops4 \
 		list_ops \
 		utils \
 		push_swap \

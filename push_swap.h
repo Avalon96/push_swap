@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:32:01 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/14 17:32:02 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/14 17:54:42 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 
 # include <unistd.h>
 
-typedef struct s_dll t_dll;
 typedef struct s_dll
 {
-	int		value;
-	t_dll	*next;
-	t_dll	*prev;
-	int		index;
+	int				value;
+	struct s_dll	*next;
+	struct s_dll	*prev;
+	int				index;
 }				t_dll;
 
-typedef struct s_stack t_stack;
 typedef struct s_stack
 {
 	t_dll	*head;
@@ -58,13 +56,11 @@ typedef enum e_flags
 typedef struct s_ps
 {
 	t_stack	a;
-	t_stack b;
-
+	t_stack	b;
 	t_dll	*cdll_malloc;
-	
 	int		bench;
 	t_flags	strategy;
-	int 	err;
+	int		err;
 	float	disorder;
 }				t_ps;
 
@@ -82,13 +78,13 @@ t_dll	*ft_dllnew(int value);
 void	ft_dlladd_front(t_dll **lst, t_dll *new);
 int		ft_dllsize(t_dll *lst);
 void	ft_dllclear(t_dll **lst);
-void	ft_dlliter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data);
-void	cdll_iter(t_dll *lst, void (*f)(int *v, int i, void *data), void *data);
+void	ft_dlliter(t_dll *lst, void (*f)(int, int, void*), void *data);
+void	cdll_iter(t_dll *lst, void (*f)(int, int, void*), void *data);
 void	cdll_link(t_dll *a, t_dll *b, t_dll *c);
 
 // Disorder
-int 	compute_disorder(t_stack *a, float *disorder);
-ssize_t ft_atol(const char *str);
+int		compute_disorder(t_stack *a, float *disorder);
+ssize_t	ft_atol(const char *str);
 
 // OPS
 void	swap_a(t_ps *ps);

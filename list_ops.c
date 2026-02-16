@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:41:18 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 15:14:39 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/14 18:01:07 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_dll	*cdll_add_front(t_dll *head, t_dll *tail, t_dll *new)
 	new->next = head;
 	tail->next = new;
 	head->prev = new;
-	return head;
+	return (head);
 }
 
 void	cdll_link(t_dll *a, t_dll *b, t_dll *c)

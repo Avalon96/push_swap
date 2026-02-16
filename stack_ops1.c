@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:07 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 15:48:39 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/14 17:49:03 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 void	swap(t_stack *stack)
 {
-	t_dll	* const first = stack->head;
-	t_dll	* const second = first->next;
+	t_dll *const	first = stack->head;
+	t_dll *const	second = first->next;
 
 	second->next->prev = first;
 	second->prev = first->prev;
 	first->next = second->next;
 	first->prev->next = second;
-
 	first->prev = second;
 	second->next = first;
-
 	stack->head = second;
 }
 
@@ -38,7 +36,6 @@ void	swap(t_stack *stack)
 // 	stack->size--;
 // 	return (top);
 // }
-
 
 // void	push(t_stack *stack, t_dll *node)
 // {
@@ -90,12 +87,12 @@ void	push(t_stack *stack, t_dll *node)
 	stack->size++;
 }
 
-void	rotate_down(t_stack *stack)
+void	rotate_up(t_stack *stack)
 {
 	stack->head = stack->head->next;
 }
 
-void	rotate_up(t_stack *stack)
+void	rotate_down(t_stack *stack)
 {
 	stack->head = stack->head->prev;
 }

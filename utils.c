@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/10 13:02:21 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/14 17:39:18 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ ssize_t	ft_atol(const char *str)
 // 	// ft_lldclear(&(ps->b.top));
 // }
 
-void err(void)
+void	err(void)
 {
 	write(2, MSG_ERROR, sizeof(MSG_ERROR) - 1);
 }

@@ -4,9 +4,9 @@
 #include "dll.h"
 #include "push_swap.h"
 #include "generics.h"
+#include "insertion_sort.h"
 
-
-void push_number_of_bucket(t_ps *ps, t_find_gap *fg, void (*pusher)(t_ps *ps));
+void	push_number_of_bucket(t_ps *ps, t_find_gap *fg, void (*pusher)(t_ps *ps));
 
 void	push_bucket(t_ps *ps, t_find_gap *fg, size_t bucket, size_t left_size){
 	if (left_size == 0)
@@ -163,4 +163,82 @@ void	set_bucket(t_custom *v, int i, void *data)
 
 	v->bucket_index = bucket_index;
 	bucket_sort->buckets[bucket_index].size++;
+}
+
+static void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
+{
+	if (i <= ps->a.size / 2)
+	{
+		(*m).a_dir = 1;
+		(*m).a_count = i;
+	}
+	else
+	{
+		(*m).a_dir = -1;
+		(*m).a_count = ps->a.size - i;
+	}
+	if (target_b <= ps->b.size / 2)
+	{
+		(*m).b_dir = 1;
+		(*m).b_count = target_b;
+	}
+	else
+	{
+		(*m).b_dir = -1;
+		(*m).b_count = ps->b.size - target_b;
+	}
+}
+
+static void	set_best(t_move *m, t_move **best)
+{
+	if ((*m).a_dir == (*m).b_dir)
+	{
+		if ((*m).a_count > (*m).b_count)
+			(*m).total = (*m).a_count;
+		else
+			(*m).total = (*m).b_count;
+	}
+	else
+		(*m).total = (*m).a_count + (*m).b_count;
+	if ((*m).total < (*best)->total)
+		**best = *m;
+}
+
+static void	set_cheapest_move(t_ps *ps, t_move *best)
+{
+	t_dll	*curr_a;
+	t_move	m;
+	int		i;
+	int		target_b;
+
+	curr_a = ps->a.head;
+	best->total = 2147483647;
+	i = 0;
+	while (i < ps->a.size)
+	{
+		target_b = find_target_in_b(&ps->b, curr_a->value.num);
+		set_cheap(i, ps, &m, target_b);
+		set_best(&m, &best);
+		curr_a = curr_a->next;
+		i++;
+	}
+}
+
+void    bucket_insertion_sort(t_ps *ps)
+{
+    t_move  best;
+    int     target;
+
+    while (ps->a.size > 0)
+    {
+        set_cheapest_move(ps, &best);
+        execute_move(ps, best);
+    }
+    while (ps->b.size > 0)
+    {
+        target = find_target_in_a(&ps->a, ps->b.head->value.num);
+        rotate_a_to_top(ps, target);
+        push_a(ps);
+    }
+    rotate_a_to_top(ps, get_min_pos(&ps->a));
 }

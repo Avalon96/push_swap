@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "bucket_sort.h"
 
+
 int	medium_sort(t_ps *ps){
 	t_bucket_sort * const bucket_sort = &ps->bucket_sort;
 	
@@ -23,7 +24,9 @@ int	medium_sort(t_ps *ps){
 	printf("occupied ct: %zu\n", bucket_sort->occupied_ct);
 	// halve_buckets(ps);
 	sort_buckets(ps);
+	print_stacks(ps);
 	// sort_bucket(ps);
+	bucket_insertion_sort(ps);
 	return (0);
 }
 

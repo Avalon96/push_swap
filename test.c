@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 12:10:18 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 13:30:31 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,6 @@ int main(int argc, char const *argv[])
 		ps->err = adaptive_sort(ps);
 	if (ps->err)
 		return (err(), end(ps), -1);
-	ps->err = compute_disorder(&ps->a, &(ps->disorder));
-	cdll_iter(ps->a.head, indexer, NULL);
 	print_stats(ps);
 	print_stacks(ps);
 

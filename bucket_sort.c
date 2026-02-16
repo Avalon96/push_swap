@@ -137,7 +137,7 @@ void	set_occupied_bucket(t_custom *v, int i, void *data)
 {
 	t_bucket_sort * const bucket_sort = data;
 	t_bucket * const bucket = &bucket_sort->buckets[ \
-		bucket_sort->bucket_ct * (v->num - bucket_sort->minmax[0]) / (bucket_sort->minmax[1] - bucket_sort->minmax[0] + 1) \
+		bucket_sort->bucket_ct * ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) / ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1) \
 	];
 
 	if (bucket->size > 0 && !bucket->counted)
@@ -158,7 +158,7 @@ void	count_occupied_buckets(t_stack *a, t_bucket_sort *bucket_sort)
 void	set_bucket(t_custom *v, int i, void *data)
 {
 	t_bucket_sort * const bucket_sort = data;
-	size_t const bucket_index = bucket_sort->bucket_ct * (v->num - bucket_sort->minmax[0]) / (bucket_sort->minmax[1] - bucket_sort->minmax[0] + 1);
+	size_t const bucket_index = bucket_sort->bucket_ct * ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) / ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1);
 	t_dll	* const node = v->this;
 
 	v->bucket_index = bucket_index;

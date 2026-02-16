@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 11:33:40 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:47:29 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ size_t ft_abs(ssize_t nb)
 
 void	minmax(t_custom *v, int i, void *data)
 {
+	(void)i;
 	int (*minmax)[2] = data;
 
 	if (v->num < (*minmax)[0])

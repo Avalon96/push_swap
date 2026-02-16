@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "libft.h"
 #include "generics.h"
+#include <stdio.h>
+#include "bucket_sort.h"
 
 int	medium_sort(t_ps *ps){
 	t_bucket_sort * const bucket_sort = &ps->bucket_sort;
@@ -26,13 +28,16 @@ int	medium_sort(t_ps *ps){
 }
 
 int complex_sort(t_ps *ps){
+	radix_sort(ps);
 	return (0);
 }
 
 int adaptive_sort(t_ps *ps){
+	(void)ps;
 	return (0);
 }
 
 int simple_sort(t_ps *ps){
+	insertion_sort(ps);
 	return (0);
 }

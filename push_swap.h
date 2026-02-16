@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:32:01 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/16 11:25:01 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:46:12 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,10 @@ void	insertion_sort(t_ps *ps);
 
 // Radix Sort
 void	radix_sort(t_ps *ps);
+
+// Strategies
+int		complex_sort(t_ps *ps);
+int		adaptive_sort(t_ps *ps);
+int		simple_sort(t_ps *ps);
+int		medium_sort(t_ps *ps);
 #endif // PUSH_SWAP_H

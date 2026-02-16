@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 11:20:21 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 12:04:43 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,48 @@
 // 				mistakes += 1
 // 	return mistakes / total_pairs
 
-int	compute_disorder(t_stack *a, float *disorder)
-{
-	float	mistakes;
-	int		total_pairs;
-	t_dll	*bottom;
-	t_dll	*i;
-	t_dll	*j;
+// int	compute_disorder(t_stack *a, float *disorder)
+// {
+// 	float	mistakes;
+// 	int		total_pairs;
+// 	t_dll	*bottom;
+// 	t_dll	*i;
+// 	t_dll	*j;
 
-	mistakes = 0;
-	total_pairs = 0;
-	bottom = a->head->prev;
-	i = a->head;
-	while (i != bottom)
+// 	mistakes = 0;
+// 	total_pairs = 0;
+// 	bottom = a->head->prev;
+// 	i = a->head;
+// 	while (i != bottom)
+// 	{
+// 		j = i->next;
+// 		while (j != bottom->next)
+// 		{
+// 			total_pairs++;
+// 			if (i->value.num > j->value.num)
+// 				mistakes++;
+// 			if (i->value.num == j->value.num)
+// 				return (-1);
+// 			j = j->next;
+// 		}
+// 		i = i->next;
+// 	}
+// 	*disorder = (mistakes * 100) / total_pairs;
+// 	return (0);
+// }
+
+int compute_disorder(t_stack *a, float *disorder)
+{
+	float mistakes = 0;
+	int total_pairs = 0;
+	t_dll *i = a->head;
+	t_dll *tail = a->head->prev;
+	t_dll *j;
+
+	while (i != tail)
 	{
 		j = i->next;
-		while (j != bottom->next)
+		while (j != tail->next)
 		{
 			total_pairs++;
 			if (i->value.num > j->value.num)

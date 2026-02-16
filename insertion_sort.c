@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 11:45:38 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/14 17:28:34 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:41:58 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	set_cheapest_move(t_ps *ps, t_move *best)
 	i = 0;
 	while (i < ps->a.size)
 	{
-		target_b = find_target_in_b(&ps->b, curr_a->value);
+		target_b = find_target_in_b(&ps->b, curr_a->value.num);
 		set_cheap(i, ps, &m, target_b);
 		set_best(&m, &best);
 		curr_a = curr_a->next;
@@ -89,7 +89,7 @@ void	insertion_sort(t_ps *ps)
 	sort_three_a(ps);
 	while (ps->b.size > 0)
 	{
-		target = find_target_in_a(&ps->a, ps->b.head->value);
+		target = find_target_in_a(&ps->a, ps->b.head->value.num);
 		rotate_a_to_top(ps, target);
 		push_a(ps);
 	}

@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 16:43:56 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/14 17:10:49 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:41:07 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	find_target_in_a(t_stack *a, int val)
 	i = 0;
 	while (i < a->size)
 	{
-		if (curr->value > val && curr->prev->value < val)
+		if (curr->value.num > val && curr->prev->value.num < val)
 			return (i);
 		curr = curr->next;
 		i++;
@@ -43,7 +43,7 @@ int	find_target_in_b(t_stack *b, int val)
 	i = 0;
 	while (i < b->size)
 	{
-		if (curr->value > val && curr->next->value < val)
+		if (curr->value.num > val && curr->next->value.num < val)
 			return (i + 1);
 		curr = curr->next;
 		i++;
@@ -85,9 +85,9 @@ void	sort_three_a(t_ps *ps)
 	int	second;
 	int	third;
 
-	first = ps->a.head->value;
-	second = ps->a.head->next->value;
-	third = ps->a.head->prev->value;
+	first = ps->a.head->value.num;
+	second = ps->a.head->next->value.num;
+	third = ps->a.head->prev->value.num;
 	if (first > second && second < third && first < third)
 		swap_a(ps);
 	else if (first > second && second > third)

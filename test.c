@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 11:31:02 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 12:10:18 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int main(int argc, char const *argv[])
 	// printf("disorder: " CLR_BLD "%f\n" CLR_RST, ps->disorder);
 	if (ps->err)
 		return (err(), end(ps), -1);
+	cdll_iter(ps->a.head, indexer, NULL);
 	print_stats(ps);
 	print_stacks(ps);
 	printf("strategy: %d\n", ps->strategy);
@@ -125,7 +126,8 @@ int main(int argc, char const *argv[])
 		ps->err = adaptive_sort(ps);
 	if (ps->err)
 		return (err(), end(ps), -1);
-	ps->err = compute_disorder(&ps->b, &(ps->disorder));
+	ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	cdll_iter(ps->a.head, indexer, NULL);
 	print_stats(ps);
 	print_stacks(ps);
 

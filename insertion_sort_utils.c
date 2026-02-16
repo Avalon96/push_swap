@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 16:35:21 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/14 17:02:51 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:41:47 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	stack_min(t_stack *s)
 	int		i;
 
 	curr = s->head;
-	min = curr->value;
+	min = curr->value.num;
 	i = 0;
 	while (i < s->size)
 	{
-		if (curr->value < min)
-			min = curr->value;
+		if (curr->value.num < min)
+			min = curr->value.num;
 		curr = curr->next;
 		i++;
 	}
@@ -38,12 +38,12 @@ int	stack_max(t_stack *s)
 	int		i;
 
 	curr = s->head;
-	max = curr->value;
+	max = curr->value.num;
 	i = 0;
 	while (i < s->size)
 	{
-		if (curr->value > max)
-			max = curr->value;
+		if (curr->value.num > max)
+			max = curr->value.num;
 		curr = curr->next;
 		i++;
 	}
@@ -58,14 +58,14 @@ int	get_min_pos(t_stack *s)
 	int		i;
 
 	curr = s->head;
-	min_val = curr->value;
+	min_val = curr->value.num;
 	min_pos = 0;
 	i = 0;
 	while (i < s->size)
 	{
-		if (curr->value < min_val)
+		if (curr->value.num < min_val)
 		{
-			min_val = curr->value;
+			min_val = curr->value.num;
 			min_pos = i;
 		}
 		curr = curr->next;
@@ -82,14 +82,14 @@ int	get_max_pos(t_stack *s)
 	int		i;
 
 	curr = s->head;
-	max_val = curr->value;
+	max_val = curr->value.num;
 	max_pos = 0;
 	i = 0;
 	while (i < s->size)
 	{
-		if (curr->value > max_val)
+		if (curr->value.num > max_val)
 		{
-			max_val = curr->value;
+			max_val = curr->value.num;
 			max_pos = i;
 		}
 		curr = curr->next;

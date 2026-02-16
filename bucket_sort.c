@@ -6,6 +6,8 @@
 #include "generics.h"
 
 
+void push_number_of_bucket(t_ps *ps, t_find_gap *fg, void (*pusher)(t_ps *ps));
+
 void	push_bucket(t_ps *ps, t_find_gap *fg, size_t bucket, size_t left_size){
 	if (left_size == 0)
 		return ;

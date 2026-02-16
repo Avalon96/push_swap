@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 15:02:01 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/14 11:56:38 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:43:04 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static void	index_stack(t_stack *stack)
 		j = 0;
 		while (j < stack->size)
 		{
-			if (curr->value > compare->value)
+			if (curr->value.num > compare->value.num)
 				index++;
 			compare = compare->next;
 			j++;
 		}
-		curr->index = index;
+		curr->value.index = index;
 		curr = curr->next;
 		i++;
 	}
@@ -68,7 +68,7 @@ void	radix_sort(t_ps *ps)
 		j = 0;
 		while (j < size)
 		{
-			if (((ps->a.head->index >> i) & 1) == 0)
+			if (((ps->a.head->value.index >> i) & 1) == 0)
 				push_b(ps);
 			else
 				rotate_a(ps);

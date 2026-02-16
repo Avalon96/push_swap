@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:05:32 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/09 15:11:51 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:33:22 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@
 #define CLR_BLD "\x1b[1m"
 #define CLR_DIM "\x1b[2m"
 
-# define MSG_ERROR "Error\n"
-
+void	indexer(t_custom *v, int i, void *data);
+size_t ft_abs(ssize_t nb);
+void	minmax(t_custom *v, int i, void *data);
+ssize_t	ft_atol(const char *str);
+int	ft_sqrt(int nb);
 void err(void);
-void end(t_ps *ps);
-void print_stacks(t_ps *ps);
 
 #endif

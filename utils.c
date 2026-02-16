@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 17:39:18 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:33:40 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,49 @@ ssize_t	ft_atol(const char *str)
 	return (result * sign);
 }
 
-// void end(t_ps *ps)
-// {
-// 	// ft_lldclear(&(ps->a.top));
-// 	// ft_lldclear(&(ps->b.top));
-// }
+int	ft_sqrt(int nb)
+{
+	int	test;
+
+	test = 2;
+	while (test <= (nb / test))
+	{
+		if ((test * test) == nb)
+			return (test);
+		test++;
+	}
+	return (--test);
+}
+
+int safe_sqrt(int nb)
+{
+	if (nb < 3)
+		return (1);
+	return (ft_sqrt(nb));
+}
+
+size_t ft_abs(ssize_t nb)
+{
+	if (nb < 0)
+		return ((size_t)(-nb));
+	return ((size_t)nb);
+}
+
+void	minmax(t_custom *v, int i, void *data)
+{
+	int (*minmax)[2] = data;
+
+	if (v->num < (*minmax)[0])
+		(*minmax)[0] = v->num;
+	if (v->num > (*minmax)[1])
+		(*minmax)[1] = v->num;
+}
+
+void	indexer(t_custom *v, int i, void *data)
+{
+	(void)data;
+	v->index = i;
+}
 
 void	err(void)
 {

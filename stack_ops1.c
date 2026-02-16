@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:07 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 17:49:03 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 11:26:48 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,15 @@ void	swap(t_stack *stack)
 	stack->head = second;
 }
 
-// t_dll	*pop(t_stack *stack)
-// {
-// 	t_dll	* const top = stack->head;
+t_dll	*pop_last(t_stack *stack)
+{
+	t_dll * const popped = stack->head;
 
-// 	stack->head->next->prev = stack->head->prev;
-// 	stack->head->prev->next = stack->head->next;
-// 	stack->head = stack->head->next;
-// 	stack->size--;
-// 	return (top);
-// }
+	stack->head = NULL;
+	stack->size = 0;
+	return popped;
+}
 
-// void	push(t_stack *stack, t_dll *node)
-// {
-// 	node->next = stack->head;
-// 	node->prev = stack->head->prev;
-// 	stack->head->prev->next = node;
-// 	stack->head->prev = node;
-// 	stack->head = node;
-// 	stack->size++;
-// }
 
 t_dll	*pop(t_stack *stack)
 {

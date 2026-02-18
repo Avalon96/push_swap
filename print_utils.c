@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:23:54 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 19:03:47 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/16 11:48:52 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void p_i(t_custom *v, int i, void *data){
 	ft_printf("[%d]	", i);
 }
 
-static void p_vi_x(t_custom *v, int i, void *data){
+void p_vi_x(t_custom *v, int i, void *data){
 	(void)data;
 	if (i == *(int *)data)
 		ft_printf(CLR_WHT CLR_DIM "[%d]:" CLR_RST CLR_BLD CLR_GRN "%d" CLR_RST ", ", i, v->num);
@@ -38,10 +38,12 @@ static void p_vi_x(t_custom *v, int i, void *data){
 }
 
 static void p_vi(t_custom *v, int i, void *data){
+	(void)i;
+	(void)data;
 	ft_printf(CLR_WHT CLR_DIM "[%d]" CLR_RST CLR_YEL"<%d>:" CLR_RST CLR_BLD "%s" "%d" CLR_RST ", ", v->index, v->bucket_index, ((v->attr & GAP_B)? CLR_RED"|B|" : (v->attr & GAP_A)? CLR_MAG"|A|" : CLR_GRN ), v->num);
 }
 
-static void print_stack(t_stack *s, char *str, int mode)
+static void	print_stack(t_stack *s, char *str, int mode)
 {
 	if (mode == 0)
 	{
@@ -61,7 +63,7 @@ static void print_stack(t_stack *s, char *str, int mode)
 	}
 }
 
-void print_stacks(t_ps *ps)
+void	print_stacks(t_ps *ps)
 {
 	print_stack(&ps->a, "A = ", 1);
 	print_stack(&ps->b, "B = ", 1);

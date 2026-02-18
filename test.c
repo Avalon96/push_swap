@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/18 04:54:14 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/18 23:10:08 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int complex_sort(t_ps *ps);
 int adaptive_sort(t_ps *ps);
 int simple_sort(t_ps *ps);
 
-void print_stacks(t_ps *ps);
+void	print_stacks(t_ps *ps);
 void	print_stats(t_ps *ps);
 
 int	atol_err(const char *str, int *i) {
@@ -133,9 +133,11 @@ int main(int argc, char const *argv[])
 	if (ps->err)
 		return (err(), end(ps), -1);
 	init_instructions(ps);
+	cdll_iter(ps->a.head, indexer, NULL);
 	print_stats(ps);
+	fflush(stdout);
 	print_stacks(ps);
-	printf("strategy: %d\n", ps->strategy);
+	// printf("strategy: %d\n", ps->strategy);
 	if (ps->strategy == STRATEGY_SIMPLE)
 		ps->err = simple_sort(ps);
 	else if (ps->strategy == STRATEGY_MEDIUM)
@@ -146,8 +148,9 @@ int main(int argc, char const *argv[])
 		ps->err = adaptive_sort(ps);
 	if (ps->err)
 		return (err(), end(ps), -1);
-	ps->err = compute_disorder(&ps->b, &(ps->disorder));
+	ps->err = compute_disorder(&ps->a, &(ps->disorder));
 	print_stats(ps);
+	fflush(stdout);
 	print_stacks(ps);
 
 	end(ps);

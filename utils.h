@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:05:32 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 10:54:26 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/16 11:49:35 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	minmax(t_custom *v, int i, void *data);
 ssize_t	ft_atol(const char *str);
 int	ft_sqrt(int nb);
 void err(void);
+int safe_sqrt(int nb);
+void	print_stacks(t_ps *ps);
 
 #endif

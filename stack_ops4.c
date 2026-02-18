@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_helpers.c                                     :+:      :+:    :+:   */
+/*   stack_ops4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/08 15:49:14 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/08 15:49:20 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/14 17:43:48 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/16 11:46:32 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
 
-int	stack_min(t_stack *s)
+void	rotate_both(t_ps *ps)
 {
-	t_lld	*current;
-	int		min;
-
-	current = s->top;
-	min = current->value;
-	while (current)
-	{
-		if (current->value < min)
-			min = current->value;
-		current = current->next;
-	}
-	return (min);
+	// rotate_up(&ps->a);
+	// rotate_up(&ps->b);
+	ps->a.head = ps->a.head->next;
+	ps->b.head = ps->b.head->next;
+	ps->ops_count++;
+	ft_printf("rr\n");
 }
 
-int	stack_max(t_stack *s)
+void	reverse_rotate_both(t_ps *ps)
 {
-	t_lld	*current;
-	int		max;
-
-	current = s->top;
-	max = current->value;
-	while (current)
-	{
-		if (current->value > max)
-			max = current->value;
-		current = current->next;
-	}
-	return (max);
+	// rotate_down(&ps->a);
+	// rotate_down(&ps->a);
+	ps->a.head = ps->a.head->prev;
+	ps->b.head = ps->b.head->prev;
+	ps->ops_count++;
+	ft_printf("rrr\n");
 }

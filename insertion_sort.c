@@ -6,89 +6,92 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 11:45:38 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/08 18:36:46 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/16 12:35:44 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "insertion_sort.h"
 
-static int	get_max_pos(t_stack *s)
+void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
 {
-	t_lld	*curr;
-	int		max_val;
-	int		max_pos;
-	int		i;
-
-	curr = s->top;
-	max_val = curr->value;
-	max_pos = 0;
-	i = 0;
-	while (curr)
+	if (i <= ps->a.size / 2)
 	{
-		if (curr->value > max_val)
-		{
-			max_val = curr->value;
-			max_pos = i;
-		}
-		curr = curr->next;
-		i++;
-	}
-	return (max_pos);
-}
-
-static int	find_insert_position(t_stack *b, int value)
-{
-	t_lld	*curr;
-	int		pos;
-
-	if (value > stack_max(b) || value < stack_min(b))
-		return (get_max_pos(b));
-	curr = b->top;
-	pos = 1;
-	while (curr->next)
-	{
-		if (curr->value > value && curr->next->value < value)
-			return (pos);
-		curr = curr->next;
-		pos++;
-	}
-	return (0);
-}
-
-static void	rotate_to_position(t_ps *ps, int pos)
-{
-	int	size;
-
-	size = ps->b.size;
-	if (pos <= size / 2)
-	{
-		while (pos--)
-			rotate_b(ps);
+		(*m).a_dir = 1;
+		(*m).a_count = i;
 	}
 	else
 	{
-		pos = size - pos;
-		while (pos--)
-			reverse_rotate_b(ps);
+		(*m).a_dir = -1;
+		(*m).a_count = ps->a.size - i;
+	}
+	if (target_b <= ps->b.size / 2)
+	{
+		(*m).b_dir = 1;
+		(*m).b_count = target_b;
+	}
+	else
+	{
+		(*m).b_dir = -1;
+		(*m).b_count = ps->b.size - target_b;
+	}
+}
+
+void	set_best(t_move *m, t_move **best)
+{
+	if ((*m).a_dir == (*m).b_dir)
+	{
+		if ((*m).a_count > (*m).b_count)
+			(*m).total = (*m).a_count;
+		else
+			(*m).total = (*m).b_count;
+	}
+	else
+		(*m).total = (*m).a_count + (*m).b_count;
+	if ((*m).total < (*best)->total)
+		**best = *m;
+}
+
+static void	set_cheapest_move(t_ps *ps, t_move *best)
+{
+	t_dll	*curr_a;
+	t_move	m;
+	int		i;
+	int		target_b;
+
+	curr_a = ps->a.head;
+	best->total = 2147483647;
+	i = 0;
+	while (i < ps->a.size)
+	{
+		target_b = find_target_in_b(&ps->b, curr_a->value.num);
+		set_cheap(i, ps, &m, target_b);
+		set_best(&m, &best);
+		curr_a = curr_a->next;
+		i++;
 	}
 }
 
 void	insertion_sort(t_ps *ps)
 {
-	int	pos;
+	t_move	best;
+	int		target;
 
-	if (ps->a.size > 0)
+	if (ps->a.size > 3)
 		push_b(ps);
-	if (ps->a.size > 0)
+	if (ps->a.size > 3)
 		push_b(ps);
-	while (ps->a.size > 0)
+	while (ps->a.size > 3)
 	{
-		pos = find_insert_position(&ps->b, ps->a.top->value);
-		rotate_to_position(ps, pos);
-		push_b(ps);
+		set_cheapest_move(ps, &best);
+		execute_move(ps, best);
 	}
-	pos = get_max_pos(&ps->b);
-	rotate_to_position(ps, pos);
+	sort_three_a(ps);
 	while (ps->b.size > 0)
+	{
+		target = find_target_in_a(&ps->a, ps->b.head->value.num);
+		rotate_a_to_top(ps, target);
 		push_a(ps);
+	}
+	rotate_a_to_top(ps, get_min_pos(&ps->a));
 }

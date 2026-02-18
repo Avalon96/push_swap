@@ -12,14 +12,19 @@ ifneq '$(err)' '0'
 	CFLAGS	+=	$(ERR)
 endif
 
-FILES	=	cmd \
+FILES	=	test \
 		stack_ops1 \
 		stack_ops2 \
 		stack_ops3 \
+		stack_ops4 \
 		list_ops \
 		utils \
 		push_swap \
+		insertion_sort \
+		insertion_sort_utils \
+		insertion_sort_utils2 \
 		print_utils \
+		radix_sort \
 		strategies \
 		bucket_sort \
 		generics
@@ -33,7 +38,11 @@ all: libft
 	$(MAKE) $(NAME)
 
 run: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(args)
+#	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(args)
+	./$(NAME) $(flags) $(args)
+
+test: all
+	./$(NAME) $(flags) $(args) | ./checker_linux $(args)
 
 libft:
 	$(MAKE) -C libft
@@ -45,12 +54,10 @@ $(NAME): $(OBJS) $(LIBS)
 	$(CC) $(LDFLAGS) -o $@ $^
 clean:
 	rm -f ${OBJS}
-# 	$(MAKE) -C libft clean
-
+	$(MAKE) -C libft fclean
 fclean: clean
 	rm -f ${NAME}
-# 	$(MAKE) -C libft fclean
-
+	$(MAKE) -C libft fclean
 re: fclean
 	$(MAKE) all
 

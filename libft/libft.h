@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:13:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/07 19:07:59 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:37:30 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // FT_PRINTF
-int	ft_printf(const char *s, ...);
-int	ft_print_char(int c);
-int	ft_print_str(char *s);
-int	ft_print_hex(size_t n, const char flag);
-int	ft_print_ptr(void *ptr);
-int	ft_print_int(int n);
-int	ft_print_uint(unsigned int n);
+int		ft_printf(const char *s, ...);
+int		ft_print_char(int c);
+int		ft_print_str(char *s);
+int		ft_print_hex(size_t n, const char flag);
+int		ft_print_ptr(void *ptr);
+int		ft_print_int(int n);
+int		ft_print_uint(unsigned int n);
 
 // GNL
 # ifndef BUFFER_SIZE

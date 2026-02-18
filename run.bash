@@ -1,7 +1,12 @@
-args="--medium"
-# args="--medium"
+flags="$1"
+# args="--simple"
 # args="--complex"
 
+args+=" "
+# args+=" 1 5 7 9 8 2 3 4 6"
+# args+=" 1 2 3 4 5 6 7 8 9"
+args+=" $(shuf -i 0-500 -n 500 | xargs)"
+# args+=" $(cat disorder19_500.txt | xargs)"
 args+=" $(cat ex1nums)"
 # args+=" $(shuf -i 0-500 -n 500 | xargs)"
 # args+=" $(cat /home/ahmbasar/sources/repos/push_swap/worst)"
@@ -13,4 +18,18 @@ args+=" $(cat ex1nums)"
 # args+="111111 3 2 8 4 7 6 5 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25" # len 25, bucket ct = 5
 # args+="111111 3"
 
-make clean run args="$args" err=0 2>&1 | tee out.log
+# shift first arg, then run
+shift
+
+# check if first arg is exist
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 [test|run] [args...]"
+	exit 1
+fi
+
+if [ "$1" = "test" ]; then
+	make test flags="$flags" args="$args" err=0 2>&1 | tee out.log
+elif [ "$1" = "run" ]; then
+	make run flags="$flags" args="$args" err=0 2>&1 | tee out.log
+fi

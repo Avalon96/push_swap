@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/15 02:37:17 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/16 11:47:29 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ size_t ft_abs(ssize_t nb)
 
 void	minmax(t_custom *v, int i, void *data)
 {
+	(void)i;
 	int (*minmax)[2] = data;
 
 	if (v->num < (*minmax)[0])
@@ -81,7 +82,7 @@ void	indexer(t_custom *v, int i, void *data)
 	v->index = i;
 }
 
-void err(void)
+void	err(void)
 {
 	write(2, MSG_ERROR, sizeof(MSG_ERROR) - 1);
 }

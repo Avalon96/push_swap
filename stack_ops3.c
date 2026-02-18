@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   stack_ops3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:24 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 19:03:12 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/16 11:29:12 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
+#include "utils.h"
 
 void	swap_a(t_ps *ps)
 {

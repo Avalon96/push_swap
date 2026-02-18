@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   stack_ops2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:19 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/14 19:02:27 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/16 11:29:07 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
+#include "utils.h"
 
 void	rotate_a(t_ps *ps)
 {
@@ -27,14 +28,6 @@ void	rotate_b(t_ps *ps)
 	ft_printf("rb\n");
 }
 
-void	rotate_both(t_ps *ps)
-{
-	rotate_up(&ps->a);
-	rotate_up(&ps->b);
-	ps->ops_count++;
-	ft_printf("rr\n");
-}
-
 void	reverse_rotate_a(t_ps *ps)
 {
 	rotate_down(&ps->a);
@@ -47,12 +40,4 @@ void	reverse_rotate_b(t_ps *ps)
 	rotate_down(&ps->b);
 	ps->ops_count++;
 	ft_printf("rrb\n");
-}
-
-void	reverse_rotate_both(t_ps *ps)
-{
-	rotate_down(&ps->a);
-	rotate_down(&ps->b);
-	ps->ops_count++;
-	ft_printf("rrr\n");
 }

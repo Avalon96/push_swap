@@ -17,7 +17,7 @@
 #include <stdlib.h> //del
 #include <stdio.h> //del
 
-void print_stacks(t_ps *ps);
+void	print_stacks(t_ps *ps);
 void	print_stats(t_ps *ps);
 
 int	atol_err(const char *str, int *i) {

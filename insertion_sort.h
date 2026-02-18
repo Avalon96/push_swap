@@ -21,10 +21,8 @@ int		find_target_in_b(t_stack *b, int val);
 int		find_target_in_a(t_stack *a, int val);
 void	execute_move(t_ps *ps, t_move m);
 void	sort_three_a(t_ps *ps);
-int		find_target_in_a(t_stack *a, int val);
-int		find_target_in_b(t_stack *b, int val);
-void	execute_move(t_ps *ps, t_move m);
-void	sort_three_a(t_ps *ps);
 void	rotate_a_to_top(t_ps *ps, int pos);
+void	set_cheap(int i, t_ps *ps, t_move *m, int target_b);
+void	set_best(t_move *m, t_move **best);
 
 #endif

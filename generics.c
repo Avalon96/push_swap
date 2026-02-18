@@ -2,6 +2,7 @@
 #include "dll.h"
 #include "generics.h"
 #include "utils.h"
+#include "libft.h"
 
 int	get_relative_index(int index, int size)
 {

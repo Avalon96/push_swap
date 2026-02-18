@@ -36,5 +36,6 @@ ssize_t	ft_atol(const char *str);
 int	ft_sqrt(int nb);
 void err(void);
 int safe_sqrt(int nb);
+void	print_stacks(t_ps *ps);
 
 #endif

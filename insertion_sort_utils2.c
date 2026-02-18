@@ -13,92 +13,43 @@
 #include "push_swap.h"
 #include "insertion_sort.h"
 
-// int	find_target_in_a(t_stack *a, int val)
-// {
-// 	t_dll	*curr;
-// 	int		i;
-
-// 	if (val < stack_min(a) || val > stack_max(a))
-// 		return (get_min_pos(a));
-// 	curr = a->head;
-// 	i = 0;
-// 	while (i < a->size)
-// 	{
-// 		if (curr->value.num > val && curr->prev->value.num < val)
-// 			return (i);
-// 		curr = curr->next;
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-int find_target_in_a(t_stack *a, int val)
+int	find_target_in_a(t_stack *a, int val)
 {
-    t_dll   *curr;
-    int     i;
+	t_dll	*curr;
+	int		i;
 
-    if (a->size == 0)
-        return (0);
-    // Both new max and new min insert at the seam (just before current min)
-    if (val > stack_max(a) || val < stack_min(a))
-        return (get_min_pos(a));
-    // find the gap: curr < val < next (ascending order)
-    curr = a->head;
-    i = 0;
-    while (i < a->size)
-    {
-        if (curr->value.num < val && curr->next->value.num > val)
-            return (i + 1);
-        curr = curr->next;
-        i++;
-    }
-    return (0);
+	if (val < stack_min(a) || val > stack_max(a))
+		return (get_min_pos(a));
+	curr = a->head;
+	i = 0;
+	while (i < a->size)
+	{
+		if (curr->value.num > val && curr->prev->value.num < val)
+			return (i);
+		curr = curr->next;
+		i++;
+	}
+	return (0);
 }
 
-int find_target_in_b(t_stack *b, int val)
+int	find_target_in_b(t_stack *b, int val)
 {
-    t_dll   *curr;
-    int     i;
+	t_dll	*curr;
+	int		i;
 
-    if (b->size == 0)
-        return (0);
-    // val is new maximum -> goes on top (position 0)
-    if (val > stack_max(b))
-        return (0);
-    // val is new minimum -> goes at bottom (just after current min)
-    if (val < stack_min(b))
-        return (get_min_pos(b) + 1) % b->size;
-    // find the gap: curr > val > next (descending order)
-    curr = b->head;
-    i = 0;
-    while (i < b->size)
-    {
-        if (curr->value.num > val && curr->next->value.num < val)
-            return (i + 1);
-        curr = curr->next;
-        i++;
-    }
-    return (0);
+	if (val < stack_min(b) || val > stack_max(b))
+		return (get_max_pos(b));
+	curr = b->head;
+	i = 0;
+	while (i < b->size)
+	{
+		if (curr->value.num > val && curr->next->value.num < val)
+			return (i + 1);
+		curr = curr->next;
+		i++;
+	}
+	return (0);
 }
-
-// int	find_target_in_b(t_stack *b, int val)
-// {
-// 	t_dll	*curr;
-// 	int		i;
-
-// 	if (val < stack_min(b) || val > stack_max(b))
-// 		return (get_max_pos(b));
-// 	curr = b->head;
-// 	i = 0;
-// 	while (i < b->size)
-// 	{
-// 		if (curr->value.num > val && curr->next->value.num < val)
-// 			return (i + 1);
-// 		curr = curr->next;
-// 		i++;
-// 	}
-// 	return (0);
-// }
 
 void	execute_move(t_ps *ps, t_move m)
 {

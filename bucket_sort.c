@@ -5,6 +5,7 @@
 #include "push_swap.h"
 #include "generics.h"
 #include "insertion_sort.h"
+#include "libft.h"
 
 void	push_number_of_bucket(t_ps *ps, t_find_gap *fg, void (*pusher)(t_ps *ps));
 
@@ -133,13 +134,31 @@ void	count_buckets(t_stack *a, t_bucket_sort *bucket_sort)
 	cdll_iter(a->head, set_bucket, bucket_sort);
 }
 
+// void	set_occupied_bucket(t_custom *v, int i, void *data)
+// {
+// 	t_bucket_sort * const bucket_sort = data;
+// 	t_bucket * const bucket = &bucket_sort->buckets[ \
+// 		bucket_sort->bucket_ct * ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) / ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1) \
+// 	];
+
+// 	if (bucket->size > 0 && !bucket->counted)
+// 	{
+// 		bucket->counted = 1;
+// 		bucket_sort->occupied_ct++;
+// 	}
+// }
+
 void	set_occupied_bucket(t_custom *v, int i, void *data)
 {
 	t_bucket_sort * const bucket_sort = data;
-	t_bucket * const bucket = &bucket_sort->buckets[ \
-		bucket_sort->bucket_ct * ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) / ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1) \
-	];
+	size_t bucket_index = bucket_sort->bucket_ct * 
+        ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) / 
+        ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1);
 
+    if (bucket_index >= bucket_sort->bucket_ct)
+        bucket_index = bucket_sort->bucket_ct - 1;
+
+	t_bucket * const bucket = &bucket_sort->buckets[bucket_index];
 	if (bucket->size > 0 && !bucket->counted)
 	{
 		bucket->counted = 1;
@@ -155,90 +174,281 @@ void	count_occupied_buckets(t_stack *a, t_bucket_sort *bucket_sort)
 	cdll_iter(a->head, set_occupied_bucket, bucket_sort);
 }
 
+// void	set_bucket(t_custom *v, int i, void *data)
+// {
+// 		t_bucket_sort * const bucket_sort = data;
+// 		size_t const bucket_index = bucket_sort->bucket_ct * ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) / ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1);
+// 		t_dll	* const node = v->this;
+	
+// 		v->bucket_index = bucket_index;
+// 		bucket_sort->buckets[bucket_index].size++;
+// }
+
 void	set_bucket(t_custom *v, int i, void *data)
 {
-	t_bucket_sort * const bucket_sort = data;
-	size_t const bucket_index = bucket_sort->bucket_ct * ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) / ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1);
-	t_dll	* const node = v->this;
-
+	t_bucket_sort *const bucket_sort = data;
+	size_t bucket_index = bucket_sort->bucket_ct *
+						  ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0]) /
+						  ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0] + 1);
+	if (bucket_index >= bucket_sort->bucket_ct)
+		bucket_index = bucket_sort->bucket_ct - 1;
 	v->bucket_index = bucket_index;
 	bucket_sort->buckets[bucket_index].size++;
 }
 
-static void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
+static int  bucket_has_elements_in_a(t_ps *ps, size_t bucket)
 {
-	if (i <= ps->a.size / 2)
-	{
-		(*m).a_dir = 1;
-		(*m).a_count = i;
-	}
-	else
-	{
-		(*m).a_dir = -1;
-		(*m).a_count = ps->a.size - i;
-	}
-	if (target_b <= ps->b.size / 2)
-	{
-		(*m).b_dir = 1;
-		(*m).b_count = target_b;
-	}
-	else
-	{
-		(*m).b_dir = -1;
-		(*m).b_count = ps->b.size - target_b;
-	}
+    t_dll   *curr;
+    int     i;
+
+    if (ps->a.size == 0)
+        return (0);
+    curr = ps->a.head;
+    i = 0;
+    while (i < ps->a.size)
+    {
+        if (curr->value.bucket_index == bucket)
+            return (1);
+        curr = curr->next;
+        i++;
+    }
+    return (0);
 }
 
-static void	set_best(t_move *m, t_move **best)
+static void execute_move_bucket(t_ps *ps, t_move m)
 {
-	if ((*m).a_dir == (*m).b_dir)
-	{
-		if ((*m).a_count > (*m).b_count)
-			(*m).total = (*m).a_count;
-		else
-			(*m).total = (*m).b_count;
-	}
-	else
-		(*m).total = (*m).a_count + (*m).b_count;
-	if ((*m).total < (*best)->total)
-		**best = *m;
+    while (m.a_count-- > 0)
+    {
+        if (m.a_dir == 1)
+            rotate_a(ps);
+        else
+            reverse_rotate_a(ps);
+    }
+    push_b(ps);
+    if (ps->a.size > 0)
+        cdll_iter(ps->a.head, indexer, NULL);
+    if (ps->b.size > 0)
+        cdll_iter(ps->b.head, indexer, NULL);
 }
 
-static void	set_cheapest_move(t_ps *ps, t_move *best)
+static void set_cheapest_a_only(t_ps *ps, t_move *best, size_t bucket)
 {
-	t_dll	*curr_a;
-	t_move	m;
-	int		i;
-	int		target_b;
+    t_dll   *curr_a;
+    t_move  m;
+    int     i;
 
-	curr_a = ps->a.head;
-	best->total = 2147483647;
-	i = 0;
-	while (i < ps->a.size)
-	{
-		target_b = find_target_in_b(&ps->b, curr_a->value.num);
-		set_cheap(i, ps, &m, target_b);
-		set_best(&m, &best);
-		curr_a = curr_a->next;
-		i++;
-	}
+    curr_a = ps->a.head;
+    best->total = 2147483647;
+    i = 0;
+    while (i < ps->a.size)
+    {
+        if (curr_a->value.bucket_index == bucket)
+        {
+            if (i <= ps->a.size / 2)
+            {
+                m.a_dir = 1;
+                m.a_count = i;
+            }
+            else
+            {
+                m.a_dir = -1;
+                m.a_count = ps->a.size - i;
+            }
+            m.b_count = 0;
+            m.b_dir = 1;
+            m.total = m.a_count;
+            if (m.total < best->total)
+                *best = m;
+        }
+        curr_a = curr_a->next;
+        i++;
+    }
 }
 
-void    bucket_insertion_sort(t_ps *ps)
+static void insert_into_segment(t_ps *ps, int seg_len)
+{
+    int i;
+
+    if (seg_len == 0)
+        return ;
+    i = 0;
+    while (i < seg_len)
+    {
+        if (ps->b.head->value.num > ps->b.head->next->value.num)
+            break ;
+        rotate_b(ps);
+        i++;
+    }
+    int max_val = ps->b.head->value.num;
+    t_dll *curr = ps->b.head->next;
+    int max_steps = 0;
+    int steps = 0;
+    int j = 1;
+    while (j <= seg_len)
+    {
+        steps++;
+        if (curr->value.num > max_val)
+        {
+            max_val = curr->value.num;
+            max_steps = steps;
+        }
+        curr = curr->next;
+        j++;
+    }
+    while (max_steps-- > 0)
+        rotate_b(ps);
+    if (ps->b.size > 0)
+        cdll_iter(ps->b.head, indexer, NULL);
+}
+
+static void sort_segment_in_b(t_ps *ps, int len)
+{
+    int i;
+    int j;
+    int max_pos;
+    t_dll *curr;
+
+    i = 0;
+    while (i < len - 1)
+    {
+        curr = ps->b.head;
+        max_pos = 0;
+        int max_val = curr->value.num;
+        j = 1;
+        curr = curr->next;
+        while (j < len - i)
+        {
+            if (curr->value.num > max_val)
+            {
+                max_val = curr->value.num;
+                max_pos = j;
+            }
+            curr = curr->next;
+            j++;
+        }
+        if (max_pos <= (len - i) / 2)
+        {
+            while (max_pos-- > 0)
+                rotate_b(ps);
+        }
+        else
+        {
+            int back = (len - i) - max_pos;
+            while (back-- > 0)
+                reverse_rotate_b(ps);
+        }
+        int sink = len - 1 - i;
+        while (sink-- > 0)
+            rotate_b(ps);
+        i++;
+    }
+    int restore = len - 1;
+    while (restore-- > 0)
+        reverse_rotate_b(ps);
+    cdll_iter(ps->b.head, indexer, NULL);
+}
+
+static void set_cheapest_largest_in_bucket(t_ps *ps, t_move *best, size_t bucket)
+{
+    t_dll   *curr_a;
+    t_move  m;
+    int     i;
+    int     best_score;
+
+    curr_a = ps->a.head;
+    best->total = 2147483647;
+    best_score = INT_MIN;
+    i = 0;
+    while (i < ps->a.size)
+    {
+        if (curr_a->value.bucket_index == bucket)
+        {
+            int cost;
+            if (i <= ps->a.size / 2)
+                cost = i;
+            else
+                cost = ps->a.size - i;
+            int score = curr_a->value.num - cost * 10;
+            if (score > best_score)
+            {
+                best_score = score;
+                if (i <= ps->a.size / 2)
+                {
+                    best->a_dir = 1;
+                    best->a_count = i;
+                }
+                else
+                {
+                    best->a_dir = -1;
+                    best->a_count = ps->a.size - i;
+                }
+                best->b_count = 0;
+                best->b_dir = 1;
+                best->total = best->a_count;
+            }
+        }
+        curr_a = curr_a->next;
+        i++;
+    }
+}
+
+static void insertion_sort_bucket(t_ps *ps, size_t bucket)
 {
     t_move  best;
-    int     target;
+    int     bucket_size;
+    int     pushed;
 
-    while (ps->a.size > 0)
+    bucket_size = (int)ps->bucket_sort.buckets[bucket].size;
+    if (bucket_size == 0)
+        return ;
+    if (!bucket_has_elements_in_a(ps, bucket))
+        return ;
+
+    pushed = 0;
+    while (pushed < bucket_size)
     {
-        set_cheapest_move(ps, &best);
-        execute_move(ps, best);
+        set_cheapest_largest_in_bucket(ps, &best, bucket);
+        if (best.total == 2147483647)
+            break ;
+        execute_move_bucket(ps, best);
+        pushed++;
     }
+}
+
+static void push_b_to_a(t_ps *ps)
+{
+    int target;
+
     while (ps->b.size > 0)
     {
+        if (ps->a.size == 0)
+        {
+            push_a(ps);
+            cdll_iter(ps->a.head, indexer, NULL);
+            continue ;
+        }
+        cdll_iter(ps->a.head, indexer, NULL);
         target = find_target_in_a(&ps->a, ps->b.head->value.num);
         rotate_a_to_top(ps, target);
         push_a(ps);
     }
+    cdll_iter(ps->a.head, indexer, NULL);
     rotate_a_to_top(ps, get_min_pos(&ps->a));
+    cdll_iter(ps->a.head, indexer, NULL);
+}
+
+void    sort_buckets_insertion(t_ps *ps)
+{
+    size_t  bucket;
+
+    // printf("sort_buckets_insertion start: a.size=%d, b.size=%d\n", ps->a.size, ps->b.size);
+    bucket = ps->bucket_sort.bucket_ct;
+    while (bucket > 0)
+    {
+        bucket--;
+        // printf("processing bucket %zu\n", bucket);
+        insertion_sort_bucket(ps, bucket);
+    }
+    // printf("pushing back to a\n");
+    push_b_to_a(ps);
 }

@@ -28,5 +28,6 @@ int		bucket_selective(t_custom *v, int i, void *data);
 void	count_occupied_buckets(t_stack *a, t_bucket_sort *bucket_sort);
 void	sort_buckets(t_ps *ps);
 void	rotator(t_ps *ps, ssize_t idx, char c);
+void	sort_buckets_insertion(t_ps *ps);
 
 #endif // BUCKET_SORT_H

@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "insertion_sort.h"
 
-static void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
+void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
 {
 	if (i <= ps->a.size / 2)
 	{
@@ -37,7 +37,7 @@ static void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
 	}
 }
 
-static void	set_best(t_move *m, t_move **best)
+void	set_best(t_move *m, t_move **best)
 {
 	if ((*m).a_dir == (*m).b_dir)
 	{

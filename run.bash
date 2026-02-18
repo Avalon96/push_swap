@@ -2,8 +2,8 @@ args="--medium"
 # args="--medium"
 # args="--complex"
 
-args+=" "
-args+=" $(shuf -i 0-500 -n 500 | xargs)"
+args+=" $(cat ex1nums)"
+# args+=" $(shuf -i 0-500 -n 500 | xargs)"
 # args+=" $(cat /home/ahmbasar/sources/repos/push_swap/worst)"
 # args+="9996 -4 4996 -3 4997 -2 4998 -1 4999 1 3 2 5000 5001 7 5002 6 5003 5004 8 9999 9998 9997"
 

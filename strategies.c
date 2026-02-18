@@ -4,7 +4,8 @@
 #include "libft.h"
 #include "generics.h"
 
-int	medium_sort(t_ps *ps){
+int	medium_sort(t_ps *ps)
+{
 	t_bucket_sort * const bucket_sort = &ps->bucket_sort;
 	
 	bucket_sort->bucket_ct = safe_sqrt(ps->a.size);
@@ -19,20 +20,22 @@ int	medium_sort(t_ps *ps){
 		printf("	[%zu]: size %zu\n", i, bucket_sort->buckets[i].size);
 	count_occupied_buckets(&ps->a, bucket_sort);
 	printf("occupied ct: %zu\n", bucket_sort->occupied_ct);
-	// halve_buckets(ps);
 	sort_buckets(ps);
 	// sort_bucket(ps);
 	return (0);
 }
 
-int complex_sort(t_ps *ps){
+int complex_sort(t_ps *ps)
+{
 	return (0);
 }
 
-int adaptive_sort(t_ps *ps){
+int adaptive_sort(t_ps *ps)
+{
 	return (0);
 }
 
-int simple_sort(t_ps *ps){
+int simple_sort(t_ps *ps)
+{
 	return (0);
 }

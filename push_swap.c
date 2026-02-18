@@ -6,11 +6,13 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/13 14:20:19 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/18 08:49:10 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+// #include "push_swap.h"
+#include "push_swap_defs.h"
+#include "stack.h"
 
 // function compute_disorder(stack a):
 // 	mistakes = 0
@@ -22,12 +24,12 @@
 // 				mistakes += 1
 // 	return mistakes / total_pairs
 
-int compute_disorder(t_stack *a, float *disorder)
+int compute_disorder(t_stack *stack, float *disorder)
 {
 	float mistakes = 0;
 	int total_pairs = 0;
-	t_dll *i = a->head;
-	t_dll *tail = a->head->prev;
+	t_dll *i = stack->head;
+	t_dll *tail = stack->head->prev;
 	t_dll *j;
 
 	while (i != tail)
@@ -46,4 +48,9 @@ int compute_disorder(t_stack *a, float *disorder)
 	}
 	*disorder = (mistakes * 100) / total_pairs;
 	return (0);
+}
+
+void	executer(t_cmd op)
+{
+	
 }

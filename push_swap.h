@@ -2,35 +2,13 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
+# include "push_swap_defs.h"
+// # include "generics.h"
 # include "bucket_sort.h"
 # include "dll.h"
 # include "stack.h"
 
 # define MSG_ERROR "Error\n"
-
-typedef enum e_cmd
-{
-	SA,
-	SB,
-	SS,
-	PA,
-	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR
-}				t_cmd;
-
-typedef enum e_flags
-{
-	STRATEGY_SIMPLE,
-	STRATEGY_MEDIUM,
-	STRATEGY_COMPLEX,
-	STRATEGY_ADAPTIVE,
-	UNDEFINED
-}			t_flags;
 
 typedef struct s_ps
 {
@@ -45,6 +23,7 @@ typedef struct s_ps
 	int 	err;
 	float	disorder;
 	size_t	ops_count;
+	void	(*(instruction[11]))(t_ps *ps);
 }				t_ps;
 
 void	swap(t_stack *stack);

@@ -5,9 +5,11 @@
 
 # include "dll.h"
 # include "stack.h"
+# include "generics.h"
 
 typedef struct	s_bucket
 {
+	size_t	index;
 	size_t	size;
 	t_dll	*head; // necessary?
 	int		counted;
@@ -15,11 +17,16 @@ typedef struct	s_bucket
 
 typedef struct	s_bucket_sort
 {
+	size_t		pushing_remaining;
+	size_t		pushing_bucket;
+	
 	size_t		bucket_ct;
 	int			minmax[2]; // [0] = min, [1] = max
 	size_t		occupied_ct;
 	// occupied buckets indexes variable
 	t_bucket	*buckets;
+	t_find_gap	*fg;
+	t_collector	*ctor;
 }	t_bucket_sort;
 
 void	set_bucket(t_custom *v, int i, void *data);

@@ -1,4 +1,4 @@
-args="$1"
+flags="$1"
 # args="--simple"
 # args="--complex"
 
@@ -15,4 +15,18 @@ args+=" $(shuf -i 0-500 -n 500 | xargs)"
 # args+="111111 3 2 8 4 7 6 5 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25" # len 25, bucket ct = 5
 # args+="111111 3"
 
-make run args="$args" err=0 2>&1 | tee out.log
+# shift first arg, then run
+shift
+
+# check if first arg is exist
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 [test|run] [args...]"
+	exit 1
+fi
+
+if [ "$1" = "test" ]; then
+	make test flags="$flags" args="$args" err=0 2>&1 | tee out.log
+elif [ "$1" = "run" ]; then
+	make run flags="$flags" args="$args" err=0 2>&1 | tee out.log
+fi

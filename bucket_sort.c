@@ -6,6 +6,7 @@
 #include "generics.h"
 #include "insertion_sort.h"
 #include "libft.h"
+#include <limits.h>
 
 void	push_number_of_bucket(t_ps *ps, t_find_gap *fg, void (*pusher)(t_ps *ps));
 
@@ -419,6 +420,7 @@ static void push_b_to_a(t_ps *ps)
 {
     int target;
 
+	dprintf(2, "==[DEBUG]== %zu\n", ps->ops_count);
     while (ps->b.size > 0)
     {
         if (ps->a.size == 0)
@@ -431,6 +433,9 @@ static void push_b_to_a(t_ps *ps)
         target = find_target_in_a(&ps->a, ps->b.head->value.num);
         rotate_a_to_top(ps, target);
         push_a(ps);
+
+		// print_stacks(ps);
+		// getchar();
     }
     cdll_iter(ps->a.head, indexer, NULL);
     rotate_a_to_top(ps, get_min_pos(&ps->a));
@@ -443,12 +448,17 @@ void    sort_buckets_insertion(t_ps *ps)
 
     // printf("sort_buckets_insertion start: a.size=%d, b.size=%d\n", ps->a.size, ps->b.size);
     bucket = ps->bucket_sort.bucket_ct;
-    while (bucket > 0)
-    {
-        bucket--;
-        // printf("processing bucket %zu\n", bucket);
-        insertion_sort_bucket(ps, bucket);
-    }
+    // while (bucket > 0)
+    // {
+    //     bucket--;
+    //     // printf("processing bucket %zu\n", bucket);
+    //     insertion_sort_bucket(ps, bucket);
+	// 	print_stacks(ps);
+	// 	getchar();
+    // }
+
+	sort_buckets(ps);
+	
     // printf("pushing back to a\n");
     push_b_to_a(ps);
 }

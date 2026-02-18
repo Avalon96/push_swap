@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 13:30:31 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/18 22:22:41 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,9 @@ int main(int argc, char const *argv[])
 		return (err(), end(ps), -1);
 	cdll_iter(ps->a.head, indexer, NULL);
 	print_stats(ps);
+	fflush(stdout);
 	print_stacks(ps);
-	printf("strategy: %d\n", ps->strategy);
+	// printf("strategy: %d\n", ps->strategy);
 	if (ps->strategy == STRATEGY_SIMPLE)
 		ps->err = simple_sort(ps);
 	else if (ps->strategy == STRATEGY_MEDIUM)
@@ -126,7 +127,9 @@ int main(int argc, char const *argv[])
 		ps->err = adaptive_sort(ps);
 	if (ps->err)
 		return (err(), end(ps), -1);
+	ps->err = compute_disorder(&ps->a, &(ps->disorder));
 	print_stats(ps);
+	fflush(stdout);
 	print_stacks(ps);
 
 	end(ps);

@@ -48,6 +48,7 @@ void	update_collector(t_ps *ps, t_collector *ctor)
 	get_biggest_gap(fg);
 	nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index, fg->stack); // get_nearest is better than find_gap
 	nearest = get_nearest_node(fg->stack, fg->filter, &ps->bucket_sort.pushing_bucket);
+
 	if (nearest > 0)
 		ctor->shift_cmd = RA;
 	else if (nearest < 0)
@@ -413,7 +414,7 @@ static void push_b_to_a(t_ps *ps)
 {
     int target;
 
-	dprintf(2, "==[DEBUG]== %zu\n", ps->ops_count);
+	dprintf(2, "==[DEBUG]== push_b_to_a: %zu\n", ps->ops_count);
     while (ps->b.size > 0)
     {
         if (ps->a.size == 0)
@@ -427,8 +428,9 @@ static void push_b_to_a(t_ps *ps)
         rotate_a_to_top(ps, target);
         push_a(ps);
 
-		// print_stacks(ps);
-		// getchar();
+		print_stacks(ps);
+		dprintf(2, "==[DEBUG]== push_b_to_a WHILE: %zu\n", ps->ops_count);
+		getchar();
     }
     cdll_iter(ps->a.head, indexer, NULL);
     rotate_a_to_top(ps, get_min_pos(&ps->a));
@@ -446,12 +448,15 @@ void    sort_buckets_insertion(t_ps *ps)
     //     bucket--;
     //     // printf("processing bucket %zu\n", bucket);
     //     insertion_sort_bucket(ps, bucket);
-	// 	print_stacks(ps);
-	// 	getchar();
+	// 	// print_stacks(ps);
+	// 	// getchar();
     // }
+	// push_b_last(ps);
 
 	sort_buckets(ps);
-	
+	print_stacks(ps);
+	dprintf(2, "==[DEBUG]== %zu\n", ps->ops_count);
+	getchar();
     // printf("pushing back to a\n");
     push_b_to_a(ps);
 }

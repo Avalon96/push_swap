@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/18 22:22:41 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/18 04:54:14 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 
 #include <stdlib.h> //del
 #include <stdio.h> //del
+
+int	medium_sort(t_ps *ps);
+int complex_sort(t_ps *ps);
+int adaptive_sort(t_ps *ps);
+int simple_sort(t_ps *ps);
 
 void	print_stacks(t_ps *ps);
 void	print_stats(t_ps *ps);
@@ -102,6 +107,21 @@ void end(t_ps *ps)
 	free(ps->bucket_sort.buckets);
 }
 
+void	init_instructions(t_ps *ps)
+{
+	ps->instruction[SA] = &swap_a;
+	ps->instruction[SB] = &swap_b;
+	ps->instruction[SS] = &swap_both;
+	ps->instruction[PA] = &push_a;
+	ps->instruction[PB] = &push_b;
+	ps->instruction[RA] = &rotate_a;
+	ps->instruction[RB] = &rotate_b;
+	ps->instruction[RR] = &rotate_both;
+	ps->instruction[RRA] = &reverse_rotate_a;
+	ps->instruction[RRB] = &reverse_rotate_b;
+	ps->instruction[RRR] = &reverse_rotate_both;
+}
+
 // ./push_swap [[--bench] strategy] numbers...
 int main(int argc, char const *argv[])
 {
@@ -112,7 +132,7 @@ int main(int argc, char const *argv[])
 	// printf("disorder: " CLR_BLD "%f\n" CLR_RST, ps->disorder);
 	if (ps->err)
 		return (err(), end(ps), -1);
-	cdll_iter(ps->a.head, indexer, NULL);
+	init_instructions(ps);
 	print_stats(ps);
 	fflush(stdout);
 	print_stacks(ps);

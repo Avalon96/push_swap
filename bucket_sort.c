@@ -10,32 +10,75 @@
 
 void	push_number_of_bucket(t_ps *ps, t_find_gap *fg, void (*pusher)(t_ps *ps));
 
-void	push_bucket(t_ps *ps, t_find_gap *fg, size_t bucket, size_t left_size){
-	if (left_size == 0)
-		return ;
-	fg->data = &bucket; // < ps->bucket_sort.bucket_ct && (ps->bucket_sort.buckets[bucket].size != 0)
-	while (--left_size > 0)
-	{
-		// printf("bucket %zu, left_size %zu\n", bucket, left_size);
-		push_number_of_bucket(ps, fg, push_b);
-	}
-	if (fg->stack->size == 1)
-	{
-		// printf("pushing with push_b_last\n");
-		push_number_of_bucket(ps, fg, push_b_last);
-	}
-	else
-	{
-		// printf("pushing with push_b\n");
-		push_number_of_bucket(ps, fg, push_b);
-	}
+int	pushb_buckets_num(t_collector *ctor)
+{
+	t_bucket_sort * const sorter = ctor->data;
 	
+	if (bucket_selective(&ctor->ps->a.head->value, 0, &sorter->pushing_bucket) == 0)
+	{
+		ctor->ps->instruction[ctor->shift_cmd](ctor->ps);
+		return (0);
+	}
+	cdll_iter(ctor->ps->a.head, clear_gap_attr, NULL); // for print_stacks
+	ctor->collect_fun(ctor->ps);
+	cdll_iter(ctor->ps->a.head, indexer, NULL); // index must correct for finding gap
+	sorter->pushing_remaining--;
+	return (1);
+
 }
 
-void	push_head(t_ps *ps, t_find_gap *fg, size_t *left_size)
+void	push_last_bucket(t_ps *ps)
+{
+	int i;
+	
+	i = ps->a.size - 1;
+	while (i--)
+	{
+		push_b(ps);
+	}
+	push_b_last(ps);
+	cdll_iter(ps->b.head, indexer, NULL);
+}
+
+void	update_collector(t_ps *ps, t_collector *ctor)
+{
+	t_find_gap const	*fg = ps->bucket_sort.fg;
+	ssize_t 			nearest;
+
+	get_biggest_gap(fg);
+	nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index, fg->stack); // get_nearest is better than find_gap
+	nearest = get_nearest_node(fg->stack, fg->filter, &ps->bucket_sort.pushing_bucket);
+	if (nearest > 0)
+		ctor->shift_cmd = RA;
+	else if (nearest < 0)
+		ctor->shift_cmd = RRA;
+	ctor->limit = ft_abs(nearest);
+}
+
+void	push_first_number_of_first_bucket(t_ps *ps){
+	update_collector(ps, ps->bucket_sort.ctor);
+	ps->bucket_sort.ctor->collect_fun = &push_b_first;
+	while (ps->bucket_sort.ctor->limit-- != (size_t)-1)
+		if (pushb_buckets_num(ps->bucket_sort.ctor) == 1)
+			return ;
+}
+
+void	push_bucket(t_ps *ps){
+	while (ps->bucket_sort.pushing_remaining != 0)
+	{
+		update_collector(ps, ps->bucket_sort.ctor);
+		while (ps->bucket_sort.ctor->limit-- != (size_t)-1)
+			pushb_buckets_num(ps->bucket_sort.ctor);
+		// cdll_iter(ps->b.head, indexer, NULL); // for print_stacks?
+		// push_number_of_bucket(ps, fg, push_b);
+	}
+}
+
+
+size_t	get_first_bucket(t_ps *ps)
 {
 	size_t i;
-	
+
 	i = 0;
 	while (i < ps->bucket_sort.bucket_ct && \
 		ps->bucket_sort.buckets[i].size == 0)
@@ -43,82 +86,32 @@ void	push_head(t_ps *ps, t_find_gap *fg, size_t *left_size)
 		// printf("skipping bucket %zu, size %zu\n", i, ps->bucket_sort.buckets[i].size);
 		i++;
 	}
-	// printf("selected bucket: %zu, size: %zu\n", i, ps->bucket_sort.buckets[i].size);
-	fg->data = &i; // < ps->bucket_sort.bucket_ct && (ps->bucket_sort.buckets[bucket].size != 0)
-	*left_size = ps->bucket_sort.buckets[i].size;
-	push_number_of_bucket(ps, fg, push_b_first);
-	--(*left_size);
+	return (i);
 }
 
 void	sort_bucket(t_ps *ps, t_bucket);
 
-// void	sort_buckets_nums(t_ps *ps)
-// {
-// 	size_t	bucket;
-	
-// 	bucket = 0;
-// 	while (bucket < ps->bucket_sort.bucket_ct)
-// 	{
-// 		if (ps->bucket_sort.buckets[bucket].size > 0)
-// 			sort_bucket(ps, ps->bucket_sort.buckets[bucket]);
-// 		bucket++;
-// 	}
-// }
-
 void	sort_buckets(t_ps *ps)
 {
-	t_find_gap * const fg = &(t_find_gap){
-		.stack = &ps->a, .filter = bucket_selective
+	ps->bucket_sort.ctor = &(t_collector){
+		.ps = ps, .data = &ps->bucket_sort,
 	};
-	size_t	bucket;
-	size_t	left_size;
-
-	bucket = 0;
-	push_head(ps, fg, &left_size);
-	// printf("after head left_size: %zu\n", left_size);
-	while (bucket < ps->bucket_sort.bucket_ct)
+	ps->bucket_sort.fg = &(t_find_gap){
+		.stack = &ps->a, .filter = bucket_selective, .data = &ps->bucket_sort.pushing_bucket
+	};
+	ps->bucket_sort.pushing_bucket = get_first_bucket(ps);
+	ps->bucket_sort.pushing_remaining = ps->bucket_sort.buckets[ps->bucket_sort.pushing_bucket].size;
+	push_first_number_of_first_bucket(ps);
+	ps->bucket_sort.ctor->collect_fun = &push_b;
+	while (ps->bucket_sort.pushing_bucket < ps->bucket_sort.bucket_ct - 1)
 	{
-		push_bucket(ps, fg, bucket, left_size);
-		bucket++;
-		if (bucket >= ps->bucket_sort.bucket_ct)
+		push_bucket(ps);
+		ps->bucket_sort.pushing_bucket++;
+		if (ps->bucket_sort.pushing_bucket >= ps->bucket_sort.bucket_ct)
 			break;
-		left_size = ps->bucket_sort.buckets[bucket].size;
+		ps->bucket_sort.pushing_remaining = ps->bucket_sort.buckets[ps->bucket_sort.pushing_bucket].size;
 	}
-}
-
-
-void	push_number_of_bucket(t_ps *ps, t_find_gap *fg, void (*pusher)(t_ps *ps))
-{
-		// printf("ps head: %zu, num: %d\n", ps->a.head->value.index, ps->a.head->value.num);
-		// printf("fg head: %zu, num: %d\n", fg->stack->head->value.index, fg->stack->head->value.num);
-		get_biggest_gap(fg);
-		// printf("ps head: %zu, num: %d\n", ps->a.head->value.index, ps->a.head->value.num);
-		// printf("fg head: %zu, num: %d\n", fg->stack->head->value.index, fg->stack->head->value.num);
-		// print_stacks(ps);
-		// printf("biggest gap: %zu...%zu\n", fg->duo[0]->value.index, fg->duo[1]->value.index);
-		// go_best(&ps->a, );
-		ssize_t nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index, fg->stack);
-		// printf("nearest: %zd\n", nearest);
-		
-		// printf("ps head: %zu, num: %d\n", ps->a.head->value.index, ps->a.head->value.num);
-		// printf("fg head: %zu, num: %d\n", fg->stack->head->value.index, fg->stack->head->value.num);
-		
-		// print_stacks(ps);
-		rotator(ps, nearest, 'a');
-
-		cdll_iter(ps->a.head, indexer, NULL);
-		// print_stacks(ps);
-
-		// printf("ps head: %zu, num: %d\n", ps->a.head->value.index, ps->a.head->value.num);
-		// printf("fg head: %zu, num: %d\n", fg->stack->head->value.index, fg->stack->head->value.num);
-
-		cdll_iter(ps->a.head, clear_gap_attr, NULL);
-		// push; index a, b;
-		pusher(ps);
-		if (ps->a.size > 0)
-			cdll_iter(ps->a.head, indexer, NULL);
-		cdll_iter(ps->b.head, indexer, NULL);
-		// print_stacks(ps);
+	push_last_bucket(ps); // because last bucket not require finding gap.
 }
 
 int		bucket_selective(t_custom *v, int i, void *data)

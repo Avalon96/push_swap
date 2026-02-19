@@ -81,6 +81,50 @@ void	get_biggest_gap(t_find_gap *fg)
 	check_rgap(&first->value, 0, fg);
 }
 
+int	get_nearest_node(t_stack *stack, int (*filter)(t_custom *v, int i, void *data), void *data)
+{
+	t_dll	*forward;
+	t_dll	*backward;
+	t_dll	*cur;
+	size_t	dist;
+
+	forward = NULL;
+	backward = NULL;
+	cur = stack->head;
+	dist = 0;
+	while (dist < stack->size)
+	{
+		if (filter(&cur->value, dist, data))
+		{
+			forward = cur;
+			break ;
+		}
+		cur = cur->next;
+		dist++;
+	}
+	cur = stack->head->prev;
+	dist = 1;
+	while (dist < stack->size)
+	{
+		if (filter(&cur->value, dist, data))
+		{
+			backward = cur;
+			break ;
+		}
+		cur = cur->prev;
+		dist++;
+	}
+	if (!forward && backward)
+		return (get_relative_index(backward->value.index, stack->size));
+	if (!backward && forward)
+		return (get_relative_index(forward->value.index, stack->size));
+	if (ft_abs(get_relative_index(forward->value.index, stack->size)) <= 
+		ft_abs(get_relative_index(backward->value.index, stack->size)))
+		return (get_relative_index(forward->value.index, stack->size));
+	return (get_relative_index(backward->value.index, stack->size));
+}
+
+
 /**
  * does not update index
  */

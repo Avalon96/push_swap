@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/18 23:46:30 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/19 08:52:30 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ int main(int argc, char const *argv[])
 		return (err(), end(ps), -1);
 	ps->err = compute_disorder(&ps->a, &(ps->disorder));
 	print_stats(ps);
-	fflush(stdout);
-	print_stacks(ps);
+	// fflush(stdout);
+	// print_stacks(ps);
 
 	end(ps);
 	// pop(&ps->a);

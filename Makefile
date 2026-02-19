@@ -38,8 +38,8 @@ all: libft
 	$(MAKE) $(NAME)
 
 run: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(flags) $(args)
-# 	./$(NAME) $(flags) $(args)
+# 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(flags) $(args)
+	./$(NAME) $(flags) $(args)
 
 test: all
 	./$(NAME) $(flags) $(args) | ./checker_linux $(args)

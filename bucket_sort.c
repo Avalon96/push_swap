@@ -46,7 +46,7 @@ void	update_collector(t_ps *ps, t_collector *ctor)
 	ssize_t 			nearest;
 
 	get_biggest_gap(fg);
-	nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index, fg->stack); // get_nearest is better than find_gap
+	// nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index, fg->stack); // get_nearest is better than find_gap
 	nearest = get_nearest_node(fg->stack, fg->filter, &ps->bucket_sort.pushing_bucket);
 
 	if (nearest > 0)
@@ -410,31 +410,100 @@ static void insertion_sort_bucket(t_ps *ps, size_t bucket)
     }
 }
 
-static void push_b_to_a(t_ps *ps)
+static void	find_cheapest_b_to_a(t_ps *ps, t_move *best)
 {
-    int target;
+	t_dll	*curr_b;
+	t_move	m;
+	int		i;
+	int		target_a;
 
-	dprintf(2, "==[DEBUG]== push_b_to_a: %zu\n", ps->ops_count);
-    while (ps->b.size > 0)
-    {
-        if (ps->a.size == 0)
-        {
-            push_a(ps);
-            cdll_iter(ps->a.head, indexer, NULL);
-            continue ;
-        }
-        cdll_iter(ps->a.head, indexer, NULL);
-        target = find_target_in_a(&ps->a, ps->b.head->value.num);
-        rotate_a_to_top(ps, target);
-        push_a(ps);
+	curr_b = ps->b.head;
+	best->total = 2147483647;
+	i = 0;
+	while (i < ps->b.size)
+	{
+		target_a = find_target_in_a(&ps->a, curr_b->value.num);
+		if (i <= ps->b.size / 2)
+		{
+			m.b_dir = 1;
+			m.b_count = i;
+		}
+		else
+		{
+			m.b_dir = -1;
+			m.b_count = ps->b.size - i;
+		}
+		if (target_a <= ps->a.size / 2)
+		{
+			m.a_dir = 1;
+			m.a_count = target_a;
+		}
+		else
+		{
+			m.a_dir = -1;
+			m.a_count = ps->a.size - target_a;
+		}
+		if (m.a_dir == m.b_dir)
+		{
+			if (m.a_count > m.b_count)
+				m.total = m.a_count;
+			else
+				m.total = m.b_count;
+		}
+		else
+			m.total = m.a_count + m.b_count;
+		if (m.total < best->total)
+			*best = m;
+		curr_b = curr_b->next;
+		i++;
+	}
+}
 
-		print_stacks(ps);
-		dprintf(2, "==[DEBUG]== push_b_to_a WHILE: %zu\n", ps->ops_count);
-		getchar();
-    }
-    cdll_iter(ps->a.head, indexer, NULL);
-    rotate_a_to_top(ps, get_min_pos(&ps->a));
-    cdll_iter(ps->a.head, indexer, NULL);
+static void	execute_move_to_a(t_ps *ps, t_move m)
+{
+	while (m.a_dir == m.b_dir && m.a_count > 0 && m.b_count > 0)
+	{
+		if (m.a_dir == 1)
+			rotate_both(ps);
+		else
+			reverse_rotate_both(ps);
+		m.a_count--;
+		m.b_count--;
+	}
+	while (m.a_count-- > 0)
+	{
+		if (m.a_dir == 1)
+			rotate_a(ps);
+		else
+			reverse_rotate_a(ps);
+	}
+	while (m.b_count-- > 0)
+	{
+		if (m.b_dir == 1)
+			rotate_b(ps);
+		else
+			reverse_rotate_b(ps);
+	}
+	push_a(ps);
+}
+
+static void	push_b_to_a(t_ps *ps)
+{
+	t_move	best;
+
+	while (ps->b.size > 0)
+	{
+		if (ps->a.size == 0)
+		{
+			push_a(ps);
+			continue ;
+		}
+		find_cheapest_b_to_a(ps, &best);
+		execute_move_to_a(ps, best);
+	}
+	cdll_iter(ps->a.head, indexer, NULL);
+	rotate_a_to_top(ps, get_min_pos(&ps->a));
+	cdll_iter(ps->a.head, indexer, NULL);
 }
 
 void    sort_buckets_insertion(t_ps *ps)
@@ -454,9 +523,11 @@ void    sort_buckets_insertion(t_ps *ps)
 	// push_b_last(ps);
 
 	sort_buckets(ps);
+	
 	print_stacks(ps);
 	dprintf(2, "==[DEBUG]== %zu\n", ps->ops_count);
-	getchar();
+	// getchar();
+
     // printf("pushing back to a\n");
     push_b_to_a(ps);
 }

@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/20 17:32:27 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/20 19:16:39 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int simple_sort(t_ps *ps);
 void	print_stacks(t_ps *ps);
 void	print_stats(t_ps *ps);
 
-int	atol_err(const char *str, int *i) {
+int	atol_err(const char *str, ssize_t *i) {
 	*i = ft_atol(str);
 	if ((*i == 0 && str[0] != '0') || \
 		*i < -2147483648 || \
@@ -122,24 +122,8 @@ void	init_instructions(t_ps *ps)
 	ps->instruction[RRR] = &reverse_rotate_both;
 }
 
-// ./push_swap [[--bench] strategy] numbers...
-int main(int argc, char const *argv[])
+void	strategy(t_ps *ps)
 {
-	t_ps * const ps = &(t_ps){0};
-	if (parse_args(argc, argv, (t_ps *)ps) < 0)
-		return (err(), -1);
-	ps->err = compute_disorder(&ps->a, &(ps->disorder));
-	if (ps->bench)
-		pre_sort_benchmark(ps);
-	// printf("disorder: " CLR_BLD "%f\n" CLR_RST, ps->disorder);
-	if (ps->err)
-		return (err(), end(ps), -1);
-	init_instructions(ps);
-	cdll_iter(ps->a.head, indexer, NULL);
-	// print_stats(ps);
-	// fflush(stdout);
-	// print_stacks(ps);
-	// printf("strategy: %d\n", ps->strategy);
 	if (ps->strategy == STRATEGY_SIMPLE)
 		ps->err = simple_sort(ps);
 	else if (ps->strategy == STRATEGY_MEDIUM)
@@ -148,6 +132,27 @@ int main(int argc, char const *argv[])
 		ps->err = complex_sort(ps);
 	else
 		ps->err = adaptive_sort(ps);
+}
+
+// ./push_swap [[--bench] strategy] numbers...
+int main(int argc, char const *argv[])
+{
+	t_ps * const ps = &(t_ps){0};
+	if (parse_args(argc, argv, (t_ps *)ps) < 0)
+		return (err(), -1);
+	ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	// printf("disorder: " CLR_BLD "%f\n" CLR_RST, ps->disorder);
+	if (ps->err)
+		return (err(), end(ps), -1);
+	if (ps->bench)
+		pre_sort_benchmark(ps);
+	init_instructions(ps);
+	cdll_iter(ps->a.head, indexer, NULL);
+	// print_stats(ps);
+	// fflush(stdout);
+	// print_stacks(ps);
+	// printf("strategy: %d\n", ps->strategy);
+	strategy(ps);
 	if (ps->err)
 		return (err(), end(ps), -1);
 	if (ps->bench)

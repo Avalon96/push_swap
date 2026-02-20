@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:24 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/20 18:50:51 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/20 19:17:19 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	swap_a(t_ps *ps)
 	swap(&ps->a);
 	ps->counts[SA]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("sa\n");
+	ft_printf("sa\n");
 }
 
 void	swap_b(t_ps *ps)
@@ -28,8 +27,7 @@ void	swap_b(t_ps *ps)
 	swap(&ps->b);
 	ps->counts[SB]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("sb\n");
+	ft_printf("sb\n");
 }
 
 void	swap_both(t_ps *ps)
@@ -38,8 +36,7 @@ void	swap_both(t_ps *ps)
 	swap(&ps->b);
 	ps->counts[SS]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("ss\n");
+	ft_printf("ss\n");
 }
 
 void	push_a(t_ps *ps)
@@ -47,8 +44,7 @@ void	push_a(t_ps *ps)
 	push(&ps->a, pop(&ps->b));
 	ps->counts[PA]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	push_b(t_ps *ps)
@@ -56,8 +52,7 @@ void	push_b(t_ps *ps)
 	push(&ps->b, pop(&ps->a));
 	ps->counts[PB]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("pb\n");
+	ft_printf("pb\n");
 }
 
 void	push_a_first(t_ps *ps)
@@ -70,8 +65,7 @@ void	push_a_first(t_ps *ps)
 	ps->a.size++;
 	ps->counts[PA]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	push_b_first(t_ps *ps)
@@ -84,8 +78,7 @@ void	push_b_first(t_ps *ps)
 	ps->b.size++;
 	ps->counts[PB]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("pb\n");
+	ft_printf("pb\n");
 }
 
 void	push_a_last(t_ps *ps)
@@ -93,8 +86,7 @@ void	push_a_last(t_ps *ps)
 	push(&ps->a, pop_last(&ps->b));
 	ps->counts[PA]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	push_b_last(t_ps *ps)
@@ -102,6 +94,5 @@ void	push_b_last(t_ps *ps)
 	push(&ps->b, pop_last(&ps->a));
 	ps->counts[PB]++;
 	ps->counts[TOTAL]++;
-	if (!ps->bench)
-		ft_printf("pb\n");
+	ft_printf("pb\n");
 }

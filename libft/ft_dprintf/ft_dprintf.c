@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:52:21 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/20 18:18:00 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/20 18:57:56 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	has_flag(int fd, va_list *args, const char flag)
 static void	norme_helper(const char *s, t_dprintf *d)
 {
 	int	flag;
-	
+
 	if (!s[d->i + 1])
 		d->count = -1;
 	else
@@ -53,7 +53,7 @@ static void	norme_helper(const char *s, t_dprintf *d)
 int	ft_dprintf(int fd, const char *str, ...)
 {
 	t_dprintf	dprintf;
-	
+
 	dprintf.fd = fd;
 	dprintf.i = -1;
 	dprintf.count = 0;

@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:13:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/20 18:20:01 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/20 18:57:35 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ typedef struct s_list
 
 typedef struct s_dprintf
 {
-	int 	fd;
+	int		fd;
 	va_list	args;
-	int 	i;
-	int 	count;
-} 			t_dprintf;
+	int		i;
+	int		count;
+}			t_dprintf;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

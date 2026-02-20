@@ -141,7 +141,7 @@ void	rotator(t_ps *ps, ssize_t idx, char c)
 		while (idx-- > 0)
 		{
 			rotate_up(stack);
-			ps->ops_count++;
+			ps->counts[TOTAL]++;
 			ft_printf("r%c\n", c);
 		}
 	}
@@ -150,7 +150,7 @@ void	rotator(t_ps *ps, ssize_t idx, char c)
 		while (idx++ < 0)
 		{
 			rotate_down(stack);
-			ps->ops_count++;
+			ps->counts[TOTAL]++;
 			ft_printf("rr%c\n", c);
 		}
 	}

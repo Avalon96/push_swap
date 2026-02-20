@@ -12,7 +12,7 @@ ifneq '$(err)' '0'
 	CFLAGS	+=	$(ERR)
 endif
 
-FILES	=	test \
+FILES	=	cmd \
 		stack_ops1 \
 		stack_ops2 \
 		stack_ops3 \
@@ -38,7 +38,7 @@ all: libft
 	$(MAKE) $(NAME)
 
 run: all
-#	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(args)
+# 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(flags) $(args)
 	./$(NAME) $(flags) $(args)
 
 test: all

@@ -14,7 +14,8 @@ typedef enum e_cmd
 	RR,
 	RRA,
 	RRB,
-	RRR
+	RRR,
+	TOTAL
 }				t_cmd;
 
 typedef enum e_flags

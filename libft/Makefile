@@ -16,6 +16,10 @@ SRC =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_printf/srcs/ft_print_char.c \
 		ft_printf/srcs/ft_print_hex.c \
 		ft_printf/srcs/ft_print_int.c \
+		ft_dprintf/ft_dprintf.c \
+		ft_dprintf/srcs/ft_dprint_char.c \
+		ft_dprintf/srcs/ft_dprint_hex.c \
+		ft_dprintf/srcs/ft_dprint_int.c \
 		get_next_line/get_next_line_bonus.c \
 		get_next_line/get_next_line_utils_bonus.c
 OBJ = $(SRC:.c=.o)

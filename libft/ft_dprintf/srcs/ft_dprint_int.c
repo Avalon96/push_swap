@@ -1,42 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_dprint_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 13:30:53 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/20 18:22:39 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/01/20 13:30:56 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/20 18:18:45 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_print_hex(size_t n, const char flag)
+int	ft_dprint_int(int fd, int n)
 {
-	char	*hex;
 	int		count;
 
-	if (flag == 'X')
-		hex = "0123456789ABCDEF";
-	else
-		hex = "0123456789abcdef";
 	count = 0;
-	if (n > 15)
-		count += ft_print_hex(n / 16, flag);
-	count += ft_print_char(hex[n % 16]);
+	if (n == -2147483648)
+	{
+		count += write(fd, "-2147483648", 11);
+		return (count);
+	}
+	if (n < 0)
+	{
+		count += ft_dprint_char(fd, '-');
+		n *= -1;
+	}
+	if (n > 9)
+		count += ft_dprint_int(fd, n / 10);
+	count += ft_dprint_char(fd, n % 10 + '0');
 	return (count);
 }
 
-int	ft_print_ptr(void *ptr)
+int	ft_dprint_uint(int fd, unsigned int n)
 {
-	size_t	address;
-	int		count;
+	int	count;
 
-	if (!ptr)
-		return (write(1, "(nil)", 5));
-	address = (size_t)ptr;
-	count = write(1, "0x", 2);
-	count += ft_print_hex(address, 'x');
+	count = 0;
+	if (n > 9)
+		count += ft_dprint_uint(fd, n / 10);
+	count += ft_dprint_char(fd, n % 10 + '0');
 	return (count);
 }

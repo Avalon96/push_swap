@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:05:32 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 11:49:35 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/20 16:25:02 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int	ft_sqrt(int nb);
 void err(void);
 int safe_sqrt(int nb);
 void	print_stacks(t_ps *ps);
+void	pre_sort_benchmark(t_ps *ps);
+void	post_sort_benchmark(t_ps *ps);
 
 #endif

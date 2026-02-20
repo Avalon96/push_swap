@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:32:01 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/16 11:46:12 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/20 17:11:51 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_ps
 	t_flags	strategy;
 	int		err;
 	float	disorder;
-	size_t	ops_count;
+	size_t	counts[12];
 	void	(*(instruction[11]))(t_ps *ps);
 }				t_ps;
 
@@ -86,4 +86,5 @@ int		complex_sort(t_ps *ps);
 int		adaptive_sort(t_ps *ps);
 int		simple_sort(t_ps *ps);
 int		medium_sort(t_ps *ps);
+
 #endif // PUSH_SWAP_H

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/18 04:54:14 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/20 17:32:27 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,15 +127,18 @@ int main(int argc, char const *argv[])
 {
 	t_ps * const ps = &(t_ps){0};
 	if (parse_args(argc, argv, (t_ps *)ps) < 0)
-		return (err(), end(ps), -1);
+		return (err(), -1);
 	ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	if (ps->bench)
+		pre_sort_benchmark(ps);
 	// printf("disorder: " CLR_BLD "%f\n" CLR_RST, ps->disorder);
 	if (ps->err)
 		return (err(), end(ps), -1);
 	init_instructions(ps);
-	print_stats(ps);
-	fflush(stdout);
-	print_stacks(ps);
+	cdll_iter(ps->a.head, indexer, NULL);
+	// print_stats(ps);
+	// fflush(stdout);
+	// print_stacks(ps);
 	// printf("strategy: %d\n", ps->strategy);
 	if (ps->strategy == STRATEGY_SIMPLE)
 		ps->err = simple_sort(ps);
@@ -147,21 +150,13 @@ int main(int argc, char const *argv[])
 		ps->err = adaptive_sort(ps);
 	if (ps->err)
 		return (err(), end(ps), -1);
-	ps->err = compute_disorder(&ps->a, &(ps->disorder));
-	print_stats(ps);
-	fflush(stdout);
-	print_stacks(ps);
+	if (ps->bench)
+		post_sort_benchmark(ps);
+	// ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	// print_stats(ps);
+	// fflush(stdout);
+	// print_stacks(ps);
 
 	end(ps);
-	// pop(&ps->a);
-	// print_stacks(ps);
-	// pop(&ps->a);
-	// print_stacks(ps);
-	// pop(&ps->a);
-	// print_stacks(ps);
-	// pop(&ps->a);
-	// print_stacks(ps);
-
-	// cdll_clear(&(ps->a.head));
 	return 0;
 }

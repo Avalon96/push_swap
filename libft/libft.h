@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:13:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/14 17:37:30 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/20 18:20:01 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,21 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct s_dprintf
+{
+	int 	fd;
+	va_list	args;
+	int 	i;
+	int 	count;
+} 			t_dprintf;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -75,6 +84,15 @@ int		ft_print_ptr(void *ptr);
 int		ft_print_int(int n);
 int		ft_print_uint(unsigned int n);
 
+// FT_DPRINTF
+int		ft_dprintf(int fd, const char *s, ...);
+int		ft_dprint_char(int fd, int c);
+int		ft_dprint_str(int fd, char *s);
+int		ft_dprint_hex(int fd, size_t n, const char flag);
+int		ft_dprint_ptr(int fd, void *ptr);
+int		ft_dprint_int(int fd, int n);
+int		ft_dprint_uint(int fd, unsigned int n);
+
 // GNL
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -85,7 +103,6 @@ int		ft_print_uint(unsigned int n);
 # endif
 
 char	*get_next_line(int fd);
-size_t	ft_strlen_line(const char *s);
 char	*ft_strjoin_free(char const *s1, char const *s2);
 void	ft_strncpy_void(char *dst, const char *src, size_t size);
 

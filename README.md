@@ -3,7 +3,7 @@
 # push_swap
 
 ## Description
-push_swap takes an array of numbers in any order, calculates the **disorder** (how sorted the array inititally is), then uses the best algorithm based on the disorder. There are 4 flags you can use with push_swap.
+push_swap takes an array of numbers in any order, calculates the **disorder** (how sorted the array inititally is), then uses the best algorithm based on the disorder. There are 5 flags you can use with push_swap.
 
 Benchmark mode (--bench) displays:
 * Disorder (% with 2 decimals)
@@ -15,6 +15,7 @@ The algorithm of choice can be forced with flags.
 * --simple for O(n²)
 * --medium for O(n√n)
 * --complex for O(nlogn)
+* --adaptive chooses an algorithm based on disorder
 
 **Example Usage**
 ```txt
@@ -54,13 +55,55 @@ xargs push_swap < test.txt
 - <https://www.w3schools.com/dsa/dsa_algo_insertionsort.php>
 - <https://www.w3schools.com/dsa/dsa_algo_radixsort.php>
 
-AI is used for deciding which algorithms to use and learning the O(n√n) algorithm.
+AI is used for deciding which algorithms to use.
 
 # DSA
 
+## Disorder
+Disorder measures how far the input sequence deviates from ascending order.
+It is defined as the ratio of inversion pairs to the total possible pairs.
+For each index i, we compare it with every subsequent index j > i.
+If a[i] > a[j], the pair is counted as an inversion.
+
+```txt
+Disorder = number_of_inversion_pairs/total_pairs
+```
+This produces a normalized value in the range [0, 1], where:
+
+*  0 means fully sorted
+*  1 means fully reverse-sorted
+
+Computing disorder using this method requires O(n²) time and O(1) additional space.
+
+## Adaptive Sort
+Adaptive chooses which sorting algorithm to use based on disorder.
+```txt
+Low Disorder (< 0.2)
+Medium Disorder (0.2 ≤ Disorder < 0.5)
+High Disorder (Disorder ≥ 0.5)
+```
+
+For low disorder inputs, we use an insertion-based sorting strategy.
+Insertion Sort has a worst-case time complexity of O(n²), which satisfies the required upper bound for this regime.
+However, its runtime is proportional to the number of inversions in the input. When disorder < 0.2, the inversion count is small relative to the maximum possible n(n−1)/2.
+Therefore, although the theoretical upper bound remains O(n²), the actual number of corrective operations is significantly reduced for nearly sorted inputs.
+Space complexity is O(1) auxiliary space in the Push_swap model.
+
+For medium disorder inputs, we use a bucket-based insertion strategy.
+The input is partitioned into √n buckets based on value ranges. Each bucket contains approximately √n elements.
+We then apply Insertion Sort within each bucket.
+Sorting one bucket costs O((√n)²) = O(n), and since there are √n buckets, the total time complexity is O(n√n).
+This reduces the quadratic behavior of insertion sort while still remaining below the O(n²) bound required for low disorder.
+Space complexity is O(n) for bucket partitioning within the Push_swap stack operations.
+
+Radix Sort runs in O(n log n) time in the Push_swap model (log n bit passes, each requiring a linear scan).
+When disorder ≥ 0.5, the input behaves similarly to a random or reverse-sorted array, where quadratic methods would approach worst-case performance.
+Therefore, a bitwise radix strategy ensures predictable O(n log n) behavior regardless of inversion density.
+Space complexity remains O(1) auxiliary space, using only the two stacks.
+
 ## Insertion Sort
 
-## O(n√n)
+## Bucket Insertion Sort
 
 ## Radix Sort
-Radix Sort checks the last bit of the numbers, pushes them to Stack B if the last bit is 0. After a full rotation in Stack A, every number in Stack B gets pushed back to Stack A. The consequent rotations check the next bit and do the same operations. After every rotation, the numbers that end up in B gets sorted bitwise, so when we complete the rotation for the number(s) with most bits, everything ends up sorted in A.
+Radix Sort attains an index to each number according to their value (bigger numbers get bigger indices). It then checks the last bit of the indices, pushes them to Stack B if the last bit is 0. After a full rotation in Stack A, every number in Stack B gets pushed back to Stack A. The consequent rotations check the next bit of the indices and do the same operations. After every rotation, the numbers that end up in B gets sorted bitwise, so when we complete the rotation for the number(s) with most bits, everything ends up sorted in A.

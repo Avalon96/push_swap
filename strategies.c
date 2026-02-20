@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "libft.h"
 #include "generics.h"
+// #include <stdio.h>
+
 
 int	medium_sort(t_ps *ps)
 {
@@ -11,31 +13,36 @@ int	medium_sort(t_ps *ps)
 	bucket_sort->bucket_ct = safe_sqrt(ps->a.size);
 	cdll_iter(ps->a.head, minmax, &bucket_sort->minmax);
 	cdll_iter(ps->a.head, indexer, NULL);
-	printf("bucket ct: %zu, min: %d, max: %d\n", bucket_sort->bucket_ct, bucket_sort->minmax[0], bucket_sort->minmax[1]);
-	bucket_sort->buckets = ft_calloc( bucket_sort->bucket_ct, sizeof(t_bucket));
+	// dprintf(2, "bucket ct: %zu, min: %d, max: %d\n", bucket_sort->bucket_ct, bucket_sort->minmax[0], bucket_sort->minmax[1]);
+	bucket_sort->buckets = ft_calloc(bucket_sort->bucket_ct, sizeof(t_bucket));
 	if (!bucket_sort->buckets)
 		return (-1);
 	count_buckets(&ps->a, bucket_sort);
-	for (size_t i = 0; i < bucket_sort->bucket_ct; i++)
-		printf("	[%zu]: size %zu\n", i, bucket_sort->buckets[i].size);
+	// for (size_t i = 0; i < bucket_sort->bucket_ct; i++)
+	// 	dprintf(2, "	[%zu]: size %zu\n", i, bucket_sort->buckets[i].size);
 	count_occupied_buckets(&ps->a, bucket_sort);
-	printf("occupied ct: %zu\n", bucket_sort->occupied_ct);
-	sort_buckets(ps);
-	// sort_bucket(ps);
+	// dprintf(2, "occupied ct: %zu\n", bucket_sort->occupied_ct);
+	// fflush(stdout);
+	sort_buckets_insertion(ps);
 	return (0);
 }
 
-int complex_sort(t_ps *ps)
-{
+int complex_sort(t_ps *ps){
+	radix_sort(ps);
 	return (0);
 }
 
-int adaptive_sort(t_ps *ps)
-{
+int adaptive_sort(t_ps *ps){
+	if (ps->disorder < 20)
+		simple_sort(ps);
+	else if (ps->disorder < 50)
+		medium_sort(ps);
+	else
+		complex_sort(ps);
 	return (0);
 }
 
-int simple_sort(t_ps *ps)
-{
+int simple_sort(t_ps *ps){
+	insertion_sort(ps);
 	return (0);
 }

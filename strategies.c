@@ -23,6 +23,12 @@ int	medium_sort(t_ps *ps)
 	count_occupied_buckets(&ps->a, bucket_sort);
 	// dprintf(2, "occupied ct: %zu\n", bucket_sort->occupied_ct);
 	// fflush(stdout);
+	// getchar();
+
+	// sort_buckets(ps);
+	// print_stacks(ps);
+	// sort_bucket(ps);
+	// printf("calling sort_buckets_insertion\n");
 	sort_buckets_insertion(ps);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:23:54 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/20 18:24:50 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/21 13:21:27 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

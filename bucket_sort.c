@@ -44,9 +44,8 @@ void	update_collector(t_ps *ps, t_collector *ctor)
 	ssize_t 			nearest;
 
 	get_biggest_gap(fg);
-	// nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index, fg->stack); // get_nearest is better than find_gap
+	nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index, fg->stack); // get_nearest is better than find_gap
 	nearest = get_nearest_node(fg->stack, fg->filter, &ps->bucket_sort.pushing_bucket);
-
 	if (nearest > 0)
 		ctor->shift_cmd = RA;
 	else if (nearest < 0)
@@ -483,6 +482,13 @@ void	sort_buckets_insertion(t_ps *ps)
 
 	bucket = ps->bucket_sort.bucket_ct;
 	sort_buckets(ps);
+	
+	print_stacks(ps);
+	dprintf(2, "==[DEBUG]== %zu\n", ps->ops_count);
+	// getchar();
+
+    // printf("pushing back to a\n");
+    push_b_to_a(ps);
 	print_stacks(ps);
 	// dprintf(2, "==[DEBUG]== %zu\n", ps->counts[TOTAL]);
 	push_b_to_a(ps);

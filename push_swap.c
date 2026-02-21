@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/18 08:49:10 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/21 13:21:37 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -483,13 +483,13 @@ void	sort_buckets_insertion(t_ps *ps)
 	bucket = ps->bucket_sort.bucket_ct;
 	sort_buckets(ps);
 	
-	print_stacks(ps);
-	dprintf(2, "==[DEBUG]== %zu\n", ps->ops_count);
+	// print_stacks(ps);
+	// dprintf(2, "==[DEBUG]== %zu\n", ps->ops_count);
 	// getchar();
 
     // printf("pushing back to a\n");
     push_b_to_a(ps);
-	print_stacks(ps);
+	// print_stacks(ps);
 	// dprintf(2, "==[DEBUG]== %zu\n", ps->counts[TOTAL]);
 	push_b_to_a(ps);
 }

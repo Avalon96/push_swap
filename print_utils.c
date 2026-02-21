@@ -6,7 +6,7 @@
 /*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:23:54 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 13:21:27 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/21 13:36:53 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	pre_sort_benchmark(t_ps *ps)
 
 void	post_sort_benchmark(t_ps *ps)
 {
-	ft_dprintf(2, "[bench] total_ops: %u\n", ps->counts[TOTAL]);
+	ft_dprintf(2, "[bench] operations: %u\n", ps->counts[TOTAL]);
 	ft_dprintf(2, "[bench] sa: %u\n", ps->counts[SA]);
 	ft_dprintf(2, "[bench] sb: %u\n", ps->counts[SB]);
 	ft_dprintf(2, "[bench] ss: %u\n", ps->counts[SS]);

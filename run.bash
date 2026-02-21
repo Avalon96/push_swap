@@ -72,23 +72,30 @@ fi
 makecmd="$1"
 shift
 
+strategy=
 # Step 4: Parse strategy flag [-s STRATEGY] (can appear after make_target)
 while [ "$#" -gt 0 ]; do
 	case "$1" in
 		-s)
 			require_value "-s" "$2"
-			flags="--$2"
+			strategy="--$2"
 			shift 2
+			;;
+		--bench)
+			bench="--bench "
+			shift 1
 			;;
 		-*)
 			die "unknown flag: $1"
 			;;
 		*)
-			die "unexpected argument: $1"
+			# die "unexpected argument: $1"
 			break
 			;;
 	esac
 done
+
+flags="$bench$strategy"
 
 
 # Step 5: Parse preset or numbers
@@ -103,16 +110,18 @@ elif [ "$1" = "ex1nums" ]; then
 elif [ "$1" = "worst" ]; then
 	args="$(cat /home/ahmbasar/sources/repos/push_swap/worst | xargs)"
 else
-	args="$*"
+	args="$(cat $1 | xargs)"
 fi
 
-echo "args: $args"
+echo "====args: $args"
 
 test_ps() {
 	out=$(	make -s $makecmd flags="$flags" args="$1" err=0 2>&1 1>stdout.txt | tee stderr.log | \
-			awk '/opera/ {lastprev=prev; last=$0} {prev=$0} END {print lastprev; print last}'
+			grep -B 2 "opera"  | tail -n 3 | sed '2d'
 		)
+	# echo $out
 	read disorder operations < <(echo "$out" | awk -F': ' '/disorder/ {d=$2} /operations/ {o=$2} END {print d, o}')
+	# echo $disorder $operations
 	disorder=$(echo "$disorder" | sed 's/\x1B\[[0-9;]*[mKJ]//g')
 	operations=$(echo "$operations" | sed 's/\x1B\[[0-9;]*[mKJ]//g')
 

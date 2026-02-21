@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_config.h                                       :+:      :+:    :+:   */
+/*   bucket_sort_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 15:06:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 16:06:18 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/21 15:58:41 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/21 16:07:38 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DLL_CONFIG_H
-# define DLL_CONFIG_H
+#include "bucket_sort_utils.h"
 
-# include <stddef.h>
-# include <stdint.h>
-
-typedef struct s_dll	t_dll;
-
-typedef struct s_custom
+int	get_relative_index(int index, int size)
 {
-	int			num;
-	size_t		index;
-	size_t		bucket_index;
-	t_dll		*this;
-}				t_custom;
+	const int	half_size = size / 2;
 
-#endif // DLL_CONFIG_H
+	if (index < half_size)
+		return (index);
+	else
+		return (-(ft_abs(size - index)));
+}
+
+void	update_gap(t_find_gap *fg, size_t ndiff, size_t odiff, t_dll *cur)
+{
+	if (ndiff > odiff)
+	{
+		fg->duo[0] = fg->prev;
+		fg->duo[1] = cur;
+		fg->prev = cur;
+	}
+	else
+	{
+		fg->prev = cur;
+	}
+}

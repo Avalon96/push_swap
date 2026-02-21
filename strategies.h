@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_config.h                                       :+:      :+:    :+:   */
+/*   strategies.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 15:06:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 16:06:18 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/21 15:21:29 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/21 16:12:32 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DLL_CONFIG_H
-# define DLL_CONFIG_H
+#ifndef STRATEGIES_H
+# define STRATEGIES_H
+# include "push_swap_defs.h"
+# include "stack.h"
 
-# include <stddef.h>
-# include <stdint.h>
+int		medium_sort(t_ps *ps);
+int		complex_sort(t_ps *ps);
+int		adaptive_sort(t_ps *ps);
+int		simple_sort(t_ps *ps);
+void	pre_sort_benchmark(t_ps *ps);
+void	post_sort_benchmark(t_ps *ps);
+int		compute_disorder(t_stack *stack, float *disorder);
 
-typedef struct s_dll	t_dll;
-
-typedef struct s_custom
-{
-	int			num;
-	size_t		index;
-	size_t		bucket_index;
-	t_dll		*this;
-}				t_custom;
-
-#endif // DLL_CONFIG_H
+#endif

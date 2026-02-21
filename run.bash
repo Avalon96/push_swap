@@ -14,7 +14,7 @@ require_value() {
 	[ -n "$val" ] || die "$opt requires a value"
 }
 
-USAGE="Usage: $0 run|test [-x N] [-n N] <make_target> [-s STRATEGY] [preset|numbers...]"
+USAGE="Usage: $0 run|test [-x N] [-n N] <make_target> [-s STRATEGY] [--bench] [preset|numbers...]"
 
 # Initialize variables
 flags=""

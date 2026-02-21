@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   disorder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 13:21:37 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/21 16:19:23 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "push_swap.h"
 #include "push_swap_defs.h"
 #include "stack.h"
 
-// function compute_disorder(stack a):
-// 	mistakes = 0
-// 	total_pairs = 0
-// 	for i from 0 to size(a)-1:
-// 		for j from i+1 to size(a)-1:
-// 			total_pairs += 1
-// 			if a[i] > a[j]:
-// 				mistakes += 1
-// 	return mistakes / total_pairs
-
-int compute_disorder(t_stack *stack, float *disorder)
+int	compute_disorder(t_stack *stack, float *disorder)
 {
-	float mistakes = 0;
-	int total_pairs = 0;
-	t_dll *i = stack->head;
-	t_dll *tail = stack->head->prev;
-	t_dll *j;
+	float	mistakes;
+	int		total_pairs;
+	t_dll	*i;
+	t_dll	*j;
 
-	while (i != tail)
+	mistakes = 0;
+	total_pairs = 0;
+	i = stack->head;
+	while (i != stack->head->prev)
 	{
 		j = i->next;
-		while (j != tail->next)
+		while (j != stack->head)
 		{
 			total_pairs++;
 			if (i->value.num > j->value.num)
@@ -48,9 +39,4 @@ int compute_disorder(t_stack *stack, float *disorder)
 	}
 	*disorder = (mistakes * 100) / total_pairs;
 	return (0);
-}
-
-void	executer(t_cmd op)
-{
-	
 }

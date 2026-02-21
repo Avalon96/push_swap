@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_config.h                                       :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 15:06:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 16:06:18 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/21 16:59:17 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/21 16:59:29 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DLL_CONFIG_H
-# define DLL_CONFIG_H
+#include "push_swap.h"
 
-# include <stddef.h>
-# include <stdint.h>
-
-typedef struct s_dll	t_dll;
-
-typedef struct s_custom
+void	err(void)
 {
-	int			num;
-	size_t		index;
-	size_t		bucket_index;
-	t_dll		*this;
-}				t_custom;
+	write(2, MSG_ERROR, sizeof(MSG_ERROR) - 1);
+}
 
-#endif // DLL_CONFIG_H
+void	indexer(t_custom *v, int i, void *data)
+{
+	(void)data;
+	v->index = i;
+}

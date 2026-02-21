@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_config.h                                       :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 15:06:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 16:06:18 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/21 16:26:39 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/21 18:19:00 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DLL_CONFIG_H
-# define DLL_CONFIG_H
+#ifndef PARSE_H
+# define PARSE_H
 
-# include <stddef.h>
-# include <stdint.h>
+# include "push_swap_defs.h"
+# include <unistd.h>
 
-typedef struct s_dll	t_dll;
+int		atol_err(const char *str, ssize_t *i);
+int		parse_numbers(int i, const char *argv[], t_ps *ps);
+t_flags	parse_strategy(const char *arg);
+int		parse_args(int argc, const char *argv[], t_ps *ps);
 
-typedef struct s_custom
-{
-	int			num;
-	size_t		index;
-	size_t		bucket_index;
-	t_dll		*this;
-}				t_custom;
-
-#endif // DLL_CONFIG_H
+#endif

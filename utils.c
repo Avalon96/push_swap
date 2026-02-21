@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 11:47:29 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/21 16:59:52 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int	ft_sqrt(int nb)
 	return (--test);
 }
 
-int safe_sqrt(int nb)
+int	safe_sqrt(int nb)
 {
 	if (nb < 3)
 		return (1);
 	return (ft_sqrt(nb));
 }
 
-size_t ft_abs(ssize_t nb)
+size_t	ft_abs(ssize_t nb)
 {
 	if (nb < 0)
 		return ((size_t)(-nb));
@@ -67,22 +67,12 @@ size_t ft_abs(ssize_t nb)
 
 void	minmax(t_custom *v, int i, void *data)
 {
-	(void)i;
-	int (*minmax)[2] = data;
+	int	(*minmax)[2];
 
+	(void)i;
+	minmax = data;
 	if (v->num < (*minmax)[0])
 		(*minmax)[0] = v->num;
 	if (v->num > (*minmax)[1])
 		(*minmax)[1] = v->num;
-}
-
-void	indexer(t_custom *v, int i, void *data)
-{
-	(void)data;
-	v->index = i;
-}
-
-void	err(void)
-{
-	write(2, MSG_ERROR, sizeof(MSG_ERROR) - 1);
 }

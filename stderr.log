@@ -1,11 +1,14 @@
-
-disorder: [1m52.380951
-[0moperations: 0
-[0mstrategy: [36m[1mSIMPLE[0m
-
-[0m[1mA = [31m{ [37m[2m[0][0m[33m<0>:[0m[1m[32m3[0m, [37m[2m[1][0m[33m<0>:[0m[1m[32m5[0m, [37m[2m[2][0m[33m<0>:[0m[1m[32m0[0m, [37m[2m[3][0m[33m<0>:[0m[1m[32m4[0m, [37m[2m[4][0m[33m<0>:[0m[1m[32m6[0m, [37m[2m[5][0m[33m<0>:[0m[1m[32m1[0m, [37m[2m[6][0m[33m<0>:[0m[1m[32m2[0m, [31m[1m }
-[0m
-disorder: [1m0.000000
-[0moperations: 16
-[0mstrategy: [36m[1mSIMPLE[0m
-
+[bench] disorder: 19.71%
+[bench] strategy: Medium / O(n√n)
+[bench] operations: 3678
+[bench] sa: 0
+[bench] sb: 0
+[bench] ss: 0
+[bench] pa: 500
+[bench] pb: 500
+[bench] ra: 1114
+[bench] rb: 277
+[bench] rr: 374
+[bench] rra: 284
+[bench] rrb: 385
+[bench] rrr: 244

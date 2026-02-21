@@ -13,21 +13,26 @@ ifneq '$(err)' '0'
 endif
 
 FILES	=	cmd \
-		stack_ops1 \
+		stack_ops \
 		stack_ops2 \
-		stack_ops3 \
-		stack_ops4 \
-		list_ops \
+		ps_ops1 \
+		ps_ops2 \
+		ps_ops3 \
+		ps_ops_special \
+		list_utils \
 		utils \
-		push_swap \
+		utils2 \
+		disorder \
+		parse \
+		strategies \
+		benchmark \
 		insertion_sort \
 		insertion_sort_utils \
 		insertion_sort_utils2 \
-		print_utils \
-		radix_sort \
-		strategies \
 		bucket_sort \
-		generics
+		bucket_sort_utils \
+		bucket_sort_utils2 \
+		radix_sort \
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)
 NAME	=	push_swap

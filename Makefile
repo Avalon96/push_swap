@@ -12,7 +12,7 @@ ifneq '$(err)' '0'
 	CFLAGS	+=	$(ERR)
 endif
 
-FILES	=	cmd \
+FILES	=	push_swap \
 		stack_ops \
 		stack_ops2 \
 		ps_ops1 \
@@ -32,7 +32,7 @@ FILES	=	cmd \
 		bucket_sort \
 		bucket_sort_utils \
 		bucket_sort_utils2 \
-		radix_sort \
+		radix_sort
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)
 NAME	=	push_swap

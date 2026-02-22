@@ -6,11 +6,10 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 16:19:23 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:59:06 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap_defs.h"
 #include "stack.h"
 
 int	compute_disorder(t_stack *stack, float *disorder)

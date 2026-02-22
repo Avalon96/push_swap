@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 16:08:05 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 16:08:06 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:40:28 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct s_find_gap
 }			t_find_gap;
 
 void	get_biggest_gap(t_find_gap *fg);
-int		get_nearest_node(t_stack *stack, int (*filter)(t_custom *v, int i,
-				void *data), void *data);
 size_t	get_nearest(size_t a, size_t b, t_stack *stack);
+void	update_gap(t_find_gap *fg, size_t ndiff, size_t odiff, t_dll *cur);
+int		get_relative_index(int index, int size);
 
 #endif

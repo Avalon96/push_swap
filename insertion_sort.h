@@ -6,14 +6,21 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:30:59 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 17:58:04 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 12:05:50 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INSERTION_SORT_H
 # define INSERTION_SORT_H
 
-typedef struct s_move	t_move;
+typedef struct s_move
+{
+	int	a_count;
+	int	b_count;
+	int	a_dir;
+	int	b_dir;
+	int	total;
+}				t_move;
 
 int		stack_min(t_stack *s);
 int		stack_max(t_stack *s);

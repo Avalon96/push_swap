@@ -6,13 +6,45 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:23:54 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 19:09:58 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:48:54 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "push_swap.h"
-#include "utils.h"
-// Change dprints
+
+static void	print_positive_int(int n)
+{
+	if (n > 9)
+		print_positive_int(n / 10);
+	ft_putchar_fd(n % 10 + '0', 2);
+}
+
+static void	print_bench(const char *str, int d, int n)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '%' && str[i + 1] == 'u')
+		{
+			if (d >= 0)
+			{
+				print_positive_int(d);
+				ft_putchar_fd('.', 2);
+				print_positive_int(n);
+				ft_putchar_fd('%', 2);
+			}
+			else
+				print_positive_int(n);
+			i++;
+		}
+		else
+			ft_putchar_fd(str[i], 2);
+	}
+}
+
 void	pre_sort_benchmark(t_ps *ps)
 {
 	float	disorder;
@@ -20,40 +52,45 @@ void	pre_sort_benchmark(t_ps *ps)
 
 	disorder = ps->disorder;
 	decimal = (int)(disorder * 100) % 100;
-	dprintf(2, "[bench] disorder: %d.%d%%\n", (int)disorder, decimal);
-	dprintf(2, "[bench] strategy: ");
+	print_bench("[bench] disorder: %u\n", (int)disorder, decimal);
+	print_bench("[bench] strategy: ", -1, 0);
 	if (ps->strategy == STRATEGY_SIMPLE)
-		dprintf(2, "Simple / O(n²)");
+		print_bench("Simple / O(n²)", -1, 0);
 	else if (ps->strategy == STRATEGY_MEDIUM)
-		dprintf(2, "Medium / O(n√n)");
+		print_bench("Medium / O(n√n)", -1, 0);
 	else if (ps->strategy == STRATEGY_COMPLEX)
-		dprintf(2, "Complex / O(n log n)");
+		print_bench("Complex / O(n log n)", -1, 0);
 	else if (ps->strategy == STRATEGY_ADAPTIVE)
 	{
 		if (disorder < 20)
-			dprintf(2, "Adaptive / O(n²)");
+			print_bench("Adaptive / O(n²)", -1, 0);
 		else if (disorder < 50)
-			dprintf(2, "Adaptive / O(n√n)");
+			print_bench("Adaptive / O(n√n)", -1, 0);
 		else
-			dprintf(2, "Adaptive / O(n log n)");
+			print_bench("Adaptive / O(n log n)", -1, 0);
 	}
 	else
-		dprintf(2, "UNDEFINED");
-	dprintf(2, "\n");
+		print_bench("UNDEFINED", -1, 0);
+	print_bench("\n", -1, 0);
 }
 
 void	post_sort_benchmark(t_ps *ps)
 {
-	dprintf(2, "[bench] operations: %u\n", ps->counts[TOTAL]);
-	dprintf(2, "[bench] sa: %u\n", ps->counts[SA]);
-	dprintf(2, "[bench] sb: %u\n", ps->counts[SB]);
-	dprintf(2, "[bench] ss: %u\n", ps->counts[SS]);
-	dprintf(2, "[bench] pa: %u\n", ps->counts[PA]);
-	dprintf(2, "[bench] pb: %u\n", ps->counts[PB]);
-	dprintf(2, "[bench] ra: %u\n", ps->counts[RA]);
-	dprintf(2, "[bench] rb: %u\n", ps->counts[RB]);
-	dprintf(2, "[bench] rr: %u\n", ps->counts[RR]);
-	dprintf(2, "[bench] rra: %u\n", ps->counts[RRA]);
-	dprintf(2, "[bench] rrb: %u\n", ps->counts[RRB]);
-	dprintf(2, "[bench] rrr: %u\n", ps->counts[RRR]);
+	unsigned int	t1;
+	unsigned int	t2;
+
+	t1 = ps->counts[TOTAL];
+	t2 = (ps->counts[TOTAL] * 100) % 100;
+	print_bench("[bench] operations: %u\n", -1, ps->counts[TOTAL]);
+	print_bench("[bench] sa: %u\n", -1, ps->counts[SA]);
+	print_bench("[bench] sb: %u\n", -1, ps->counts[SB]);
+	print_bench("[bench] ss: %u\n", -1, ps->counts[SS]);
+	print_bench("[bench] pa: %u\n", -1, ps->counts[PA]);
+	print_bench("[bench] pb: %u\n", -1, ps->counts[PB]);
+	print_bench("[bench] ra: %u\n", -1, ps->counts[RA]);
+	print_bench("[bench] rb: %u\n", -1, ps->counts[RB]);
+	print_bench("[bench] rr: %u\n", -1, ps->counts[RR]);
+	print_bench("[bench] rra: %u\n", -1, ps->counts[RRA]);
+	print_bench("[bench] rrb: %u\n", -1, ps->counts[RRB]);
+	print_bench("[bench] rrr: %u\n", -1, ps->counts[RRR]);
 }

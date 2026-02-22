@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:32:01 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 18:23:21 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 12:05:47 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ typedef struct s_ps
 	unsigned int	counts[12];
 	void			(*instruction[11])(t_ps *ps);
 }				t_ps;
-
-typedef struct s_move
-{
-	int	a_count;
-	int	b_count;
-	int	a_dir;
-	int	b_dir;
-	int	total;
-}				t_move;
 
 void	swap(t_stack *stack);
 t_dll	*pop(t_stack *stack);

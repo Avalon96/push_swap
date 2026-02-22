@@ -6,15 +6,14 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 15:20:45 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:56:35 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
-#include "utils.h"
-#include "parse.h"
 #include <stdlib.h>
+#include "parse.h"
+#include "utils.h"
 
 int		medium_sort(t_ps *ps);
 int		complex_sort(t_ps *ps);

@@ -6,12 +6,10 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 16:59:52 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 12:11:16 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "utils.h"
 #include "push_swap.h"
 
 ssize_t	ft_atol(const char *str)

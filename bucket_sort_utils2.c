@@ -6,11 +6,12 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:58:41 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 16:07:38 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:50:07 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bucket_sort_utils.h"
+#include "utils.h"
 
 int	get_relative_index(int index, int size)
 {

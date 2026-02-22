@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:07:13 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 15:09:09 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:59:59 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,4 @@ int		cdll_every(t_dll *lst, int (*f)(t_custom *v, int i,
 				void *data), void *data);
 void	cdll_link(t_dll *a, t_dll *b, t_dll *c);
 
-#endif // DLL_H
+#endif

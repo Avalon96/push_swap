@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:06:22 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 16:06:18 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 12:00:00 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,4 @@ typedef struct s_custom
 	t_dll		*this;
 }				t_custom;
 
-#endif // DLL_CONFIG_H
+#endif

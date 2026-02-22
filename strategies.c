@@ -6,13 +6,13 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:23:46 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 15:24:56 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 12:08:40 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 #include "bucket_sort.h"
 #include "libft.h"
-#include "push_swap.h"
 #include "utils.h"
 
 int	medium_sort(t_ps *ps)

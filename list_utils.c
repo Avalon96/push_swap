@@ -6,12 +6,11 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:41:18 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 16:25:00 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 12:01:23 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dll.h"
-#include <stdlib.h>
 
 void	cdll_link(t_dll *a, t_dll *b, t_dll *c)
 {

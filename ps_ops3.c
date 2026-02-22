@@ -6,12 +6,11 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 16:32:12 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 18:19:19 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 12:04:39 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "push_swap_defs.h"
 #include "libft.h"
 
 void	rotate_both(t_ps *ps)

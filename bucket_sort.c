@@ -6,19 +6,15 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:05:41 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 18:26:45 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:54:10 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 #include "bucket_sort.h"
 #include "bucket_sort_utils.h"
-#include "dll.h"
-#include "insertion_sort.h"
-#include "libft.h"
-#include "push_swap.h"
-#include "stack.h"
 #include "utils.h"
-#include <limits.h>
+#include "insertion_sort.h"
 
 int	pushb_buckets_num(t_collector *ctor)
 {
@@ -52,8 +48,9 @@ void	push_last_bucket(t_ps *ps)
 void	update_collector(t_ps *ps, t_collector *ctor)
 {
 	ssize_t				nearest;
-	t_find_gap const	*fg = ps->bucket_sort.fg;
+	t_find_gap *fg;
 
+	fg = ps->bucket_sort.fg;
 	get_biggest_gap(fg);
 	nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index,
 			fg->stack);
@@ -176,22 +173,6 @@ void	set_bucket(t_custom *v, int i, void *data)
 		bucket_index = bucket_sort->bucket_ct - 1;
 	v->bucket_index = bucket_index;
 	bucket_sort->buckets[bucket_index].size++;
-}
-
-static void	execute_move_bucket(t_ps *ps, t_move m)
-{
-	while (m.a_count-- > 0)
-	{
-		if (m.a_dir == 1)
-			rotate_a(ps);
-		else
-			reverse_rotate_a(ps);
-	}
-	push_b(ps);
-	if (ps->a.size > 0)
-		cdll_iter(ps->a.head, indexer, NULL);
-	if (ps->b.size > 0)
-		cdll_iter(ps->b.head, indexer, NULL);
 }
 
 static void	set_cheap_bucket(int i, t_ps *ps, t_move *m, int target_a)

@@ -6,14 +6,12 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:26:48 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 18:28:50 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/22 11:49:59 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
 #include "bucket_sort_utils.h"
 #include "libft.h"
-#include "stack.h"
 #include "utils.h"
 
 void	check_gap(t_custom *v, int i, void *data)

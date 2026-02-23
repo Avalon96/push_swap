@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/23 13:29:19 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/23 19:24:39 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_instructions(t_ps *ps)
 
 void	strategy(t_ps *ps)
 {
-	if (ps->strategy == STRATEGY_SIMPLE)
+	if (ps->strategy == STRATEGY_SIMPLE || ps->a.size <= 5)
 		ps->err = simple_sort(ps);
 	else if (ps->strategy == STRATEGY_MEDIUM)
 		ps->err = medium_sort(ps);

@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 14:52:29 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/23 13:42:47 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/23 15:40:09 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	atol_err(const char *str, ssize_t *i)
 {
-	char *endptr;
+	char	*endptr;
 
 	*i = ft_atol(str, &endptr);
 	if ((*i == 0 && str[0] != '0') || *i < -2147483648 || *i > 2147483647

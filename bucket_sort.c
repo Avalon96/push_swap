@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:05:41 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/23 14:46:49 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/23 15:51:05 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,160 +16,13 @@
 #include "push_swap.h"
 #include "utils.h"
 
-int	pushb_buckets_num(t_collector *ctor)
-{
-	t_bucket_sort *const sorter = ctor->data;
-	if (bucket_selective(&ctor->ps->a.head->value, 0,
-			&sorter->pushing_bucket) == 0)
-	{
-		ctor->ps->instruction[ctor->shift_cmd](ctor->ps);
-		return (0);
-	}
-	ctor->collect_fun(ctor->ps);
-	cdll_iter(ctor->ps->a.head, indexer, NULL);
-	sorter->pushing_remaining--;
-	return (1);
-}
-
-void	push_last_bucket(t_ps *ps)
-{
-	int	i;
-
-	i = ps->a.size - 1;
-	while (i--)
-	{
-		push_b(ps);
-	}
-	push_b_last(ps);
-	cdll_iter(ps->b.head, indexer, NULL);
-}
-
-void	update_collector(t_ps *ps, t_collector *ctor)
-{
-	ssize_t		nearest;
-	t_find_gap	*fg;
-
-	fg = ps->bucket_sort.fg;
-	get_biggest_gap(fg);
-	nearest = get_nearest(fg->duo[0]->value.index, fg->duo[1]->value.index,
-			fg->stack);
-	if (nearest > 0)
-		ctor->shift_cmd = RA;
-	else if (nearest < 0)
-		ctor->shift_cmd = RRA;
-	ctor->limit = ft_abs(nearest);
-}
-
-void	push_first_number_of_first_bucket(t_ps *ps)
-{
-	update_collector(ps, ps->bucket_sort.ctor);
-	ps->bucket_sort.ctor->collect_fun = &push_b_first;
-	while (ps->bucket_sort.ctor->limit-- != (size_t)-1)
-		if (pushb_buckets_num(ps->bucket_sort.ctor) == 1)
-			return ;
-}
-
-void	push_bucket(t_ps *ps)
-{
-	while (ps->bucket_sort.pushing_remaining != 0)
-	{
-		update_collector(ps, ps->bucket_sort.ctor);
-		while (ps->bucket_sort.ctor->limit-- != ((size_t)-1))
-			pushb_buckets_num(ps->bucket_sort.ctor);
-	}
-}
-
-size_t	get_first_bucket(t_ps *ps)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < ps->bucket_sort.bucket_ct
-		&& ps->bucket_sort.buckets[i].size == 0)
-	{
-		i++;
-	}
-	return (i);
-}
-
-void	sort_buckets(t_ps *ps)
-{
-	size_t	norme;
-
-	ps->bucket_sort.ctor = &(t_collector){
-		.ps = ps,
-		.data = &ps->bucket_sort,
-	};
-	ps->bucket_sort.fg = &(t_find_gap){.stack = &ps->a,
-		.filter = bucket_selective, .data = &ps->bucket_sort.pushing_bucket};
-	ps->bucket_sort.pushing_bucket = get_first_bucket(ps);
-	norme = ps->bucket_sort.buckets[ps->bucket_sort.pushing_bucket].size;
-	ps->bucket_sort.pushing_remaining = norme;
-	push_first_number_of_first_bucket(ps);
-	ps->bucket_sort.ctor->collect_fun = &push_b;
-	while (ps->bucket_sort.pushing_bucket < ps->bucket_sort.bucket_ct - 1)
-	{
-		push_bucket(ps);
-		ps->bucket_sort.pushing_bucket++;
-		if (ps->bucket_sort.pushing_bucket >= ps->bucket_sort.bucket_ct)
-			break ;
-		norme = ps->bucket_sort.buckets[ps->bucket_sort.pushing_bucket].size;
-		ps->bucket_sort.pushing_remaining = norme;
-	}
-	push_last_bucket(ps);
-}
-
-int	bucket_selective(t_custom *v, int i, void *data)
-{
-	size_t *const bucket = data;
-	(void)i;
-	return (v->this->value.bucket_index == *bucket);
-}
-
-void	count_buckets(t_stack *a, t_bucket_sort *bucket_sort)
-{
-	cdll_iter(a->head, set_bucket, bucket_sort);
-}
-
-// void	set_occupied_bucket(t_custom *v, int i, void *data)
-// {
-// 	(void)i;
-// 	t_bucket_sort *const bucket_sort = data;
-// 	// t_bucket *const bucket = &bucket_sort->buckets[bucket_sort->bucket_ct
-// 	// 	* ((ssize_t)v->num - (ssize_t)bucket_sort->minmax[0])
-// 	// 	/ ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0]
-// 	// 		+ 1)];
-// 	// if (bucket->size > 0 && !bucket->counted)
-// 	// {
-// 	// 	// bucket->counted = 1;
-// 	// 	// bucket_sort->occupied_ct++;
-// 	// }
-// }
-
-// void	count_occupied_buckets(t_stack *a, t_bucket_sort *bucket_sort)
-// {
-// 	cdll_iter(a->head, set_occupied_bucket, bucket_sort);
-// }
-
-void	set_bucket(t_custom *v, int i, void *data)
-{
-	size_t	bucket_index;
-
-	(void)i;
-	t_bucket_sort *const bucket_sort = data;
-	bucket_index = bucket_sort->bucket_ct * ((ssize_t)v->num
-			- (ssize_t)bucket_sort->minmax[0])
-		/ ((ssize_t)bucket_sort->minmax[1] - (ssize_t)bucket_sort->minmax[0]
-			+ 1);
-	v->bucket_index = bucket_index;
-	bucket_sort->buckets[bucket_index].size++;
-}
-
 static void	set_cheap_bucket(int i, t_ps *ps, t_move *m, int target_a)
 {
-	m->a_dir = (get_relative_index(target_a, ps->a.size) < 0) * -1 + (get_relative_index(target_a, ps->a.size) >= 0) * 1;
+	m->a_dir = (get_relative_index(target_a, ps->a.size) < 0) * -1
+		+ (get_relative_index(target_a, ps->a.size) >= 0) * 1;
 	m->a_count = ft_abs(get_relative_index(target_a, ps->a.size));
-	m->b_dir = (get_relative_index(i, ps->b.size) < 0) * -1 + (get_relative_index(i, ps->b.size) >= 0) * 1;
+	m->b_dir = (get_relative_index(i, ps->b.size) < 0) * -1
+		+ (get_relative_index(i, ps->b.size) >= 0) * 1;
 	m->b_count = ft_abs(get_relative_index(i, ps->b.size));
 	if (m->a_dir == m->b_dir)
 	{

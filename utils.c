@@ -6,13 +6,14 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/22 12:11:16 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/23 13:40:44 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "limits.h"
 
-ssize_t	ft_atol(const char *str)
+ssize_t	ft_atol(const char *str, char **endptr)
 {
 	ssize_t	result;
 	ssize_t	sign;
@@ -30,9 +31,15 @@ ssize_t	ft_atol(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');
+		if (result > 2147483647 && sign == 1)
+			return (result);
+		if (result > 2147483648 && sign == -1)
+			return (result);
 		str++;
 	}
-	return (result * sign);
+	if (*str != '\0')
+		return (*endptr = (char *)str, result * sign);
+	return (*endptr = NULL, result * sign);
 }
 
 int	ft_sqrt(int nb)

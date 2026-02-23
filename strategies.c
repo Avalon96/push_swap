@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:23:46 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/22 12:08:40 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/23 14:47:01 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	medium_sort(t_ps *ps)
 	if (!bucket_sort->buckets)
 		return (-1);
 	count_buckets(&ps->a, bucket_sort);
-	count_occupied_buckets(&ps->a, bucket_sort);
 	sort_buckets_insertion(ps);
 	return (0);
 }

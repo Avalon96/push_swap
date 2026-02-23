@@ -1,14 +1,2 @@
-[bench] disorder: 19.71%
-[bench] strategy: Medium / O(n√n)
-[bench] operations: 3678
-[bench] sa: 0
-[bench] sb: 0
-[bench] ss: 0
-[bench] pa: 500
-[bench] pb: 500
-[bench] ra: 1114
-[bench] rb: 277
-[bench] rr: 374
-[bench] rra: 284
-[bench] rrb: 385
-[bench] rrr: 244
+[bench] disorder: 47.12%
+[bench] strategy: Adaptive / O(n√n)

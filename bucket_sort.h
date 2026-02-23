@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 14:37:16 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 15:57:55 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/23 14:45:57 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_bucket
 {
 	size_t		size;
 	t_dll		*head;
-	int			counted;
+	// int			counted;
 }				t_bucket;
 
 typedef struct s_bucket_sort
@@ -32,7 +32,7 @@ typedef struct s_bucket_sort
 	size_t		pushing_bucket;
 	size_t		bucket_ct;
 	int			minmax[2];
-	size_t		occupied_ct;
+	// size_t		occupied_ct;
 	t_bucket	*buckets;
 	t_find_gap	*fg;
 	t_collector	*ctor;

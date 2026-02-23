@@ -96,5 +96,9 @@ Space complexity remains O(1) auxiliary space, using only the two stacks.
 
 - <https://www.w3schools.com/dsa/dsa_algo_insertionsort.php>
 - <https://www.w3schools.com/dsa/dsa_algo_radixsort.php>
+- <https://en.wikipedia.org/wiki/Bucket_sort>
+- <https://www.youtube.com/watch?v=VuXbEb5ywrU>
 
 AI is used for deciding which algorithms to use, as well as learning how to optimize the operation count.
+
+2 4 6 8 0

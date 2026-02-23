@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 14:52:29 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/22 12:06:34 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/23 13:42:47 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 
 int	atol_err(const char *str, ssize_t *i)
 {
-	*i = ft_atol(str);
-	if ((*i == 0 && str[0] != '0') || *i < -2147483648 || *i > 2147483647)
+	char *endptr;
+
+	*i = ft_atol(str, &endptr);
+	if ((*i == 0 && str[0] != '0') || *i < -2147483648 || *i > 2147483647
+		|| endptr != NULL)
 		return (-1);
 	return (0);
 }
@@ -80,11 +83,13 @@ int	parse_args(int argc, const char *argv[], t_ps *ps)
 
 	i = 1;
 	if (argc <= 1)
-		return (-1);
+		return (1);
 	if (ft_strncmp(argv[i], "--bench", 7) != 0)
 		ps->bench = 0;
 	else
 		ps->bench = i++;
+	if (i == argc)
+		return (-1);
 	ps->strategy = parse_strategy(argv[i]);
 	if (ps->strategy != UNDEFINED)
 		i++;

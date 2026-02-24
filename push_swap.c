@@ -45,7 +45,7 @@ void	init_instructions(t_ps *ps)
 
 void	strategy(t_ps *ps)
 {
-	if (ps->strategy == STRATEGY_SIMPLE || ps->a.size <= 5)
+	if (ps->strategy == STRATEGY_SIMPLE)
 		ps->err = simple_sort(ps);
 	else if (ps->strategy == STRATEGY_MEDIUM)
 		ps->err = medium_sort(ps);

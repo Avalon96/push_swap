@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 #include "bucket_sort.h"
 #include "bucket_sort_utils.h"
 #include "insertion_sort.h"
-#include "push_swap.h"
 #include "utils.h"
 
 static void	set_cheap_bucket(int i, t_ps *ps, t_move *m, int target_a)
@@ -105,9 +105,8 @@ static void	push_b_to_a(t_ps *ps)
 
 void	sort_buckets_insertion(t_ps *ps)
 {
-	int	bucket;
-
-	bucket = ps->bucket_sort.bucket_ct;
+	if (brute_force(ps))
+		return ;
 	sort_buckets(ps);
 	push_b_to_a(ps);
 }

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
+#include "libft.h"
 
 static void	print_positive_int(int n)
 {
@@ -76,11 +76,6 @@ void	pre_sort_benchmark(t_ps *ps)
 
 void	post_sort_benchmark(t_ps *ps)
 {
-	unsigned int	t1;
-	unsigned int	t2;
-
-	t1 = ps->counts[TOTAL];
-	t2 = (ps->counts[TOTAL] * 100) % 100;
 	print_bench("[bench] operations: %u\n", -1, ps->counts[TOTAL]);
 	print_bench("[bench] sa: %u\n", -1, ps->counts[SA]);
 	print_bench("[bench] sb: %u\n", -1, ps->counts[SB]);

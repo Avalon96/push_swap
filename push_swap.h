@@ -61,6 +61,7 @@ void	reverse_rotate_both(t_ps *ps);
 int		compute_disorder(t_stack *a, float *disorder);
 void	insertion_sort(t_ps *ps);
 void	radix_sort(t_ps *ps);
+int		brute_force(t_ps *ps);
 int		complex_sort(t_ps *ps);
 int		adaptive_sort(t_ps *ps);
 int		simple_sort(t_ps *ps);

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 die() {
 	echo "Error: $1"
 	echo "$USAGE"
@@ -110,6 +112,7 @@ elif [ "$1" = "ex1nums" ]; then
 elif [ "$1" = "worst" ]; then
 	args="$(cat /home/ahmbasar/sources/repos/push_swap/worst | xargs)"
 else
+	filearg="$1"
 	args="$(cat $1 | xargs)"
 fi
 
@@ -132,7 +135,7 @@ test_ps() {
 
 	# grep KO from checker_linux output, if exist, then exit with error
 	./checker_linux $1 < stdout.txt | grep -E "KO|Error" && {
-		echo "KO!, args: $1"
+		echo "KO!, args: $1 " "$filearg" 
 		echo "disorder: $disorder, operations: $operations"
 		cat >"$(md5sum <<<$1)_$(md5sum <<<$(cat stdout.txt))" <<EOF
 		args: $1

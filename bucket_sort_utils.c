@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bucket_sort_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:26:48 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/22 11:49:59 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 17:48:10 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	rotator(t_ps *ps, ssize_t idx, char c)
 
 size_t	get_nearest(size_t a, size_t b, t_stack *stack)
 {
-	const size_t	r_a = get_relative_index(a, stack->size);
-	const size_t	r_b = get_relative_index(b, stack->size);
+	const ssize_t	r_a = get_relative_index(a, stack->size);
+	const ssize_t	r_b = get_relative_index(b, stack->size);
 	const size_t	ra_a = ft_abs(r_a);
 	const size_t	ra_b = ft_abs(r_b);
 

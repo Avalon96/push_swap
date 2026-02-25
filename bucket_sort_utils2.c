@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bucket_sort_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:58:41 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/22 11:50:07 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 20:49:29 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_relative_index(int index, int size)
 {
 	const int	half_size = size / 2;
 
-	if (index < half_size)
+	if (index <= half_size)
 		return (index);
 	else
 		return (-(ft_abs(size - index)));

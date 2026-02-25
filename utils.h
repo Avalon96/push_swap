@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:05:32 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/25 17:20:31 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 21:22:19 by ahmbasar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 # define UTILS_H
 
 # include "push_swap.h"
+
+#define CLR_RED "\x1b[31m"
+#define CLR_GRN "\x1b[32m"
+#define CLR_YEL "\x1b[33m" //////
+#define CLR_BLU "\x1b[34m"///arstarstarst
+#define CLR_MAG "\x1b[35m"
+#define CLR_CYN "\x1b[36m"
+#define CLR_RST "\x1b[0m"
+#define CLR_BLD "\x1b[1m"
+#define CLR_UND "\x1b[4m"
+#define CLR_BLK "\x1b[30m"
+#define CLR_WHT "\x1b[37m"
+#define CLR_BLD "\x1b[1m"
+#define CLR_DIM "\x1b[2m"
 
 void	indexer(t_custom *v, int i, void *data);
 size_t	ft_abs(ssize_t nb);
@@ -23,5 +37,6 @@ int		ft_sqrt(int nb);
 int		safe_sqrt(int nb);
 void	err(void);
 int		ft_strcmp(char const *s1, char const *s2);
+void	print_stacks(t_ps *ps); // sillllllll
 
 #endif

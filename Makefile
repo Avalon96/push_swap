@@ -35,7 +35,8 @@ FILES	=	push_swap \
 		bucket_sort_utils3 \
 		bucket_sort_utils4 \
 		radix_sort \
-		brute_force
+		brute_force \
+		print_utils
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)
 NAME	=	push_swap

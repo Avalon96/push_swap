@@ -14,7 +14,7 @@ require_value() {
 	[ -n "$val" ] || die "$opt requires a value"
 }
 
-USAGE="Usage: $0 run|test [-x N] [-n N] <make_target> [-s STRATEGY] [--bench] [preset|numbers...]"
+USAGE="Usage: $0 test [-x N] [-n N] <make_target> [-s STRATEGY] [--bench] [preset|numbers...]"
 
 # Initialize variables
 flags=""
@@ -217,24 +217,24 @@ test() {
 	fi
 }
 
-run() {
-	echo "--strategy selected: ${flags:-<default>}"
-	echo "makecmd: $makecmd"
-	echo "random_args: $random_args"
+# run() {
+# 	echo "--strategy selected: ${flags:-<default>}"
+# 	echo "makecmd: $makecmd"
+# 	echo "random_args: $random_args"
 
-	GREEN='\033[0;32m'
-	LIGHT_GREEN='\033[1;32m'
-	CLR_RST='\033[0m'
+# 	GREEN='\033[0;32m'
+# 	LIGHT_GREEN='\033[1;32m'
+# 	CLR_RST='\033[0m'
 
-	total_ops=0
-	if [ "$random_args" = "1" ]; then
-		for ((i=0; i<nexec; i++)); do
-			args="$(shuf -i 0-500 -n 500 | xargs)"
-			test_ps "$args" "$i"
-		done
-	else
-		test_ps "$args" "$i"
-	fi
-}
+# 	total_ops=0
+# 	if [ "$random_args" = "1" ]; then
+# 		for ((i=0; i<nexec; i++)); do
+# 			args="$(shuf -i 0-500 -n 500 | xargs)"
+# 			test_ps "$args" "$i"
+# 		done
+# 	else
+# 		test_ps "$args" "$i"
+# 	fi
+# }
 
 "$subcmd"

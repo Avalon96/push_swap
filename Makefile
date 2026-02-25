@@ -50,7 +50,7 @@ run: all
 	./$(NAME) $(flags) $(args)
 
 test: all
-	./$(NAME) $(flags) $(args) | ./checker_linux $(args)
+	valgrind ./$(NAME) $(flags) $(args) | ./checker_linux $(args)
 
 libft:
 	$(MAKE) -C libft

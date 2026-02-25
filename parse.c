@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 14:52:29 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/25 13:13:28 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 17:10:02 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_flags	parse_strategy(const char *arg)
 
 	i = -1;
 	while (++i < 4)
-		if (ft_strncmp(arg, strategies[i], ft_strlen(strategies[i])) == 0)
+		if (ft_strcmp(arg, strategies[i]) == 0)
 			return (i);
 	return (UNDEFINED);
 }
@@ -86,17 +86,19 @@ int	parse_args(int argc, const char *argv[], t_ps *ps)
 	i = 1;
 	if (argc == 1)
 		return (1);
-	if (ft_strncmp(argv[i], "--bench", 7) != 0)
+	if (ft_strcmp(argv[i], "--bench") != 0)
 		ps->bench = 0;
 	else
 		ps->bench = i++;
-	if (i == argc)
-		return (-1);
+	if (i >= argc)
+		return (1);
 	ps->strategy = parse_strategy(argv[i]);
 	if (ps->strategy != UNDEFINED)
 		i++;
 	else
 		ps->strategy = STRATEGY_ADAPTIVE;
+	if (i >= argc)
+		return (1);
 	if (parse_numbers(argc - i, argv + i, ps) < 0)
 		return (-1);
 	return (0);

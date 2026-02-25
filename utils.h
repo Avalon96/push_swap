@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 02:05:32 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/23 13:41:37 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 17:20:31 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ ssize_t	ft_atol(const char *str, char **endptr);
 int		ft_sqrt(int nb);
 int		safe_sqrt(int nb);
 void	err(void);
+int		ft_strcmp(char const *s1, char const *s2);
 
 #endif

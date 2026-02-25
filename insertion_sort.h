@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:30:59 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/25 12:47:25 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 13:53:21 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "push_swap_defs.h"
 # include "stack.h"
+
 typedef struct s_move
 {
 	int	a_count;

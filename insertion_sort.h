@@ -6,13 +6,15 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:30:59 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/22 12:05:50 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 12:47:25 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INSERTION_SORT_H
 # define INSERTION_SORT_H
 
+# include "push_swap_defs.h"
+# include "stack.h"
 typedef struct s_move
 {
 	int	a_count;

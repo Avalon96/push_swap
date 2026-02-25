@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 14:52:29 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/23 15:40:09 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 13:13:28 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	parse_numbers(int i, const char *argv[], t_ps *ps)
 	j++;
 	if (parse_numbers_helper(i, &j, argv, ps) < 0)
 		return (free(ps->cdll_malloc), -1);
+	if (i == 0)
+		return (0);
 	if (atol_err(argv[j], (ssize_t *)&ps->cdll_malloc[j].value.num) < 0)
 		return (free(ps->cdll_malloc), -1);
 	ps->cdll_malloc[j].prev = &ps->cdll_malloc[j - 1];
@@ -82,7 +84,7 @@ int	parse_args(int argc, const char *argv[], t_ps *ps)
 	int	i;
 
 	i = 1;
-	if (argc <= 1)
+	if (argc == 1)
 		return (1);
 	if (ft_strncmp(argv[i], "--bench", 7) != 0)
 		ps->bench = 0;
@@ -95,8 +97,6 @@ int	parse_args(int argc, const char *argv[], t_ps *ps)
 		i++;
 	else
 		ps->strategy = STRATEGY_ADAPTIVE;
-	if (argc - i <= 1)
-		return (-1);
 	if (parse_numbers(argc - i, argv + i, ps) < 0)
 		return (-1);
 	return (0);

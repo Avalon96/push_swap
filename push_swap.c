@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/23 19:24:39 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 13:16:40 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	main(int argc, char const *argv[])
 	ps->err = parse_args(argc, argv, (t_ps *)ps);
 	if (ps->err < 0)
 		return (err(), -1);
-	else if (ps->err > 0)
+	else if (ps->err == 1)
 		return (1);
-	ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	if (ps->a.size > 1)
+		ps->err = compute_disorder(&ps->a, &(ps->disorder));
 	if (ps->err)
 		return (err(), end(ps), -1);
 	if (ps->bench)

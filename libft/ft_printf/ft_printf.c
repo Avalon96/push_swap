@@ -6,11 +6,12 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:52:21 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/20 18:22:29 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/26 14:35:52 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdarg.h>
 
 static int	has_flag(va_list *args, const char flag)
 {

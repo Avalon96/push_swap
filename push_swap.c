@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/25 13:16:40 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/26 11:58:44 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	strategy(t_ps *ps)
 		ps->err = adaptive_sort(ps);
 }
 
-// ./push_swap [[--bench] strategy] numbers...
 int	main(int argc, char const *argv[])
 {
 	t_ps *const	ps = &(t_ps){0};

@@ -1,7 +1,0 @@
-push_swap
-out.log
-**/*.o
-**/*.a
-struct.h
-args.txt
-bench.txt

@@ -85,7 +85,7 @@ The input is partitioned into √n buckets based on value ranges. Each bucket co
 We then apply Insertion Sort within each bucket.
 Sorting one bucket costs O((√n)²) = O(n), and since there are √n buckets, the total time complexity is O(n√n).
 This reduces the quadratic behavior of insertion sort while still remaining below the O(n²) bound required for low disorder.
-Space complexity is O(n) for bucket partitioning within the Push_swap stack operations.
+Space complexity is O(√n) for bucket partitioning within the Push_swap stack operations.
 
 Radix Sort runs in O(n log n) time in the Push_swap model (log n bit passes, each requiring a linear scan).
 When disorder ≥ 0.5, the input behaves similarly to a random or reverse-sorted array, where quadratic methods would approach worst-case performance.

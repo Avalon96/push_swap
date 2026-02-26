@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 14:37:16 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/23 15:56:57 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/26 12:30:08 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	count_buckets(t_stack *a, t_bucket_sort *bucket_sort);
 int		bucket_selective(t_custom *v, int i, void *data);
 void	sort_buckets(t_ps *ps);
 void	rotator(t_ps *ps, ssize_t idx, char c);
-void	sort_buckets_insertion(t_ps *ps);
 void	push_first_number_of_first_bucket(t_ps *ps);
 void	push_last_bucket(t_ps *ps);
 void	push_bucket(t_ps *ps);
+void	push_b_to_a(t_ps *ps);
 
 #endif

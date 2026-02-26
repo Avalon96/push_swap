@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:23:46 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/23 14:47:01 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/26 12:20:42 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	medium_sort(t_ps *ps)
 	if (!bucket_sort->buckets)
 		return (-1);
 	count_buckets(&ps->a, bucket_sort);
-	sort_buckets_insertion(ps);
+	if (brute_force(ps))
+		return (0);
+	sort_buckets(ps);
+	push_b_to_a(ps);
 	return (0);
 }
 

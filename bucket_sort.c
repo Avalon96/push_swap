@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bucket_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:05:41 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/25 20:55:16 by ahmbasar         ###   ########.fr       */
+/*   Updated: 2026/02/26 12:20:55 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,16 @@ static void	execute_move_to_a(t_ps *ps, t_move m, t_dll **bucket_head)
 	}
 	update_head(ps, bucket_head);
 	push_a(ps);
-	// decrase bucket size
 }
 
-#include <stdio.h> //sssssssss
-
-static void	push_b_to_a(t_ps *ps)
+void	push_b_to_a(t_ps *ps)
 {
 	t_move	best;
 	t_dll	*bucket_head;
-	
+
 	bucket_head = ps->b.head->next;
 	while (ps->b.size > 0)
 	{
-		// if (ps->bucket_sort.buckets[bucket_head->value.bucket_index].size == 0)
-		// 	bucket_head = ps->b.head;
 		if (ps->a.size == 0)
 		{
 			ps->bucket_sort.buckets[ps->b.head->value.bucket_index].size--;
@@ -109,35 +104,13 @@ static void	push_b_to_a(t_ps *ps)
 			cdll_iter(ps->b.head, indexer, NULL);
 			continue ;
 		}
-		// dprintf(2,"head bucket index %d\n", bucket_head->value.bucket_index);
 		set_cheapest_move_bucket(ps, &best, bucket_head);
-		// dprintf(2, "cheap HEAD: [%d]:%d ct %d, dir %d\n", bucket_head->value.index, bucket_head->value.num, best.b_count, best.b_dir);
-		// fflush(stderr);
-		// print_stacks(ps);
-		// getchar();
 		execute_move_to_a(ps, best, &bucket_head);
 		cdll_iter(ps->a.head, indexer, NULL);
 		if (ps->b.size > 1)
 			cdll_iter(ps->b.head, indexer, NULL);
-		// print_stacks(ps);
-		// dprintf(2, "HEAD: [%d]:%d \n", bucket_head->value.index, bucket_head->value.num);
-		// fflush(stderr);
-		// getchar();
-		// bucket_head = 
-		// ps->bucket_sort.buckets[ps->b.head->value.bucket_index].head
 	}
 	cdll_iter(ps->a.head, indexer, NULL);
 	rotate_a_to_top(ps, get_min_pos(&ps->a));
 	cdll_iter(ps->a.head, indexer, NULL);
-	// print_stacks(ps);
-	// fflush(stderr);
-}
-
-
-void	sort_buckets_insertion(t_ps *ps)
-{
-	if (brute_force(ps))
-		return ;
-	sort_buckets(ps);
-	push_b_to_a(ps);
 }

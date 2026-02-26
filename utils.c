@@ -6,7 +6,7 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 14:49:16 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/23 13:40:44 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/26 14:02:45 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@ ssize_t	ft_atol(const char *str, char **endptr)
 	sign = 1;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
+	sign = 1 - 2 * (*str == '-');
 	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
 		str++;
-	}
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');
-		if (result > 2147483647 && sign == 1)
-			return (result);
-		if (result > 2147483648 && sign == -1)
+		if ((result > 2147483647 && sign == 1)
+			|| (result > 2147483648 && sign == -1))
 			return (result);
 		str++;
 	}
 	if (*str != '\0')
-		return (*endptr = (char *)str, result * sign);
-	return (*endptr = NULL, result * sign);
+	{
+		*endptr = (char *)str;
+		return (result * sign);
+	}
+	*endptr = NULL;
+	return (result * sign);
 }
 
 int	ft_sqrt(int nb)

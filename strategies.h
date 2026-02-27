@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_defs.h                                   :+:      :+:    :+:   */
+/*   strategies.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 16:36:18 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 18:18:44 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/21 15:21:29 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/21 16:12:32 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_DEFS_H
-# define PUSH_SWAP_DEFS_H
+#ifndef STRATEGIES_H
+# define STRATEGIES_H
+# include "push_swap_defs.h"
+# include "stack.h"
 
-typedef enum e_cmd
-{
-	SA,
-	SB,
-	SS,
-	PA,
-	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR,
-	TOTAL
-}				t_cmd;
-
-typedef enum e_flags
-{
-	STRATEGY_SIMPLE,
-	STRATEGY_MEDIUM,
-	STRATEGY_COMPLEX,
-	STRATEGY_ADAPTIVE,
-	UNDEFINED
-}			t_flags;
-
-typedef struct s_ps	t_ps;
+int		medium_sort(t_ps *ps);
+int		complex_sort(t_ps *ps);
+int		adaptive_sort(t_ps *ps);
+int		simple_sort(t_ps *ps);
+void	pre_sort_benchmark(t_ps *ps);
+void	post_sort_benchmark(t_ps *ps);
+int		compute_disorder(t_stack *stack, float *disorder);
 
 #endif

@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_defs.h                                   :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 16:36:18 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/21 18:18:44 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/21 16:26:39 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/21 18:19:00 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_DEFS_H
-# define PUSH_SWAP_DEFS_H
+#ifndef PARSE_H
+# define PARSE_H
 
-typedef enum e_cmd
-{
-	SA,
-	SB,
-	SS,
-	PA,
-	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR,
-	TOTAL
-}				t_cmd;
+# include "push_swap_defs.h"
+# include <unistd.h>
 
-typedef enum e_flags
-{
-	STRATEGY_SIMPLE,
-	STRATEGY_MEDIUM,
-	STRATEGY_COMPLEX,
-	STRATEGY_ADAPTIVE,
-	UNDEFINED
-}			t_flags;
-
-typedef struct s_ps	t_ps;
+int		atol_err(const char *str, ssize_t *i);
+int		parse_numbers(int i, const char *argv[], t_ps *ps);
+t_flags	parse_strategy(const char *arg);
+int		parse_args(int argc, const char *argv[], t_ps *ps);
 
 #endif

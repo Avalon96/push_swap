@@ -1,27 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dll_config.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/21 15:06:22 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/22 12:00:00 by aunverdi         ###   ########.tr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DLL_CONFIG_H
 # define DLL_CONFIG_H
 
 # include <stddef.h>
 # include <stdint.h>
 
-typedef struct s_dll t_dll;
+typedef struct s_dll	t_dll;
 
-typedef int16_t t_attrs_ps; 
-
-typedef enum	e_attr_ps
-{
-	GAP_A = (1 << 0),
-	GAP_B = (1 << 1)
-}	t_attr_ps;
-
-typedef struct	s_custom
+typedef struct s_custom
 {
 	int			num;
-	size_t		index; // dont forget to update
-	size_t		bucket_index; // dont forget to update
+	size_t		index;
+	size_t		bucket_index;
 	t_dll		*this;
-	t_attrs_ps	attr;
-}	t_custom;
+}				t_custom;
 
-
-#endif // DLL_CONFIG_H
+#endif

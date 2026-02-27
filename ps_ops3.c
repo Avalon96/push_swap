@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dprint_char.c                                   :+:      :+:    :+:   */
+/*   ps_ops3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 13:30:49 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/20 18:01:14 by aunverdi         ###   ########.tr       */
+/*   Created: 2026/02/21 16:32:12 by aunverdi          #+#    #+#             */
+/*   Updated: 2026/02/22 12:04:39 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 #include "libft.h"
 
-int	ft_dprint_char(int fd, int c)
+void	rotate_both(t_ps *ps)
 {
-	ft_putchar_fd(c, fd);
-	return (1);
+	ps->a.head = ps->a.head->next;
+	ps->b.head = ps->b.head->next;
+	ps->counts[RR]++;
+	ps->counts[TOTAL]++;
+	ft_printf("rr\n");
 }
 
-int	ft_dprint_str(int fd, char *s)
+void	reverse_rotate_both(t_ps *ps)
 {
-	int	count;
-
-	if (!s)
-		return (write(fd, "(null)", 6));
-	count = ft_strlen(s);
-	ft_putstr_fd(s, fd);
-	return (count);
+	ps->a.head = ps->a.head->prev;
+	ps->b.head = ps->b.head->prev;
+	ps->counts[RRR]++;
+	ps->counts[TOTAL]++;
+	ft_printf("rrr\n");
 }

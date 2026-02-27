@@ -3,54 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmbasar <ahmbasar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 13:38:33 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/21 13:21:37 by ahmbasar         ###   ########.fr       */
+/*   Created: 2026/02/07 13:17:33 by ahmbasar          #+#    #+#             */
+/*   Updated: 2026/02/26 11:58:44 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "push_swap.h"
-#include "push_swap_defs.h"
-#include "stack.h"
+#include "push_swap.h"
+#include <stdlib.h>
+#include "parse.h"
+#include "utils.h"
 
-// function compute_disorder(stack a):
-// 	mistakes = 0
-// 	total_pairs = 0
-// 	for i from 0 to size(a)-1:
-// 		for j from i+1 to size(a)-1:
-// 			total_pairs += 1
-// 			if a[i] > a[j]:
-// 				mistakes += 1
-// 	return mistakes / total_pairs
+int		medium_sort(t_ps *ps);
+int		complex_sort(t_ps *ps);
+int		adaptive_sort(t_ps *ps);
+int		simple_sort(t_ps *ps);
+void	pre_sort_benchmark(t_ps *ps);
+void	post_sort_benchmark(t_ps *ps);
 
-int compute_disorder(t_stack *stack, float *disorder)
+void	end(t_ps *ps)
 {
-	float mistakes = 0;
-	int total_pairs = 0;
-	t_dll *i = stack->head;
-	t_dll *tail = stack->head->prev;
-	t_dll *j;
-
-	while (i != tail)
-	{
-		j = i->next;
-		while (j != tail->next)
-		{
-			total_pairs++;
-			if (i->value.num > j->value.num)
-				mistakes++;
-			if (i->value.num == j->value.num)
-				return (-1);
-			j = j->next;
-		}
-		i = i->next;
-	}
-	*disorder = (mistakes * 100) / total_pairs;
-	return (0);
+	free(ps->cdll_malloc);
+	free(ps->bucket_sort.buckets);
 }
 
-void	executer(t_cmd op)
+void	init_instructions(t_ps *ps)
 {
-	
+	ps->instruction[SA] = &swap_a;
+	ps->instruction[SB] = &swap_b;
+	ps->instruction[SS] = &swap_both;
+	ps->instruction[PA] = &push_a;
+	ps->instruction[PB] = &push_b;
+	ps->instruction[RA] = &rotate_a;
+	ps->instruction[RB] = &rotate_b;
+	ps->instruction[RR] = &rotate_both;
+	ps->instruction[RRA] = &reverse_rotate_a;
+	ps->instruction[RRB] = &reverse_rotate_b;
+	ps->instruction[RRR] = &reverse_rotate_both;
+}
+
+void	strategy(t_ps *ps)
+{
+	if (ps->strategy == STRATEGY_SIMPLE)
+		ps->err = simple_sort(ps);
+	else if (ps->strategy == STRATEGY_MEDIUM)
+		ps->err = medium_sort(ps);
+	else if (ps->strategy == STRATEGY_COMPLEX)
+		ps->err = complex_sort(ps);
+	else
+		ps->err = adaptive_sort(ps);
+}
+
+int	main(int argc, char const *argv[])
+{
+	t_ps *const	ps = &(t_ps){0};
+
+	ps->err = parse_args(argc, argv, (t_ps *)ps);
+	if (ps->err < 0)
+		return (err(), -1);
+	else if (ps->err == 1)
+		return (1);
+	if (ps->a.size > 1)
+		ps->err = compute_disorder(&ps->a, &(ps->disorder));
+	if (ps->err)
+		return (err(), end(ps), -1);
+	if (ps->bench)
+		pre_sort_benchmark(ps);
+	init_instructions(ps);
+	cdll_iter(ps->a.head, indexer, NULL);
+	strategy(ps);
+	if (ps->err)
+		return (err(), end(ps), -1);
+	if (ps->bench)
+		post_sort_benchmark(ps);
+	end(ps);
+	return (0);
 }

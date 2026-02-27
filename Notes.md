@@ -31,8 +31,22 @@ valid range, or duplicate values**
 * shuf -i 0-9999 -n 500 > args.txt ; ./push_swap --bench $(cat args.txt) 2> bench.txt | ./checker_linux $(cat args.txt)
 * ./push_swap --adaptive 0 one 2 3
 * ./push_swap --simple 3 2 3
-
-## Failing Commands
 * ARG="4 67 3 87 23"; ./push_swap --bench --adaptive $ARG 2> bench.txt | ./checker_linux $ARG
 * ARG="4 67 3 87 23"; ./push_swap --complex $ARG | ./checker_linux $ARG
 * ARG="4 67 3 87 23"; ./push_swap --adaptive $ARG | wc -l
+
+## Commands
+xargs valgrind ./push_swap --bench < disorder0_500.txt 2>bench.txt | ./checker_linux $(cat disorder0_500.txt)
+xargs valgrind ./push_swap --bench < disorder19_500.txt 2>>bench.txt | ./checker_linux $(cat disorder19_500.txt)
+xargs valgrind ./push_swap --bench < disorder21_500.txt 2>>bench.txt | ./checker_linux $(cat disorder21_500.txt)
+xargs valgrind ./push_swap --bench < disorder49_500.txt 2>>bench.txt | ./checker_linux $(cat disorder49_500.txt)
+xargs valgrind ./push_swap --bench < disorder51_500.txt 2>>bench.txt | ./checker_linux $(cat disorder51_500.txt)
+xargs valgrind ./push_swap --bench < disorder80_500.txt 2>>bench.txt | ./checker_linux $(cat disorder80_500.txt)
+xargs valgrind ./push_swap --bench < disorder100_500.txt 2>>bench.txt | ./checker_linux $(cat disorder100_500.txt)
+xargs valgrind ./push_swap --bench < disorder0_100.txt 2>>bench.txt | ./checker_linux $(cat disorder0_100.txt)
+xargs valgrind ./push_swap --bench < disorder19_100.txt 2>>bench.txt | ./checker_linux $(cat disorder19_100.txt)
+xargs valgrind ./push_swap --bench < disorder21_100.txt 2>>bench.txt | ./checker_linux $(cat disorder21_100.txt)
+xargs valgrind ./push_swap --bench < disorder49_100.txt 2>>bench.txt | ./checker_linux $(cat disorder49_100.txt)
+xargs valgrind ./push_swap --bench < disorder51_100.txt 2>>bench.txt | ./checker_linux $(cat disorder51_100.txt)
+xargs valgrind ./push_swap --bench < disorder80_100.txt 2>>bench.txt | ./checker_linux $(cat disorder80_100.txt)
+xargs valgrind ./push_swap --bench < disorder100_100.txt 2>>bench.txt | ./checker_linux $(cat disorder100_100.txt)

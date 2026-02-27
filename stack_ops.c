@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_ops1.c                                       :+:      :+:    :+:   */
+/*   stack_ops.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:38:07 by ahmbasar          #+#    #+#             */
-/*   Updated: 2026/02/16 13:38:39 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/21 17:02:21 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ void	swap(t_stack *stack)
 
 t_dll	*pop_last(t_stack *stack)
 {
-	t_dll * const popped = stack->head;
+	t_dll *const	popped = stack->head;
 
 	stack->head = NULL;
 	stack->size = 0;
-	return popped;
+	return (popped);
 }
-
 
 t_dll	*pop(t_stack *stack)
 {
@@ -74,14 +73,4 @@ void	push(t_stack *stack, t_dll *node)
 		stack->head = node;
 	}
 	stack->size++;
-}
-
-void	rotate_up(t_stack *stack)
-{
-	stack->head = stack->head->next;
-}
-
-void	rotate_down(t_stack *stack)
-{
-	stack->head = stack->head->prev;
 }

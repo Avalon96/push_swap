@@ -3,7 +3,7 @@ SRC		=	$(ROOT)/
 INC		=	$(ROOT)/
 
 CC		=	cc
-CFLAGS	=	-I $(INC) -pedantic -Wall -Wextra -I ./libft -I ./libft/ft_printf/include -g
+CFLAGS	=	-I $(INC) -pedantic -Wall -Wextra -I ./libft -g
 LDFLAGS	=	#-fsanitize=address
 
 ERR		=	-Werror
@@ -12,22 +12,30 @@ ifneq '$(err)' '0'
 	CFLAGS	+=	$(ERR)
 endif
 
-FILES	=	cmd \
-		stack_ops1 \
+FILES	=	push_swap \
+		stack_ops \
 		stack_ops2 \
-		stack_ops3 \
-		stack_ops4 \
-		list_ops \
+		ps_ops1 \
+		ps_ops2 \
+		ps_ops3 \
+		ps_ops_special \
+		list_utils \
 		utils \
-		push_swap \
+		utils2 \
+		disorder \
+		parse \
+		strategies \
+		benchmark \
 		insertion_sort \
 		insertion_sort_utils \
 		insertion_sort_utils2 \
-		print_utils \
-		radix_sort \
-		strategies \
 		bucket_sort \
-		generics
+		bucket_sort_utils \
+		bucket_sort_utils2 \
+		bucket_sort_utils3 \
+		bucket_sort_utils4 \
+		radix_sort \
+		brute_force 
 SRCS	=	$(addprefix $(SRC), $(addsuffix .c, $(FILES)))
 OBJS	=	$(SRCS:.c=.o)
 NAME	=	push_swap
@@ -42,12 +50,12 @@ run: all
 	./$(NAME) $(flags) $(args)
 
 test: all
-	./$(NAME) $(flags) $(args) | ./checker_linux $(args)
+	valgrind ./$(NAME) $(flags) $(args) | ./checker_linux $(args)
 
 libft:
 	$(MAKE) -C libft
 
-$(SRC)/%.o: $(SRC)/%.c $(SRC)/buffer.h
+$(SRC)/%.o: $(SRC)/%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(NAME): $(OBJS) $(LIBS)

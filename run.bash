@@ -1,3 +1,5 @@
+#!/bin/bash
+
 die() {
 	echo "Error: $1"
 	echo "$USAGE"
@@ -14,7 +16,7 @@ require_value() {
 	[ -n "$val" ] || die "$opt requires a value"
 }
 
-USAGE="Usage: $0 run|test [-x N] [-n N] <make_target> [-s STRATEGY] [preset|numbers...]"
+USAGE="Usage: $0 test [-x N] [-n N] <make_target> [-s STRATEGY] [--bench] [preset|numbers...]"
 
 # Initialize variables
 flags=""
@@ -110,6 +112,7 @@ elif [ "$1" = "ex1nums" ]; then
 elif [ "$1" = "worst" ]; then
 	args="$(cat /home/ahmbasar/sources/repos/push_swap/worst | xargs)"
 else
+	filearg="$1"
 	args="$(cat $1 | xargs)"
 fi
 
@@ -132,7 +135,7 @@ test_ps() {
 
 	# grep KO from checker_linux output, if exist, then exit with error
 	./checker_linux $1 < stdout.txt | grep -E "KO|Error" && {
-		echo "KO!, args: $1"
+		echo "KO!, args: $1 " "$filearg" 
 		echo "disorder: $disorder, operations: $operations"
 		cat >"$(md5sum <<<$1)_$(md5sum <<<$(cat stdout.txt))" <<EOF
 		args: $1
@@ -217,24 +220,24 @@ test() {
 	fi
 }
 
-run() {
-	echo "--strategy selected: ${flags:-<default>}"
-	echo "makecmd: $makecmd"
-	echo "random_args: $random_args"
+# run() {
+# 	echo "--strategy selected: ${flags:-<default>}"
+# 	echo "makecmd: $makecmd"
+# 	echo "random_args: $random_args"
 
-	GREEN='\033[0;32m'
-	LIGHT_GREEN='\033[1;32m'
-	CLR_RST='\033[0m'
+# 	GREEN='\033[0;32m'
+# 	LIGHT_GREEN='\033[1;32m'
+# 	CLR_RST='\033[0m'
 
-	total_ops=0
-	if [ "$random_args" = "1" ]; then
-		for ((i=0; i<nexec; i++)); do
-			args="$(shuf -i 0-500 -n 500 | xargs)"
-			test_ps "$args" "$i"
-		done
-	else
-		test_ps "$args" "$i"
-	fi
-}
+# 	total_ops=0
+# 	if [ "$random_args" = "1" ]; then
+# 		for ((i=0; i<nexec; i++)); do
+# 			args="$(shuf -i 0-500 -n 500 | xargs)"
+# 			test_ps "$args" "$i"
+# 		done
+# 	else
+# 		test_ps "$args" "$i"
+# 	fi
+# }
 
 "$subcmd"

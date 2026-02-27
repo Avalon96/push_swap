@@ -6,12 +6,24 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:30:59 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/14 17:31:00 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/25 13:53:21 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INSERTION_SORT_H
 # define INSERTION_SORT_H
+
+# include "push_swap_defs.h"
+# include "stack.h"
+
+typedef struct s_move
+{
+	int	a_count;
+	int	b_count;
+	int	a_dir;
+	int	b_dir;
+	int	total;
+}				t_move;
 
 int		stack_min(t_stack *s);
 int		stack_max(t_stack *s);
@@ -22,7 +34,5 @@ int		find_target_in_a(t_stack *a, int val);
 void	execute_move(t_ps *ps, t_move m);
 void	sort_three_a(t_ps *ps);
 void	rotate_a_to_top(t_ps *ps, int pos);
-void	set_cheap(int i, t_ps *ps, t_move *m, int target_b);
-void	set_best(t_move *m, t_move **best);
 
 #endif

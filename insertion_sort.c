@@ -6,14 +6,14 @@
 /*   By: aunverdi <aunverdi@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 11:45:38 by aunverdi          #+#    #+#             */
-/*   Updated: 2026/02/16 12:35:44 by aunverdi         ###   ########.tr       */
+/*   Updated: 2026/02/21 17:57:56 by aunverdi         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "insertion_sort.h"
 
-void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
+static void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
 {
 	if (i <= ps->a.size / 2)
 	{
@@ -37,7 +37,7 @@ void	set_cheap(int i, t_ps *ps, t_move *m, int target_b)
 	}
 }
 
-void	set_best(t_move *m, t_move **best)
+static void	set_best(t_move *m, t_move **best)
 {
 	if ((*m).a_dir == (*m).b_dir)
 	{

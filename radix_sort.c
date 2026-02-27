@@ -59,23 +59,23 @@ void	radix_sort(t_ps *ps)
 	int	size;
 	int	max_bits;
 
+	if (brute_force(ps))
+		return ;
 	index_stack(&ps->a);
 	size = ps->a.size;
 	max_bits = get_max_bits(&ps->a);
-	i = 0;
-	while (i < max_bits)
+	i = -1;
+	while (++i < max_bits)
 	{
-		j = 0;
-		while (j < size)
+		j = -1;
+		while (++j < size)
 		{
 			if (((ps->a.head->value.index >> i) & 1) == 0)
 				push_b(ps);
 			else
 				rotate_a(ps);
-			j++;
 		}
 		while (ps->b.size > 0)
 			push_a(ps);
-		i++;
 	}
 }
